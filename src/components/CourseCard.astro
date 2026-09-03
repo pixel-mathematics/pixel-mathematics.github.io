@@ -1,0 +1,52 @@
+---
+import { KeyRoundIcon, BookIcon, ClockIcon } from "lucide-react"
+import { formatDate } from "@/lib/utils"
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+} from "./ui/card"
+
+interface Props {
+  id: string
+  subjects: {
+    id: string
+    title: string
+  }
+  title: string
+  description: string
+  start_date: Date
+  updated_at: Date
+}
+
+const { id, subjects, title, description, updated_at } = Astro.props
+---
+
+<a href={`/courses/${id}`}>
+  <Card className="group duration-300 hover:shadow-md">
+    <CardHeader>
+      <CardTitle
+        className="text-lg font-semibold uppercase duration-300 group-hover:text-primary"
+        >{title}</CardTitle
+      >
+      <CardDescription className="truncate">{description}</CardDescription>
+    </CardHeader>
+    <CardFooter>
+      <div class="flex w-full items-center gap-4">
+        <div class="flex items-center gap-1 uppercase">
+          <KeyRoundIcon size={16} />{id}
+        </div>
+        <div class="flex items-center gap-1">
+          <BookIcon size={16} />{subjects.title}
+        </div>
+        <div class="ml-auto flex items-center gap-1">
+          <ClockIcon size={16} />
+          {formatDate(updated_at)}
+        </div>
+      </div>
+    </CardFooter>
+  </Card>
+</a>

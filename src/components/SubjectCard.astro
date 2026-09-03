@@ -1,0 +1,27 @@
+---
+import { GraduationCapIcon } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
+
+interface Props {
+  id: string
+  title: string
+  sort_order: number
+  courses: { count: number }[]
+}
+
+const { id, title, courses } = Astro.props
+---
+
+<a href={`/subjects/${id}`}>
+  <Card className="bg-primary text-center text-primary-foreground">
+    <CardHeader>
+      <CardTitle className="text-xl font-bold uppercase">{title}</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <div class="flex items-center justify-center gap-1">
+        <GraduationCapIcon size={24} />
+        <p class="text-lg"><span>{courses[0].count}</span> khóa học</p>
+      </div>
+    </CardContent>
+  </Card>
+</a>
