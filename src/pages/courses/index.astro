@@ -5,38 +5,17 @@ import CourseCard from "@/components/CourseCard.astro"
 import Container from "@/components/Container.astro"
 import HeroImage from "@/components/HeroImage.astro"
 import { Separator } from "@/components/ui/separator"
-import { createServerClient } from "@/lib/supabase"
+import { getSubjects, getCourses } from "@/lib/supabase"
 
-const supabase = createServerClient()
-const { data: subjects, error: fetchSubjectsError } = await supabase.from(
-  "subjects"
-).select(`
-    id,
-    title,
-    courses (count)
-  `)
-if (!subjects || fetchSubjectsError) {
-  throw new Error("Lỗi không thể hiển thị môn học")
+const { data: subjects, error: getSubjectsError } = await getSubjects()
+
+if (!subjects || getSubjectsError) {
+  throw new Error("Lỗi không thể hiển thị khóa học")
 }
 
-const { data: courses, error } = await supabase
-  .from("courses")
-  .select(
-    `
-    id,
-    subjects (
-      id,
-      title
-    ),
-    title,
-    description,
-    start_date,
-    updated_at
-  `
-  )
-  .eq("status", "active")
+const { data: courses, error: getCoursesError } = await getCourses()
 
-if (!courses || error) {
+if (!courses || getCoursesError) {
   throw new Error("Lỗi không thể hiển thị khóa học")
 }
 ---
@@ -50,7 +29,7 @@ if (!courses || error) {
         x="964"
         y="204"
         text-anchor="middle"
-        font-size="80"
+        font-size="64"
         font-weight="900"
         fill="#3b82f6"
       >
@@ -61,7 +40,7 @@ if (!courses || error) {
         x="960"
         y="200"
         text-anchor="middle"
-        font-size="80"
+        font-size="64"
         font-weight="900"
         fill="#ffffff"
       >
@@ -78,7 +57,7 @@ if (!courses || error) {
         fill="#94a3b8"
         letter-spacing="2"
       >
-        [ Mistakes are proof that you are trying. ]
+        [ "Mistakes are proof that you are trying. "]
       </text>
     </HeroImage>
   </section>
@@ -97,7 +76,7 @@ if (!courses || error) {
         <Separator />
         <div class="py-4">
           <h1 class="mb-4 text-2xl font-bold text-primary">Toàn bộ khóa học</h1>
-          <div class="grid grid-cols-3 gap-4">
+          <div class="grid grid-cols-2 gap-4">
             {courses.map((course: any) => <CourseCard {...course} />)}
           </div>
         </div>

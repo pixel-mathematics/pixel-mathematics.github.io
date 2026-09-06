@@ -1,0 +1,49 @@
+---
+import { formatDate } from "@/lib/utils"
+import { ClockIcon, KeyRoundIcon, ScrollTextIcon } from "lucide-react"
+interface Props {
+  id: string
+  title: string
+  class_date: Date
+  updated_at: Date
+  chapters: {
+    id: string
+    title: string
+    courses: {
+      id: string
+      title: string
+    }
+  }
+}
+
+const { id, title, updated_at, chapters } = Astro.props
+---
+
+<a
+  href={`/courses/${chapters.courses.id}?chapter_id=${chapters.id}&lesson_id=${id}`}
+>
+  <div class="flex items-center rounded-md border px-3 py-2.5 text-base">
+    <div class="flex items-center gap-2 font-medium">
+      <span
+        class="flex h-6 items-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-primary uppercase"
+      >
+        {id}
+      </span>
+      <span>{title}</span>
+    </div>
+    <div class="ml-auto flex items-center gap-4 text-sm">
+      <div class="flex items-center gap-1 font-medium text-primary uppercase">
+        <KeyRoundIcon size={16} />{chapters.courses.id}
+      </div>
+      <div class="flex items-center gap-1 font-medium text-pink-700 uppercase">
+        <ScrollTextIcon size={16} />{chapters.id}
+      </div>
+      <div class="flex items-center gap-1 text-foreground/60">
+        <ClockIcon size={16} />
+        <span>
+          {formatDate(updated_at)}
+        </span>
+      </div>
+    </div>
+  </div>
+</a>

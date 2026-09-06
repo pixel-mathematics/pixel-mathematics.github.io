@@ -3,6 +3,154 @@ import { createClient } from "@supabase/supabase-js"
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL
 const supabasePublishableKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY
 
-export function createServerClient() {
-  return createClient(supabaseUrl, supabasePublishableKey)
+export const supabase = createClient(supabaseUrl, supabasePublishableKey)
+
+export async function getSubjects() {
+  return supabase.from("subjects").select(`
+    id,
+    title,
+    courses (count)
+  `)
+}
+
+export async function getCourses() {
+  return supabase
+    .from("courses")
+    .select(
+      `
+    id,
+    subjects (
+      id,
+      title
+    ),
+    title,
+    description,
+    start_date,
+    updated_at
+  `
+    )
+    .eq("status", "active")
+}
+
+export async function getSubjectById(id: string) {
+  return supabase
+    .from("subjects")
+    .select(
+      `
+      id,
+      title,
+      courses (
+        id,
+        title,
+        description,
+        start_date,
+        updated_at,
+        subjects (
+          id,
+          title
+        )
+      )
+    `
+    )
+    .eq("id", id)
+    .single()
+}
+
+export function getCourseById(id: string) {
+  return supabase
+    .from("courses")
+    .select(
+      `
+    id,
+    title,
+    description,
+    start_date,
+    updated_at,
+    status,
+    chapters (
+      id,
+      title,
+      sort_order,
+      lessons (
+        id,
+        title,
+        class_date,
+        updated_at,
+        due_date,
+        sort_order,
+        lesson_attachments (
+          id,
+          file_name,
+          file_url,
+          file_type
+        )
+      )
+    )
+`
+    )
+    .order("id", { referencedTable: "chapters", ascending: true })
+    .eq("id", id)
+    .single()
+}
+
+export async function getCoursesByLatestLesson() {
+  return supabase
+    .from("courses_by_latest_lesson")
+    .select("*")
+    .order("latest_lesson_updated_at", { ascending: false })
+}
+
+export async function getRecentLessonsWithinWeek() {
+  // 1. Tính toán mốc thời gian cách đây 7 ngày
+  const oneWeekAgo = new Date()
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
+  const targetDateISO = oneWeekAgo.toISOString() // Supabase cần định dạng ISO string
+
+  // 2. Truy vấn Supabase
+  return supabase
+    .from("lessons")
+    .select(
+      `
+      id,
+      title,
+      class_date,
+      updated_at,
+      chapters (
+        id,
+        title,
+        courses (
+          id,
+          title
+        )
+      )
+    `
+    )
+    .gte("updated_at", targetDateISO) // Chỉ lấy các bài có updated_at >= thời điểm 7 ngày trước
+    .order("updated_at", { ascending: false })
+    .limit(10)
+}
+
+export async function getActiveMessages() {
+  // Lấy thời gian hiện tại và chuyển sang định dạng ISO string
+  const now = new Date().toISOString()
+
+  return (
+    supabase
+      .from("messages")
+      .select(
+        `
+        id,
+        content,
+        created_at,
+        expired_at,
+        courses (
+        id,
+        title
+        )
+      `
+      )
+      // Lọc: expired_at lớn hơn (gt) hiện tại HOẶC expired_at là null
+      .or(`expired_at.gt.${now},expired_at.is.null`)
+      .order("created_at", { ascending: false })
+  )
 }

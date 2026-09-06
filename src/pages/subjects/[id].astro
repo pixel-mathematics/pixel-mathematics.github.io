@@ -1,0 +1,77 @@
+---
+import Layout from "@/layouts/main.astro"
+import CourseCard from "@/components/CourseCard.astro"
+import Container from "@/components/Container.astro"
+import HeroImage from "@/components/HeroImage.astro"
+import { getSubjectById, getSubjects } from "@/lib/supabase"
+
+export async function getStaticPaths() {
+  const { data: subjects, error: getSubjectsError } = await getSubjects()
+  if (!subjects || getSubjectsError) {
+    throw new Error("Lỗi hiển thị môn học")
+  }
+  return subjects.map((subject: any) => ({ params: { id: subject.id } }))
+}
+
+const { data: subject, error: getSubjectError } = await getSubjectById(
+  Astro.params.id
+)
+
+if (!subject || getSubjectError) {
+  throw new Error("Lỗi hiển thị môn học")
+}
+
+const { id, title, courses } = subject
+---
+
+<Layout>
+  <section class="w-full overflow-hidden">
+    <HeroImage>
+      <!-- 4. Tiêu đề trung tâm với hiệu ứng Pixel Shadow -->
+      <!-- Shadow -->
+      <text
+        x="964"
+        y="204"
+        text-anchor="middle"
+        font-size="64"
+        font-weight="900"
+        fill="#3b82f6"
+      >
+        Môn {title}
+      </text>
+      <!-- Main Text -->
+      <text
+        x="960"
+        y="200"
+        text-anchor="middle"
+        font-size="64"
+        font-weight="900"
+        fill="#ffffff"
+      >
+        Môn <tspan fill="#4ade80">{title}</tspan>
+      </text>
+
+      <!-- Subtitle -->
+      <text
+        x="960"
+        y="280"
+        text-anchor="middle"
+        font-size="24"
+        font-weight="bold"
+        fill="#94a3b8"
+        letter-spacing="2"
+      >
+        [ "Mistakes are proof that you are trying. "]
+      </text>
+    </HeroImage>
+  </section>
+
+  <section class="mt-6">
+    <Container>
+      <h1 class="mb-4 text-2xl font-bold text-primary">Danh sách khóa học</h1>
+      <div class="grid grid-cols-2 gap-4">
+        {courses.map((course: any) => <CourseCard {...course} />)}
+      </div>
+    </Container>
+  </section>
+</Layout>

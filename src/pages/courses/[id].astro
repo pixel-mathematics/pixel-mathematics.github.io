@@ -1,61 +1,32 @@
 ---
-import { createServerClient } from "@/lib/supabase"
+import { getCourses, getCourseById } from "@/lib/supabase"
 
 import Layout from "@/layouts/main.astro"
 import HeroImage from "@/components/HeroImage.astro"
 import Container from "@/components/Container.astro"
 import { CourseOutline } from "@/components/course-outline"
 
+export const prerender = false
+
 export async function getStaticPaths() {
-  const supabase = createServerClient()
-  const { data: courses, error } = await supabase.from("courses").select(`id`)
+  const { data: courses, error } = await getCourses()
   if (!courses || error) {
     throw new Error("Lỗi lấy dữ liệu khóa học")
   }
   return courses.map((course: any) => ({ params: { id: course.id } }))
 }
 
-const supabase = createServerClient()
-const { data: course, error } = await supabase
-  .from("courses")
-  .select(
-    `
-    id,
-    title,
-    description,
-    start_date,
-    updated_at,
-    status,
-    chapters (
-      id,
-      title,
-      sort_order,
-      lessons (
-        id,
-        title,
-        class_date,
-        updated_at,
-        due_date,
-        sort_order,
-        lesson_attachments (
-          id,
-          file_name,
-          file_url,
-          file_type
-        )
-      )
-    )
-`
-  )
-  .order("id", { referencedTable: "chapters", ascending: true })
-  .eq("id", Astro.params.id)
-  .single()
+const { data: course, error } = await getCourseById(Astro.params.id)
 
 if (!course || error) {
   throw new Error("Lỗi lấy dữ liệu khóa học")
 }
 
 const { id, title, description, start_date, updated_at, chapters } = course
+
+const chapter_id = Astro.url.searchParams.get("chapter_id")
+const lesson_id = Astro.url.searchParams.get("lesson_id")
+console.log(Astro.url)
 ---
 
 <Layout>
@@ -67,7 +38,7 @@ const { id, title, description, start_date, updated_at, chapters } = course
         x="964"
         y="204"
         text-anchor="middle"
-        font-size="80"
+        font-size="64"
         font-weight="900"
         fill="#3b82f6"
       >
@@ -78,7 +49,7 @@ const { id, title, description, start_date, updated_at, chapters } = course
         x="960"
         y="200"
         text-anchor="middle"
-        font-size="80"
+        font-size="64"
         font-weight="900"
         fill="#ffffff"
       >
@@ -102,7 +73,12 @@ const { id, title, description, start_date, updated_at, chapters } = course
   <section>
     <div class="flex min-h-svh p-6">
       <Container>
-        <CourseOutline client:load chapters={chapters} />
+        <CourseOutline
+          client:load
+          course={course}
+          chapter_id={chapter_id}
+          lesson_id={lesson_id}
+        />
       </Container>
     </div>
   </section>

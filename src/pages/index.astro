@@ -1,11 +1,23 @@
 ---
 import Layout from "@/layouts/main.astro"
-import { Button } from "@/components/ui/button"
+import Container from "@/components/Container.astro"
 import HeroImage from "@/components/HeroImage.astro"
-import { createServerClient } from "@/lib/supabase"
+import RecentLessonListItem from "@/components/RecentLessonListItem.astro"
+import MessageListItem from "@/components/MessageListItem.astro"
+import { getActiveMessages, getRecentLessonsWithinWeek } from "@/lib/supabase"
 
-const supabase = createServerClient()
-const { data: courses, error } = await supabase.from("courses").select()
+const { data: recentLessons, error: getRecentLessonsError } =
+  await getRecentLessonsWithinWeek()
+
+if (!recentLessons || getRecentLessonsError) {
+  throw new Error("Lỗi hiển thị các bài học gần nhất")
+}
+
+const { data: messages, error: getMessagesError } = await getActiveMessages()
+
+if (!messages || getMessagesError) {
+  throw new Error("Lỗi hiển thị lời nhắn")
+}
 ---
 
 <Layout>
@@ -17,7 +29,7 @@ const { data: courses, error } = await supabase.from("courses").select()
         x="964"
         y="204"
         text-anchor="middle"
-        font-size="80"
+        font-size="64"
         font-weight="900"
         fill="#3b82f6"
       >
@@ -28,7 +40,7 @@ const { data: courses, error } = await supabase.from("courses").select()
         x="960"
         y="200"
         text-anchor="middle"
-        font-size="80"
+        font-size="64"
         font-weight="900"
         fill="#ffffff"
       >
@@ -48,5 +60,25 @@ const { data: courses, error } = await supabase.from("courses").select()
         [ "The more I learn, the less I realize I know" - Socrates ]
       </text>
     </HeroImage>
+  </section>
+  <section class="mt-6">
+    <Container>
+      <h1 class="mb-4 text-2xl font-bold text-primary">Bài học gần đây</h1>
+      <div class="grid grid-cols-1 gap-2">
+        {
+          recentLessons.map((lesson: any) => (
+            <RecentLessonListItem {...lesson} />
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+  <section class="mt-6">
+    <Container>
+      <h1 class="mb-4 text-2xl font-bold text-primary">Lời nhắn</h1>
+      <div class="grid grid-cols-1 gap-2">
+        {messages.map((message: any) => <MessageListItem {...message} />)}
+      </div>
+    </Container>
   </section>
 </Layout>
