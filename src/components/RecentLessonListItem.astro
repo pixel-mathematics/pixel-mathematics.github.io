@@ -1,20 +1,8 @@
 ---
 import { formatDate } from "@/lib/utils"
 import { ClockIcon, KeyRoundIcon, ScrollTextIcon } from "lucide-react"
-interface Props {
-  id: string
-  title: string
-  class_date: Date
-  updated_at: Date
-  chapters: {
-    id: string
-    title: string
-    courses: {
-      id: string
-      title: string
-    }
-  }
-}
+import type { RecentLesson } from "@/types"
+interface Props extends RecentLesson {}
 
 const { id, title, updated_at, chapters } = Astro.props
 ---

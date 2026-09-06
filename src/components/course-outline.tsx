@@ -7,34 +7,10 @@ import {
 } from "@/components/ui/accordion"
 
 import { LessonListItem } from "./lesson-list-item"
+import type { CourseWithLessons } from "@/types"
 
 interface Props {
-  course: {
-    id: string
-    title: string
-    description: string
-    start_date: Date
-    updated_at: Date
-    status: string
-    chapters: {
-      id: string
-      title: string
-      sort_order?: number
-      lessons: {
-        id: string
-        title: string
-        class_date: Date
-        updated_at: Date
-        due_date: Date
-        lesson_attachments: {
-          id: string
-          file_name: string
-          file_url: string
-          file_type?: string
-        }[]
-      }[]
-    }[]
-  }
+  course: CourseWithLessons
   chapter_id?: string | null
   lesson_id?: string | null
 }

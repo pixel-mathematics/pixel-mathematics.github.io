@@ -9,6 +9,7 @@ export async function getSubjects() {
   return supabase.from("subjects").select(`
     id,
     title,
+    sort_order,
     courses (count)
   `)
 }
@@ -153,4 +154,8 @@ export async function getActiveMessages() {
       .or(`expired_at.gt.${now},expired_at.is.null`)
       .order("created_at", { ascending: false })
   )
+}
+
+export async function getScheduleEvents() {
+  return supabase.from("schedule_events").select().order("id")
 }

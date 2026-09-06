@@ -8,18 +8,9 @@ import {
   CardTitle,
   CardDescription,
 } from "./ui/card"
+import type { CourseWithSubject } from "@/types"
 
-interface Props {
-  id: string
-  subjects: {
-    id: string
-    title: string
-  }
-  title: string
-  description: string
-  start_date: Date
-  updated_at: Date
-}
+interface Props extends CourseWithSubject {}
 
 const { id, subjects, title, description, updated_at } = Astro.props
 ---

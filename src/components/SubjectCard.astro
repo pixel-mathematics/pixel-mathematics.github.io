@@ -1,11 +1,9 @@
 ---
 import { GraduationCapIcon } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
+import type { Subject } from "@/types"
 
-interface Props {
-  id: string
-  title: string
-  sort_order: number
+interface Props extends Subject {
   courses: { count: number }[]
 }
 

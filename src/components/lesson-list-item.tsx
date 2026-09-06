@@ -19,27 +19,18 @@ import {
   DrawerFooter,
 } from "@/components/ui/drawer"
 import { useState } from "react"
+import type { Chapter, Course, LessonWithLessonAttachments } from "@/types"
 
 interface Props {
   lesson_id?: string | null
-  lesson: {
-    id: string
-    title: string
-    class_date: Date
-    updated_at: Date
-    due_date: Date
-    lesson_attachments: {
-      id: string
-      file_name: string
-      file_url: string
-      file_type?: string
-    }[]
-  }
-  chapter: { id: string; title: string }
-  course: { id: string; title: string }
+  lesson: LessonWithLessonAttachments
+  chapter: Pick<Chapter, "id" | "title">
+  course: Pick<Course, "id" | "title">
 }
-export function LessonListItem({ lesson_id, lesson, chapter, course }: Props) {
-  const [open, setOpen] = useState(lesson_id === lesson.id)
+export function LessonListItem({ lesson, chapter, course }: Props) {
+  const params = new URLSearchParams(window.location.href)
+  const lesson_id = params.get("lesson_id")
+  const [open, setOpen] = useState(lesson.id === lesson_id)
 
   const handleOpenChange = (open: boolean) => {
     setOpen(open)
@@ -62,7 +53,7 @@ export function LessonListItem({ lesson_id, lesson, chapter, course }: Props) {
       swipeDirection="right"
       key={lesson.id}
     >
-      <DrawerTrigger className="odd:bg-primary/5">
+      <DrawerTrigger>
         <div className="flex items-center rounded-md border px-3 py-2.5 text-base">
           <div className="flex items-center gap-2 font-medium">
             <span className="flex h-6 items-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-primary uppercase">

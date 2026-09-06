@@ -74,7 +74,7 @@ console.log(Astro.url)
     <div class="flex min-h-svh p-6">
       <Container>
         <CourseOutline
-          client:load
+          client:only="react"
           course={course}
           chapter_id={chapter_id}
           lesson_id={lesson_id}

@@ -132,3 +132,9 @@
     @apply font-sans;
   }
 }
+
+/* Chỉ bỏ highlight của ngày Chủ nhật */
+.fc .fc-day-sun {
+  background-color: transparent !important;
+  /* Hoặc đổi thành màu nền bạn muốn, VD: #ffffff */
+}

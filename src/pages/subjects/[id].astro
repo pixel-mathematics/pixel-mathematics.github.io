@@ -4,13 +4,14 @@ import CourseCard from "@/components/CourseCard.astro"
 import Container from "@/components/Container.astro"
 import HeroImage from "@/components/HeroImage.astro"
 import { getSubjectById, getSubjects } from "@/lib/supabase"
+import type { Subject } from "@/types"
 
 export async function getStaticPaths() {
   const { data: subjects, error: getSubjectsError } = await getSubjects()
   if (!subjects || getSubjectsError) {
     throw new Error("Lỗi hiển thị môn học")
   }
-  return subjects.map((subject: any) => ({ params: { id: subject.id } }))
+  return subjects.map((subject: Subject) => ({ params: { id: subject.id } }))
 }
 
 const { data: subject, error: getSubjectError } = await getSubjectById(

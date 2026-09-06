@@ -5,6 +5,7 @@ import HeroImage from "@/components/HeroImage.astro"
 import RecentLessonListItem from "@/components/RecentLessonListItem.astro"
 import MessageListItem from "@/components/MessageListItem.astro"
 import { getActiveMessages, getRecentLessonsWithinWeek } from "@/lib/supabase"
+import type { RecentLesson } from "@/types"
 
 const { data: recentLessons, error: getRecentLessonsError } =
   await getRecentLessonsWithinWeek()
@@ -66,7 +67,7 @@ if (!messages || getMessagesError) {
       <h1 class="mb-4 text-2xl font-bold text-primary">Bài học gần đây</h1>
       <div class="grid grid-cols-1 gap-2">
         {
-          recentLessons.map((lesson: any) => (
+          recentLessons.map((lesson: RecentLesson) => (
             <RecentLessonListItem {...lesson} />
           ))
         }
