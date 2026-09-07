@@ -19,7 +19,6 @@ const { data: messages, error: getMessagesError } = await getActiveMessages()
 if (!messages || getMessagesError) {
   throw new Error("Lỗi hiển thị lời nhắn")
 }
-console.log(messages)
 ---
 
 <Layout>

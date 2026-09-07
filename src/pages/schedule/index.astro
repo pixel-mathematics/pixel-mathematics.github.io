@@ -9,8 +9,6 @@ const { data: scheduleEvents, error } = await getScheduleEvents()
 if (!scheduleEvents || error) {
   throw new Error("Lỗi hiển thị sự kiện")
 }
-
-console.log(scheduleEvents)
 ---
 
 <Layout>

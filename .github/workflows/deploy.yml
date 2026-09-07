@@ -1,0 +1,44 @@
+name: Deploy Astro to GitHub Pages
+
+on:
+  # Chạy workflow khi push code lên nhánh main (hoặc master)
+  push:
+    branches: [main]
+  # Cho phép chạy workflow thủ công từ tab Actions
+  workflow_dispatch:
+
+# Cho phép workflow đọc code và ghi lên GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install, build, and upload your site
+        uses: withastro/action@v3
+        # CHÚ Ý: Truyền các biến môi trường từ GitHub Secrets vào bước build này
+        env:
+          PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
+          PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
+          # Thêm các biến khác tương ứng với file .env của bạn tại đây
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

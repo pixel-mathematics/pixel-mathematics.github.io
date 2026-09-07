@@ -6,8 +6,6 @@ import Hero from "@/components/Hero.astro"
 import Container from "@/components/Container.astro"
 import { CourseOutline } from "@/components/course-outline"
 
-export const prerender = false
-
 export async function getStaticPaths() {
   const { data: courses, error } = await getCourses()
   if (!courses || error) {
@@ -26,7 +24,6 @@ const { id, title, description, start_date, updated_at, chapters } = course
 
 const chapter_id = Astro.url.searchParams.get("chapter_id")
 const lesson_id = Astro.url.searchParams.get("lesson_id")
-console.log(Astro.url)
 ---
 
 <Layout>
