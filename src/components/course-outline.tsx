@@ -7,16 +7,17 @@ import {
 } from "@/components/ui/accordion"
 
 import { LessonListItem } from "./lesson-list-item"
-import type { CourseWithLessons } from "@/types"
+import type { CourseWithMaterials } from "@/types"
+import { DocumentListItem } from "./document-list-item"
 
 interface Props {
-  course: CourseWithLessons
+  course: CourseWithMaterials
   chapter_id?: string | null
   lesson_id?: string | null
 }
 
 export function CourseOutline({
-  course: { id, title, chapters },
+  course: { id, title, chapters, documents },
   chapter_id,
   lesson_id,
 }: Props) {
@@ -89,7 +90,13 @@ export function CourseOutline({
             <p className="p-4">Chưa có bài học nào trong khóa này</p>
           )}
         </TabsContent>
-        <TabsContent value="documents"></TabsContent>
+        <TabsContent value="documents">
+          <div className="flex flex-col items-stretch gap-2">
+            {documents.map((doc) => (
+              <DocumentListItem key={doc.id} document={doc} />
+            ))}
+          </div>
+        </TabsContent>
       </Tabs>
     </div>
   )

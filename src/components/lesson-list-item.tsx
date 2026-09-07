@@ -47,12 +47,7 @@ export function LessonListItem({ lesson, chapter, course }: Props) {
   }
 
   return (
-    <Drawer
-      open={open}
-      onOpenChange={handleOpenChange}
-      swipeDirection="right"
-      key={lesson.id}
-    >
+    <Drawer open={open} onOpenChange={handleOpenChange} swipeDirection="right">
       <DrawerTrigger>
         <div className="flex items-center rounded-md border px-3 py-2.5 text-base">
           <div className="flex items-center gap-2 font-medium">

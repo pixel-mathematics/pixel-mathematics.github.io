@@ -56,7 +56,14 @@ export interface RecentLesson extends Lesson {
   }
 }
 
-export interface CourseWithLessons extends Course {
+export interface Document {
+  id: string
+  file_name: string
+  file_url: string
+  file_type: string
+}
+
+export interface CourseWithMaterials extends Course {
   chapters: Array<
     Chapter & {
       lessons: Array<
@@ -66,6 +73,7 @@ export interface CourseWithLessons extends Course {
       >
     }
   >
+  documents: Array<Document>
 }
 
 export interface Message {
@@ -73,6 +81,10 @@ export interface Message {
   content: string
   created_at: Date
   expired_at: Date
+}
+
+export interface MessageWithCourse extends Message {
+  courses: Pick<Course, "id" | "title">
 }
 
 export interface ScheduleEvent {

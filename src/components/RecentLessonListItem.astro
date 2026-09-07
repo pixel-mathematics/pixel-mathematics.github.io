@@ -2,9 +2,11 @@
 import { formatDate } from "@/lib/utils"
 import { ClockIcon, KeyRoundIcon, ScrollTextIcon } from "lucide-react"
 import type { RecentLesson } from "@/types"
-interface Props extends RecentLesson {}
+interface Props {
+  lesson: RecentLesson
+}
 
-const { id, title, updated_at, chapters } = Astro.props
+const { id, title, updated_at, chapters } = Astro.props.lesson
 ---
 
 <a

@@ -86,6 +86,12 @@ export function getCourseById(id: string) {
           file_type
         )
       )
+    ),
+    documents (
+      id,
+      file_name,
+      file_url,
+      file_type
     )
 `
     )
@@ -126,34 +132,30 @@ export async function getRecentLessonsWithinWeek() {
       )
     `
     )
-    .gte("updated_at", targetDateISO) // Chỉ lấy các bài có updated_at >= thời điểm 7 ngày trước
+    .gte("updated_at", targetDateISO)
     .order("updated_at", { ascending: false })
     .limit(10)
 }
 
 export async function getActiveMessages() {
-  // Lấy thời gian hiện tại và chuyển sang định dạng ISO string
   const now = new Date().toISOString()
 
-  return (
-    supabase
-      .from("messages")
-      .select(
-        `
+  return supabase
+    .from("messages")
+    .select(
+      `
         id,
         content,
         created_at,
         expired_at,
         courses (
-        id,
-        title
+          id,
+          title
         )
       `
-      )
-      // Lọc: expired_at lớn hơn (gt) hiện tại HOẶC expired_at là null
-      .or(`expired_at.gt.${now},expired_at.is.null`)
-      .order("created_at", { ascending: false })
-  )
+    )
+    .or(`expired_at.gt.${now},expired_at.is.null`)
+    .order("created_at", { ascending: false })
 }
 
 export async function getScheduleEvents() {

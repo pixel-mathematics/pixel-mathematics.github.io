@@ -3,9 +3,9 @@ import Layout from "@/layouts/main.astro"
 import Container from "@/components/Container.astro"
 import HeroImage from "@/components/HeroImage.astro"
 import RecentLessonListItem from "@/components/RecentLessonListItem.astro"
-import MessageListItem from "@/components/MessageListItem.astro"
+import { MessageListItem } from "@/components/message-list-item"
 import { getActiveMessages, getRecentLessonsWithinWeek } from "@/lib/supabase"
-import type { RecentLesson } from "@/types"
+import type { RecentLesson, MessageWithCourse } from "@/types"
 
 const { data: recentLessons, error: getRecentLessonsError } =
   await getRecentLessonsWithinWeek()
@@ -19,6 +19,7 @@ const { data: messages, error: getMessagesError } = await getActiveMessages()
 if (!messages || getMessagesError) {
   throw new Error("Lỗi hiển thị lời nhắn")
 }
+console.log(messages)
 ---
 
 <Layout>
@@ -67,8 +68,8 @@ if (!messages || getMessagesError) {
       <h1 class="mb-4 text-2xl font-bold text-primary">Bài học gần đây</h1>
       <div class="grid grid-cols-1 gap-2">
         {
-          recentLessons.map((lesson: RecentLesson) => (
-            <RecentLessonListItem {...lesson} />
+          recentLessons.map((lesson) => (
+            <RecentLessonListItem lesson={lesson} />
           ))
         }
       </div>
@@ -78,7 +79,11 @@ if (!messages || getMessagesError) {
     <Container>
       <h1 class="mb-4 text-2xl font-bold text-primary">Lời nhắn</h1>
       <div class="grid grid-cols-1 gap-2">
-        {messages.map((message: any) => <MessageListItem {...message} />)}
+        {
+          messages.map((message: MessageWithCourse) => (
+            <MessageListItem client:load key={message.id} message={message} />
+          ))
+        }
       </div>
     </Container>
   </section>
