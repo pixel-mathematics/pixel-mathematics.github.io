@@ -24,6 +24,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+
+      # (Tùy chọn) 2. Setup Node.js nếu bạn muốn fix cứng version Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "pnpm"
+
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         # CHÚ Ý: Truyền các biến môi trường từ GitHub Secrets vào bước build này
