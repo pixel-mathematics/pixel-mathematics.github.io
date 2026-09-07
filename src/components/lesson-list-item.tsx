@@ -51,7 +51,7 @@ export function LessonListItem({ lesson, chapter, course }: Props) {
       <DrawerTrigger>
         <div className="flex flex-col items-start gap-2 rounded-md border px-3 py-2.5 text-base md:flex-row md:items-center">
           <div className="flex flex-col items-start gap-2 font-medium md:flex-row md:items-center">
-            <span className="flex h-6 items-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-nowrap text-primary uppercase">
+            <span className="flex h-6 w-20 items-center justify-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-nowrap text-primary uppercase">
               {lesson.id}
             </span>
             <span className="max-w-[80vw] truncate text-left md:max-w-full">
@@ -75,7 +75,7 @@ export function LessonListItem({ lesson, chapter, course }: Props) {
         <DrawerHeader>
           <DrawerTitle>
             <div className="flex flex-col items-start gap-2">
-              <div className="inline-block h-6.5 rounded-sm bg-primary/10 px-2 text-base font-semibold text-primary uppercase">
+              <div className="flex h-6 w-20 items-center justify-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-primary uppercase">
                 {lesson.id}
               </div>
               <div className="self-stretch truncate text-lg">
@@ -87,13 +87,13 @@ export function LessonListItem({ lesson, chapter, course }: Props) {
             <div className="mt-2 flex items-center gap-4">
               <div className="flex items-center gap-1">
                 Khóa
-                <div className="flex h-6 items-center rounded-sm bg-primary/10 px-1.5 text-sm font-semibold text-primary uppercase">
+                <div className="flex h-6 w-12 items-center justify-center rounded-sm bg-primary/10 text-sm font-semibold text-primary uppercase">
                   {course.id}
                 </div>
               </div>
               <div className="flex items-center gap-1">
                 Chương
-                <div className="flex h-6 items-center rounded-sm bg-primary px-1.5 text-sm font-semibold text-primary-foreground uppercase">
+                <div className="flex h-6 w-16 items-center justify-center rounded-sm bg-primary text-sm font-semibold text-primary-foreground uppercase">
                   {chapter.id}
                 </div>
               </div>
@@ -106,15 +106,15 @@ export function LessonListItem({ lesson, chapter, course }: Props) {
               <PaperclipIcon size={18} />
               <span>Tài liệu đính kèm</span>
             </div>
-            <div className="ml-6 flex flex-col">
+            <div className="ml-6 flex flex-col gap-1">
               {lesson.lesson_attachments.map((file) => (
                 <div className="flex items-center gap-4" key={file.id}>
-                  <span>{file.file_name}</span>
+                  <span className="w-20">{file.file_name}</span>
                   <a href={file.file_url} target="_blank">
-                    <div className="flex items-center gap-1 text-xs text-primary uppercase hover:text-primary/70">
+                    <button className="flex items-center gap-1 text-xs text-primary uppercase hover:text-primary/70">
                       <DownloadIcon size={16} />
                       {file.file_type}
-                    </div>
+                    </button>
                   </a>
                 </div>
               ))}

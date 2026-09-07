@@ -27,7 +27,7 @@ export function MessageListItem({ message }: Props) {
       <DrawerTrigger>
         <div className="flex flex-col items-start gap-2 rounded-md border px-3 py-2.5 text-base md:flex-row md:items-center">
           <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
-            <span className="flex h-6 items-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-primary uppercase">
+            <span className="flex h-6 w-12 items-center justify-center rounded-sm bg-primary/10 text-sm font-semibold text-primary uppercase">
               {message.courses.id}
             </span>
             <span className="max-w-[80vw] truncate text-left">

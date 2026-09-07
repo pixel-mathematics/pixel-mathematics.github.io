@@ -60,7 +60,7 @@ export function CourseOutline({
                 >
                   <AccordionTrigger className="flex items-center text-base md:text-lg">
                     <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
-                      <span className="flex h-6.5 items-center rounded-sm bg-primary px-2 text-base font-semibold text-nowrap text-primary-foreground uppercase">
+                      <span className="flex h-6 w-16 items-center justify-center rounded-sm bg-primary text-sm font-semibold text-nowrap text-primary-foreground uppercase">
                         {chapter.id}
                       </span>{" "}
                       <span className="max-w-[80vw] truncate text-primary uppercase md:max-w-full">

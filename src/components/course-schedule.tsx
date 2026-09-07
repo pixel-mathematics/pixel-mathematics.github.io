@@ -98,7 +98,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                   <div className="mt-2 flex items-center gap-4">
                     <div className="flex items-center gap-1">
                       Mã lớp:
-                      <div className="flex h-6 items-center rounded-sm bg-primary/10 px-1.5 text-sm font-semibold text-primary uppercase">
+                      <div className="flex h-6 w-26 items-center justify-center rounded-sm bg-primary/10 text-sm font-semibold text-primary uppercase">
                         {selectedEvent.id}
                       </div>
                     </div>
