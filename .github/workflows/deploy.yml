@@ -26,6 +26,8 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
+        with:
+          version: 11 # Thay bằng version pnpm bạn dùng, hoặc bỏ dòng này nếu đã khai trong package.json
 
       # (Tùy chọn) 2. Setup Node.js nếu bạn muốn fix cứng version Node
       - name: Setup Node.js
