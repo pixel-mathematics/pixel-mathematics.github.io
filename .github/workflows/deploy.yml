@@ -24,16 +24,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-
       - name: Install, build, and upload your site
         uses: withastro/action@v3
+        with:
+          node-version: "24"
         # CHÚ Ý: Truyền các biến môi trường từ GitHub Secrets vào bước build này
         env:
           PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
