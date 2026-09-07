@@ -2,16 +2,22 @@
 import Container from "@/components/Container.astro"
 import Logo from "@/components/Logo.astro"
 import Navigation from "@/components/Navigation.astro"
+import { MobileNavigation } from "@/components/mobile-navigation"
 ---
 
 <header class="sticky top-0 z-10 bg-background shadow-lg">
-  <Container class="flex h-16 items-center">
+  <Container class="flex h-16 items-center justify-between">
     <a href="/">
       <div class="flex items-center gap-2">
         <Logo class="h-8 w-8" />
-        <div class="text-2xl font-bold">Pixel Mathematics</div>
+        <div class="hidden text-2xl font-bold md:block">Pixel Mathematics</div>
       </div>
     </a>
-    <Navigation />
+    <div class="hidden md:block">
+      <Navigation />
+    </div>
+    <div class="block md:hidden">
+      <MobileNavigation client:load />
+    </div>
   </Container>
 </header>

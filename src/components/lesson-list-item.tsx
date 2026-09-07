@@ -49,12 +49,14 @@ export function LessonListItem({ lesson, chapter, course }: Props) {
   return (
     <Drawer open={open} onOpenChange={handleOpenChange} swipeDirection="right">
       <DrawerTrigger>
-        <div className="flex items-center rounded-md border px-3 py-2.5 text-base">
+        <div className="flex items-center gap-2 rounded-md border px-3 py-2.5 text-base">
           <div className="flex items-center gap-2 font-medium">
-            <span className="flex h-6 items-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-primary uppercase">
+            <span className="flex h-6 items-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-nowrap text-primary uppercase">
               {lesson.id}
             </span>
-            <span>{lesson.title}</span>
+            <span className="max-w-[60vw] truncate text-left md:max-w-full">
+              {lesson.title}
+            </span>
           </div>
           <div className="ml-auto flex items-center gap-4">
             <div className="flex items-center gap-1 text-foreground/60">

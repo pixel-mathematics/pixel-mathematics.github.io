@@ -1,0 +1,22 @@
+---
+interface Props {
+  text?: string
+  highlightText?: string
+  quote?: string
+}
+
+const { text, highlightText, quote } = Astro.props
+---
+
+<div
+  class="relative flex min-h-[30vh] items-center justify-center bg-[url('/hero.svg')] bg-cover md:min-h-[40vh]"
+>
+  <div class="flex flex-col items-center gap-4 text-center">
+    <div class="text-3xl font-bold sm:text-4xl md:text-5xl">
+      <span class="text-white">{text}</span>{" "}<span class="text-teal-400"
+        >{highlightText}</span
+      >
+    </div>
+    <div class="text-base text-slate-300 md:text-lg">{quote}</div>
+  </div>
+</div>

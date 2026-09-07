@@ -3,58 +3,26 @@ import { getPosts } from "@/lib/content"
 import PostCard from "@/components/PostCard.astro"
 import Layout from "@/layouts/main.astro"
 import Container from "@/components/Container.astro"
-import HeroImage from "@/components/HeroImage.astro"
+import Hero from "@/components/Hero.astro"
 const posts = await getPosts()
 ---
 
 <Layout>
   <section class="w-full overflow-hidden">
-    <HeroImage>
-      <!-- 4. Tiêu đề trung tâm với hiệu ứng Pixel Shadow -->
-      <!-- Shadow -->
-      <text
-        x="964"
-        y="204"
-        text-anchor="middle"
-        font-size="64"
-        font-weight="900"
-        fill="#3b82f6"
-      >
-        Bài viết
-      </text>
-      <!-- Main Text -->
-      <text
-        x="960"
-        y="200"
-        text-anchor="middle"
-        font-size="64"
-        font-weight="900"
-        fill="#ffffff"
-      >
-        <tspan fill="#4ade80">Bài viết</tspan>
-      </text>
-
-      <!-- Subtitle -->
-      <text
-        x="960"
-        y="280"
-        text-anchor="middle"
-        font-size="24"
-        font-weight="bold"
-        fill="#94a3b8"
-        letter-spacing="2"
-      >
-        [ "Mistakes are proof that you are trying. "]
-      </text>
-    </HeroImage>
+    <Hero
+      highlightText="Bài viết"
+      quote={`"A drop of ink may make a million think."`}
+    />
   </section>
 
-  <section class="mt-6">
-    <Container>
-      <h1 class="mb-4 text-2xl font-bold text-primary">Danh sách bài viết</h1>
-      <div class="grid grid-cols-2 gap-4">
-        {posts.map((post) => <PostCard {...post} />)}
-      </div>
-    </Container>
+  <section>
+    <div class="min-h-svh py-6">
+      <Container>
+        <h1 class="mb-4 text-2xl font-bold text-primary">Danh sách bài viết</h1>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {posts.map((post) => <PostCard {...post} />)}
+        </div>
+      </Container>
+    </div>
   </section>
 </Layout>

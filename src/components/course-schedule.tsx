@@ -39,44 +39,48 @@ export function CourseSchedule({ scheduleEvents }: Props) {
   }
 
   return (
-    <div className="calendar-container">
-      <FullCalendar
-        plugins={[timeGridPlugin]}
-        initialView="timeGridWeek"
-        events={scheduleEvents.map((event) => ({
-          id: event.id,
-          title: event.title,
-          startTime: event.start_time,
-          endTime: event.end_time,
-          daysOfWeek: [event.dayOfWeek],
-          backgroundColor: event.background_color,
-          textColor: event.text_color ?? "#000",
-          borderColor: event.background_color,
-        }))}
-        slotMinTime="07:00:00" // Thời gian bắt đầu trong ngày
-        slotMaxTime="22:00:00" // Thời gian kết thúc trong ngày
-        allDaySlot={false} // Ẩn hàng "Cả ngày"
-        headerToolbar={{
-          left: "",
-          center: "",
-          right: "",
-        }}
-        height="auto"
-        buttonText={{
-          today: "Hôm nay",
-          week: "Tuần",
-          day: "Ngày",
-        }}
-        locale={viLocale}
-        dayHeaderFormat={{
-          weekday: "short",
-        }}
-        slotLabelFormat={{
-          hour: "2-digit",
-          minute: "2-digit",
-        }}
-        eventClick={handleEventClick}
-      />
+    <div>
+      <div className="w-full overflow-x-auto">
+        <div className="min-w-[1000px]">
+          <FullCalendar
+            plugins={[timeGridPlugin]}
+            initialView="timeGridWeek"
+            events={scheduleEvents.map((event) => ({
+              id: event.id,
+              title: event.title,
+              startTime: event.start_time,
+              endTime: event.end_time,
+              daysOfWeek: [event.dayOfWeek],
+              backgroundColor: event.background_color,
+              textColor: event.text_color ?? "#000",
+              borderColor: event.background_color,
+            }))}
+            slotMinTime="07:00:00" // Thời gian bắt đầu trong ngày
+            slotMaxTime="22:00:00" // Thời gian kết thúc trong ngày
+            allDaySlot={false} // Ẩn hàng "Cả ngày"
+            headerToolbar={{
+              left: "",
+              center: "",
+              right: "",
+            }}
+            height="auto"
+            buttonText={{
+              today: "Hôm nay",
+              week: "Tuần",
+              day: "Ngày",
+            }}
+            locale={viLocale}
+            dayHeaderFormat={{
+              weekday: "short",
+            }}
+            slotLabelFormat={{
+              hour: "2-digit",
+              minute: "2-digit",
+            }}
+            eventClick={handleEventClick}
+          />
+        </div>
+      </div>
       {/* Drawer */}
       <Drawer open={open} onOpenChange={setOpen} swipeDirection="right">
         <DrawerContent>

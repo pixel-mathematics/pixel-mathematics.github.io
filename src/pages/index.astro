@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/main.astro"
 import Container from "@/components/Container.astro"
-import HeroImage from "@/components/HeroImage.astro"
+import Hero from "@/components/Hero.astro"
 import RecentLessonListItem from "@/components/RecentLessonListItem.astro"
 import { MessageListItem } from "@/components/message-list-item"
 import { getActiveMessages, getRecentLessonsWithinWeek } from "@/lib/supabase"
@@ -24,44 +24,11 @@ console.log(messages)
 
 <Layout>
   <section class="w-full overflow-hidden">
-    <HeroImage>
-      <!-- 4. Tiêu đề trung tâm với hiệu ứng Pixel Shadow -->
-      <!-- Shadow -->
-      <text
-        x="964"
-        y="204"
-        text-anchor="middle"
-        font-size="64"
-        font-weight="900"
-        fill="#3b82f6"
-      >
-        Pixel Mathematics
-      </text>
-      <!-- Main Text -->
-      <text
-        x="960"
-        y="200"
-        text-anchor="middle"
-        font-size="64"
-        font-weight="900"
-        fill="#ffffff"
-      >
-        Pixel <tspan fill="#4ade80">Mathematics</tspan>
-      </text>
-
-      <!-- Subtitle -->
-      <text
-        x="960"
-        y="280"
-        text-anchor="middle"
-        font-size="24"
-        font-weight="bold"
-        fill="#94a3b8"
-        letter-spacing="2"
-      >
-        [ "The more I learn, the less I realize I know" - Socrates ]
-      </text>
-    </HeroImage>
+    <Hero
+      text="Pixel"
+      highlightText="Mathematics"
+      quote={`"The more I learn, the less I realize I know"`}
+    />
   </section>
   <section class="mt-6">
     <Container>
@@ -75,7 +42,7 @@ console.log(messages)
       </div>
     </Container>
   </section>
-  <section class="mt-6">
+  <section class="my-6">
     <Container>
       <h1 class="mb-4 text-2xl font-bold text-primary">Lời nhắn</h1>
       <div class="grid grid-cols-1 gap-2">

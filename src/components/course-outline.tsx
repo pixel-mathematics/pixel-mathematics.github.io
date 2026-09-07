@@ -36,15 +36,15 @@ export function CourseOutline({
         <TabsList>
           <TabsTrigger
             value="chapters"
-            className="px-4 text-lg font-bold uppercase"
+            className="px-4 text-base font-bold uppercase md:text-lg"
           >
-            Chương trình học
+            Bài học
           </TabsTrigger>
           <TabsTrigger
             value="documents"
-            className="px-4 text-lg font-bold uppercase"
+            className="px-4 text-base font-bold uppercase md:text-lg"
           >
-            Tài liệu tham khảo
+            Tài liệu
           </TabsTrigger>
         </TabsList>
         <TabsContent value="chapters">
@@ -58,18 +58,18 @@ export function CourseOutline({
                     handleChapterOpenChange(open, chapter.id)
                   }
                 >
-                  <AccordionTrigger className="text-lg">
+                  <AccordionTrigger className="text-base md:text-lg">
                     <div className="flex items-center gap-2">
-                      <span className="flex h-6.5 items-center rounded-sm bg-primary px-2 text-base font-semibold text-primary-foreground uppercase">
+                      <span className="flex h-6.5 items-center rounded-sm bg-primary px-2 text-base font-semibold text-nowrap text-primary-foreground uppercase">
                         {chapter.id}
                       </span>{" "}
-                      <span className="truncate text-primary uppercase">
+                      <span className="max-w-[60vw] truncate text-primary uppercase md:max-w-full">
                         {chapter.title}
                       </span>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="ml-14 flex flex-col items-stretch gap-2">
+                    <div className="ml-0 flex flex-col items-stretch gap-2 md:ml-14">
                       {chapter.lessons.map((lesson) => (
                         <LessonListItem
                           lesson_id={lesson_id}

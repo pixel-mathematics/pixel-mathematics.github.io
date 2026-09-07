@@ -7,9 +7,9 @@ interface Props {
 
 export function DocumentListItem({ document }: Props) {
   return (
-    <div className="flex items-center rounded-md border px-3 py-2.5 text-base">
-      <div className="flex items-center gap-2 font-medium">
-        <span className="flex h-6 items-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-primary uppercase">
+    <div className="flex flex-col items-start gap-2 rounded-md border px-3 py-2.5 text-base md:flex-row md:items-center">
+      <div className="flex flex-col items-start gap-2 font-medium md:flex-row md:items-center">
+        <span className="flex h-6 items-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-nowrap text-primary uppercase">
           {document.id}
         </span>
         <span>{document.file_name}</span>

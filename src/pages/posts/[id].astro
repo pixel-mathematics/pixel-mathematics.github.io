@@ -1,0 +1,71 @@
+---
+import { getPosts, getPostById } from "@/lib/content"
+import Layout from "@/layouts/main.astro"
+import Container from "@/components/Container.astro"
+import { formatDate } from "@/lib/utils"
+import { ClockIcon, SquarePenIcon } from "lucide-react"
+import { Separator } from "@/components/ui/separator"
+import { render } from "astro:content"
+import H2 from "@/components/mdx/H2.astro"
+import Paragraph from "@/components/mdx/Paragraph.astro"
+
+export async function getStaticPaths() {
+  const posts = await getPosts()
+  return posts.map((post) => ({ params: { id: post.id } }))
+}
+
+const post = await getPostById(Astro.params.id)
+if (!post) {
+  throw new Error("Không thể tìm thấy bài viết")
+}
+
+const {
+  id,
+  data: { title, description, topic, pubDate },
+} = post
+const { Content } = await render(post)
+---
+
+<Layout>
+  <section class="mt-6">
+    <div class="min-h-svh">
+      <Container class="grid max-w-4xl">
+        <div class="grid grid-cols-1 gap-4">
+          <div class="flex items-center gap-6">
+            <div class="flex items-center gap-1 text-primary">
+              <SquarePenIcon size={16} />
+              <span>
+                {
+                  topic.reduce((text, t, index) => {
+                    if (index === 0) {
+                      return (text += t)
+                    }
+                    return text + t + ", "
+                  }, "")
+                }
+              </span>
+            </div>
+
+            <div class="flex items-center gap-1 text-foreground/60">
+              <ClockIcon size={16} />
+              <span>
+                {formatDate(pubDate)}
+              </span>
+            </div>
+          </div>
+          <h1 class="text-3xl font-bold text-primary">{title}</h1>
+          <p class="text-muted-foreground">{description}</p>
+          <Separator />
+          <div>
+            <Content
+              components={{
+                h2: H2,
+                p: Paragraph,
+              }}
+            />
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+</Layout>
