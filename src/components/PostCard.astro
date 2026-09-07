@@ -1,0 +1,40 @@
+---
+import type { Post } from "@/lib/content"
+import { formatDate } from "@/lib/utils"
+import { ClockIcon, SquarePenIcon } from "lucide-react"
+
+interface Props extends Post {}
+const {
+  id,
+  data: { title, description, topic, pubDate },
+} = Astro.props
+---
+
+<a href={`/posts/${id}`}>
+  <div class="grid grid-cols-1 gap-2 rounded-md border p-4">
+    <div class="text-xl font-semibold text-primary">{title}</div>
+    <div class="text-muted-foreground">{description}</div>
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-1 text-primary">
+        <SquarePenIcon size={16} />
+        <span>
+          {
+            topic.reduce((text, t, index) => {
+              if (index === 0) {
+                return (text += t)
+              }
+              return text + t + ", "
+            }, "")
+          }
+        </span>
+      </div>
+
+      <div class="flex items-center gap-1 text-foreground/60">
+        <ClockIcon size={16} />
+        <span>
+          {formatDate(pubDate)}
+        </span>
+      </div>
+    </div>
+  </div>
+</a>
