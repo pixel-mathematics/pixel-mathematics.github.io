@@ -23,11 +23,11 @@ const { id, title, updated_at, chapters } = Astro.props.lesson
       >
         {id}
       </span>
-      <span class="max-w-[60vw] truncate text-nowrap md:max-w-full"
+      <span class="max-w-[80vw] truncate text-nowrap md:max-w-full"
         >{title}</span
       >
     </div>
-    <div class="ml-0 flex items-center gap-4 text-sm md:ml-auto">
+    <div class="ml-auto flex items-center gap-4 text-sm">
       <div class="flex items-center gap-1 font-medium text-primary uppercase">
         <KeyRoundIcon size={16} />{chapters.courses.id}
       </div>

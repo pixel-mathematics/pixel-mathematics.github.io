@@ -58,12 +58,12 @@ export function CourseOutline({
                     handleChapterOpenChange(open, chapter.id)
                   }
                 >
-                  <AccordionTrigger className="text-base md:text-lg">
-                    <div className="flex items-center gap-2">
+                  <AccordionTrigger className="flex items-center text-base md:text-lg">
+                    <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
                       <span className="flex h-6.5 items-center rounded-sm bg-primary px-2 text-base font-semibold text-nowrap text-primary-foreground uppercase">
                         {chapter.id}
                       </span>{" "}
-                      <span className="max-w-[60vw] truncate text-primary uppercase md:max-w-full">
+                      <span className="max-w-[80vw] truncate text-primary uppercase md:max-w-full">
                         {chapter.title}
                       </span>
                     </div>

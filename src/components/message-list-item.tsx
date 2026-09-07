@@ -25,7 +25,7 @@ export function MessageListItem({ message }: Props) {
   return (
     <Drawer swipeDirection="right">
       <DrawerTrigger>
-        <div className="flex flex-col items-start rounded-md border px-3 py-2.5 text-base md:flex-row md:items-center">
+        <div className="flex flex-col items-start gap-2 rounded-md border px-3 py-2.5 text-base md:flex-row md:items-center">
           <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
             <span className="flex h-6 items-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-primary uppercase">
               {message.courses.id}
@@ -34,7 +34,7 @@ export function MessageListItem({ message }: Props) {
               {message.content}
             </span>
           </div>
-          <div className="ml-0 flex items-center gap-4 text-sm md:ml-auto">
+          <div className="ml-auto flex items-center gap-4 text-sm">
             <div className="flex items-center gap-1 text-foreground/60">
               <ClockIcon size={14} />
               <span>{formatDate(message.created_at)}</span>
