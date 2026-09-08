@@ -27,7 +27,7 @@ export async function getCourses() {
     title,
     description,
     start_date,
-    updated_at
+    updated_on
   `
     )
     .eq("status", "active")
@@ -45,7 +45,7 @@ export async function getSubjectById(id: string) {
         title,
         description,
         start_date,
-        updated_at,
+        updated_on,
         subjects (
           id,
           title
@@ -66,7 +66,7 @@ export function getCourseById(id: string) {
     title,
     description,
     start_date,
-    updated_at,
+    updated_on,
     status,
     sort_order,
     chapters (
@@ -77,8 +77,8 @@ export function getCourseById(id: string) {
         id,
         title,
         class_date,
-        updated_at,
-        due_date,
+        updated_on,
+        deadline,
         sort_order,
         lesson_attachments (
           id,
@@ -101,13 +101,6 @@ export function getCourseById(id: string) {
     .single()
 }
 
-export async function getCoursesByLatestLesson() {
-  return supabase
-    .from("courses_by_latest_lesson")
-    .select("*")
-    .order("latest_lesson_updated_at", { ascending: false })
-}
-
 export async function getRecentLessonsWithinWeek() {
   // 1. Tính toán mốc thời gian cách đây 7 ngày
   const oneWeekAgo = new Date()
@@ -122,7 +115,7 @@ export async function getRecentLessonsWithinWeek() {
       id,
       title,
       class_date,
-      updated_at,
+      updated_on,
       chapters (
         id,
         title,
@@ -133,8 +126,8 @@ export async function getRecentLessonsWithinWeek() {
       )
     `
     )
-    .gte("updated_at", targetDateISO)
-    .order("updated_at", { ascending: false })
+    .gte("updated_on", targetDateISO)
+    .order("updated_on", { ascending: false })
     .limit(10)
 }
 

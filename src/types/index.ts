@@ -11,7 +11,7 @@ export interface Course {
   start_date: string
   status: string
   sort_order: number
-  updated_at: Date
+  updated_on: Date
 }
 
 export interface SubjectWithCourses extends Subject {
@@ -34,8 +34,8 @@ export interface Lesson {
   id: string
   title: string
   class_date: Date
-  updated_at: Date
-  due_date: Date
+  updated_on: Date
+  deadline: Date
   sort_order: number
 }
 
@@ -96,5 +96,4 @@ export interface ScheduleEvent {
   text_color: string
   background_color: string
   students: string
-  created_at: Date
 }

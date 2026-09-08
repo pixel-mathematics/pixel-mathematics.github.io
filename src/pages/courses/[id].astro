@@ -20,7 +20,7 @@ if (!course || error) {
   throw new Error("Lỗi lấy dữ liệu khóa học")
 }
 
-const { id, title, description, start_date, updated_at, chapters } = course
+const { id, title, description, start_date, updated_on, chapters } = course
 
 const chapter_id = Astro.url.searchParams.get("chapter_id")
 const lesson_id = Astro.url.searchParams.get("lesson_id")

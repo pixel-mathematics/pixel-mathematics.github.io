@@ -63,7 +63,7 @@ export function LessonListItem({ lesson, chapter, course }: Props) {
               <PaperclipIcon size={16} />
               <span>{lesson.lesson_attachments.length}</span>
             </div>
-            {lesson.due_date >= new Date() && (
+            {lesson.deadline >= new Date() && (
               <div className="flex items-center gap-1 text-destructive">
                 <HourglassIcon size={16} />
               </div>
@@ -136,19 +136,19 @@ export function LessonListItem({ lesson, chapter, course }: Props) {
               <span>Cập nhật lần cuối</span>
             </div>
             <div className="ml-6">
-              {formatDate(lesson.updated_at, "dd/MM/yyyy")}
+              {formatDate(lesson.updated_on, "dd/MM/yyyy")}
             </div>
           </div>
-          {lesson.due_date >= new Date() && (
+          {lesson.deadline >= new Date() && (
             <div className="rounded-md border border-destructive p-4">
               <div className="mb-1 flex items-center gap-1 font-medium text-destructive">
                 <HourglassIcon size={18} />
                 <span>Hạn cuối BTVN</span>
               </div>
               <div className="ml-6">
-                <span>{formatDate(lesson.due_date, "dd/MM/yyyy")}</span>{" "}
+                <span>{formatDate(lesson.deadline, "dd/MM/yyyy")}</span>{" "}
                 <span>
-                  (Còn {differenceInCalendarDays(lesson.due_date, new Date())}{" "}
+                  (Còn {differenceInCalendarDays(lesson.deadline, new Date())}{" "}
                   ngày)
                 </span>
               </div>

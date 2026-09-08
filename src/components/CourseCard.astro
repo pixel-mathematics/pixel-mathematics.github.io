@@ -12,7 +12,7 @@ import type { CourseWithSubject } from "@/types"
 
 interface Props extends CourseWithSubject {}
 
-const { id, subjects, title, description, updated_at } = Astro.props
+const { id, subjects, title, description, updated_on } = Astro.props
 ---
 
 <a href={`/courses/${id}`}>
@@ -38,7 +38,7 @@ const { id, subjects, title, description, updated_at } = Astro.props
         </div>
         <div class="ml-auto flex items-center gap-1">
           <ClockIcon size={16} />
-          {formatDate(updated_at)}
+          {formatDate(updated_on)}
         </div>
       </div>
     </CardFooter>

@@ -6,7 +6,7 @@ interface Props {
   lesson: RecentLesson
 }
 
-const { id, title, updated_at, chapters } = Astro.props.lesson
+const { id, title, updated_on, chapters } = Astro.props.lesson
 ---
 
 <a
@@ -37,7 +37,7 @@ const { id, title, updated_at, chapters } = Astro.props.lesson
       <div class="flex items-center gap-1 text-foreground/60">
         <ClockIcon size={14} />
         <span>
-          {formatDate(updated_at)}
+          {formatDate(updated_on)}
         </span>
       </div>
     </div>
