@@ -128,6 +128,7 @@ export async function getRecentLessonsWithinWeek() {
     )
     .gte("updated_on", targetDateISO)
     .order("updated_on", { ascending: false })
+    .order("id", { ascending: false })
     .limit(10)
 }
 

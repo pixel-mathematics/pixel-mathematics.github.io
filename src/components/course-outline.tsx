@@ -87,15 +87,19 @@ export function CourseOutline({
               ))}
             </Accordion>
           ) : (
-            <p className="p-4">Chưa có bài học nào trong khóa này</p>
+            <p className="p-4 text-muted-foreground">Chưa cập nhật bài học.</p>
           )}
         </TabsContent>
         <TabsContent value="documents">
-          <div className="flex flex-col items-stretch gap-2">
-            {documents.map((doc) => (
-              <DocumentListItem key={doc.id} document={doc} />
-            ))}
-          </div>
+          {documents.length > 0 ? (
+            <div className="flex flex-col items-stretch gap-2">
+              {documents.map((doc) => (
+                <DocumentListItem key={doc.id} document={doc} />
+              ))}
+            </div>
+          ) : (
+            <p className="p-4 text-muted-foreground">Chưa cập nhật tài liệu.</p>
+          )}
         </TabsContent>
       </Tabs>
     </div>
