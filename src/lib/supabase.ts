@@ -72,6 +72,7 @@ export function getCourseById(id: string) {
     chapters (
       id,
       title,
+      start_date,
       sort_order,
       lessons (
         id,

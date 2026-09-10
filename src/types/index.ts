@@ -25,7 +25,6 @@ export interface CourseWithSubject extends Course {
 export interface Chapter {
   id: string
   title: string
-  description: string
   start_date: string
   sort_order: number
 }

@@ -12,9 +12,9 @@ export function MobileNavigation() {
   return (
     <Drawer swipeDirection="right">
       <DrawerTrigger>
-        <button className="rounded-md p-2">
+        <div className="rounded-md p-2">
           <MenuIcon size={28} />
-        </button>
+        </div>
       </DrawerTrigger>
       <DrawerContent>
         <div className="px-6 py-8">

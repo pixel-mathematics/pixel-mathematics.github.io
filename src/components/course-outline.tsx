@@ -12,15 +12,13 @@ import { DocumentListItem } from "./document-list-item"
 
 interface Props {
   course: CourseWithMaterials
-  chapter_id?: string | null
-  lesson_id?: string | null
 }
 
 export function CourseOutline({
   course: { id, title, chapters, documents },
-  chapter_id,
-  lesson_id,
 }: Props) {
+  const url = new URL(window.location.href)
+  const chapter_id = url.searchParams.get("chapter_id")
   const handleChapterOpenChange = (open: boolean, id: string) => {
     if (open) {
       const url = new URL(window.location.href)
@@ -72,7 +70,6 @@ export function CourseOutline({
                     <div className="ml-0 flex flex-col items-stretch gap-2 md:ml-14">
                       {chapter.lessons.map((lesson) => (
                         <LessonListItem
-                          lesson_id={lesson_id}
                           lesson={lesson}
                           chapter={{ id: chapter.id, title: chapter.title }}
                           course={{

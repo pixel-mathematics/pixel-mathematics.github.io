@@ -22,14 +22,13 @@ import { useState } from "react"
 import type { Chapter, Course, LessonWithLessonAttachments } from "@/types"
 
 interface Props {
-  lesson_id?: string | null
   lesson: LessonWithLessonAttachments
   chapter: Pick<Chapter, "id" | "title">
   course: Pick<Course, "id" | "title">
 }
 export function LessonListItem({ lesson, chapter, course }: Props) {
-  const params = new URLSearchParams(window.location.href)
-  const lesson_id = params.get("lesson_id")
+  const url = new URL(window.location.href)
+  const lesson_id = url.searchParams.get("lesson_id")
   const [open, setOpen] = useState(lesson.id === lesson_id)
 
   const handleOpenChange = (open: boolean) => {

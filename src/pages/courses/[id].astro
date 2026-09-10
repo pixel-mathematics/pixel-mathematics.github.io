@@ -20,10 +20,7 @@ if (!course || error) {
   throw new Error("Lỗi lấy dữ liệu khóa học")
 }
 
-const { id, title, description, start_date, updated_on, chapters } = course
-
-const chapter_id = Astro.url.searchParams.get("chapter_id")
-const lesson_id = Astro.url.searchParams.get("lesson_id")
+const { title, description } = course
 ---
 
 <Layout>
@@ -34,12 +31,7 @@ const lesson_id = Astro.url.searchParams.get("lesson_id")
   <section>
     <div class="flex min-h-svh py-6">
       <Container>
-        <CourseOutline
-          client:only="react"
-          course={course}
-          chapter_id={chapter_id}
-          lesson_id={lesson_id}
-        />
+        <CourseOutline client:only="react" course={course} />
       </Container>
     </div>
   </section>
