@@ -4,6 +4,9 @@ on:
   # Chạy workflow khi push code lên nhánh main (hoặc master)
   push:
     branches: [main]
+
+  schedule:
+    - cron: "0 */8 * * *"
   # Cho phép chạy workflow thủ công từ tab Actions
   workflow_dispatch:
 
