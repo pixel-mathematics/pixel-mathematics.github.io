@@ -2,6 +2,7 @@
 import Layout from "@/layouts/main.astro"
 import { CourseSchedule } from "@/components/course-schedule"
 import Hero from "@/components/Hero.astro"
+import Container from "@/components/Container.astro"
 import { getScheduleEvents } from "@/lib/supabase"
 
 const { data: scheduleEvents, error } = await getScheduleEvents()
@@ -16,7 +17,10 @@ if (!scheduleEvents || error) {
     <Hero highlightText="Lịch học" quote={"Practice makes perfect."} />
   </section>
 
-  <section>
+  <section class="mt-6">
+    <Container class="block text-center md:hidden">
+      Kéo/cuộn sang trái/phải và click để xem thông tin buổi học
+    </Container>
     <CourseSchedule client:load scheduleEvents={scheduleEvents} />
   </section>
 </Layout>
