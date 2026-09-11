@@ -130,7 +130,29 @@ export async function getRecentLessonsWithinWeek() {
     .gte("updated_on", targetDateISO)
     .order("updated_on", { ascending: false })
     .order("id", { ascending: false })
-    .limit(16)
+}
+
+export async function getLessons() {
+  return supabase
+    .from("lessons")
+    .select(
+      `
+      id,
+      title,
+      class_date,
+      updated_on,
+      chapters (
+        id,
+        title,
+        courses (
+          id,
+          title
+        )
+      )
+    `
+    )
+    .order("updated_on", { ascending: false })
+    .order("id", { ascending: false })
 }
 
 export async function getActiveMessages() {

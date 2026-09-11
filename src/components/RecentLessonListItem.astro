@@ -1,9 +1,9 @@
 ---
 import { formatDate } from "@/lib/utils"
 import { ClockIcon, KeyRoundIcon, ScrollTextIcon } from "lucide-react"
-import type { RecentLesson } from "@/types"
+import type { LessonWithCourseAndChapter } from "@/types"
 interface Props {
-  lesson: RecentLesson
+  lesson: LessonWithCourseAndChapter
 }
 
 const { id, title, updated_on, chapters } = Astro.props.lesson
@@ -23,7 +23,7 @@ const { id, title, updated_on, chapters } = Astro.props.lesson
       >
         {id}
       </span>
-      <span class="max-w-[80vw] truncate text-nowrap md:max-w-full"
+      <span class="block max-w-[80vw] truncate text-nowrap md:max-w-[400px]"
         >{title}</span
       >
     </div>

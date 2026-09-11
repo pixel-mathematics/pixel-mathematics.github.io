@@ -3,6 +3,13 @@ import Container from "@/components/Container.astro"
 import Logo from "@/components/Logo.astro"
 import Navigation from "@/components/Navigation.astro"
 import { MobileNavigation } from "@/components/mobile-navigation"
+import { Search } from "@/components/search"
+import { getLessons } from "@/lib/supabase"
+
+const { data: lessons, error: getLessonsError } = await getLessons()
+if (!lessons || getLessonsError) {
+  throw new Error("Lỗi lấy dữ liệu khóa học")
+}
 ---
 
 <header class="sticky top-0 z-10 bg-background shadow-lg">
@@ -13,11 +20,14 @@ import { MobileNavigation } from "@/components/mobile-navigation"
         <div class="hidden text-2xl font-bold md:block">Pixel Mathematics</div>
       </div>
     </a>
-    <div class="hidden md:block">
-      <Navigation />
-    </div>
-    <div class="block md:hidden">
-      <MobileNavigation client:load />
+    <div class="flex flex-row-reverse items-center gap-2 md:flex-row">
+      <div class="hidden md:block">
+        <Navigation />
+      </div>
+      <div class="flex md:hidden">
+        <MobileNavigation client:load />
+      </div>
+      <Search client:load data={{ lessons }} />
     </div>
   </Container>
 </header>

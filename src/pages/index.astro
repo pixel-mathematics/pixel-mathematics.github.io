@@ -5,7 +5,7 @@ import Hero from "@/components/Hero.astro"
 import RecentLessonListItem from "@/components/RecentLessonListItem.astro"
 import { MessageListItem } from "@/components/message-list-item"
 import { getActiveMessages, getRecentLessonsWithinWeek } from "@/lib/supabase"
-import type { RecentLesson, MessageWithCourse } from "@/types"
+import type { LessonWithCourseAndChapter, MessageWithCourse } from "@/types"
 
 const { data: recentLessons, error: getRecentLessonsError } =
   await getRecentLessonsWithinWeek()
@@ -34,7 +34,7 @@ if (!messages || getMessagesError) {
       <h1 class="mb-4 text-2xl font-bold text-primary">Bài học gần đây</h1>
       <div class="grid grid-cols-1 gap-2">
         {
-          recentLessons.map((lesson) => (
+          recentLessons.map((lesson: LessonWithCourseAndChapter) => (
             <RecentLessonListItem lesson={lesson} />
           ))
         }
@@ -47,7 +47,7 @@ if (!messages || getMessagesError) {
       <div class="grid grid-cols-1 gap-2">
         {
           messages.map((message: MessageWithCourse) => (
-            <MessageListItem client:load key={message.id} message={message} />
+            <MessageListItem client:load message={message} />
           ))
         }
       </div>

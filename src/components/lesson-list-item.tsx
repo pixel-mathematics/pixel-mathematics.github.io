@@ -19,10 +19,10 @@ import {
   DrawerFooter,
 } from "@/components/ui/drawer"
 import { useState } from "react"
-import type { Chapter, Course, LessonWithLessonAttachments } from "@/types"
+import type { Chapter, Course, LessonWithAttachments } from "@/types"
 
 interface Props {
-  lesson: LessonWithLessonAttachments
+  lesson: LessonWithAttachments
   chapter: Pick<Chapter, "id" | "title">
   course: Pick<Course, "id" | "title">
 }
@@ -53,7 +53,7 @@ export function LessonListItem({ lesson, chapter, course }: Props) {
             <span className="flex h-6 w-20 items-center justify-center rounded-sm bg-primary/10 px-2 text-sm font-semibold text-nowrap text-primary uppercase">
               {lesson.id}
             </span>
-            <span className="max-w-[80vw] truncate text-left md:max-w-full">
+            <span className="max-w-[80vw] truncate text-left md:max-w-[500px]">
               {lesson.title}
             </span>
           </div>

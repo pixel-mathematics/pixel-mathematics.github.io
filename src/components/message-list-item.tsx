@@ -30,7 +30,7 @@ export function MessageListItem({ message }: Props) {
             <span className="flex h-6 w-12 items-center justify-center rounded-sm bg-primary/10 text-sm font-semibold text-primary uppercase">
               {message.courses.id}
             </span>
-            <span className="max-w-[80vw] truncate text-left">
+            <span className="block max-w-[80vw] truncate text-left md:max-w-[400px]">
               {message.content}
             </span>
           </div>
