@@ -47,13 +47,13 @@ export function Search({ data: { lessons } }: Props) {
   return (
     <div>
       <div
-        className="cursor-pointer rounded-md p-2 hover:bg-muted [&_svg]:h-[28px] [&_svg]:w-[28px] md:[&_svg]:h-[18px] md:[&_svg]:w-[18px]"
+        className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md hover:bg-muted md:h-9 md:w-9"
         onClick={() => {
           setOpen(true)
           setKeyword("")
         }}
       >
-        <SearchIcon size={18} />
+        <SearchIcon className="size-6 md:size-[18px]" />
       </div>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
@@ -63,7 +63,9 @@ export function Search({ data: { lessons } }: Props) {
           />
           <CommandList>
             <CommandGroup heading="Bài học">
-              <CommandEmpty>Không tìm thấy kết quả nào.</CommandEmpty>
+              <CommandEmpty className="text-lg">
+                Không tìm thấy kết quả nào.
+              </CommandEmpty>
               {searchResults?.lessons.map((lesson) => (
                 <CommandItem
                   key={lesson.id}

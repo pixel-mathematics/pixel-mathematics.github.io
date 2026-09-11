@@ -12,8 +12,8 @@ export function MobileNavigation() {
   return (
     <Drawer swipeDirection="right">
       <DrawerTrigger>
-        <div className="rounded-md p-2">
-          <MenuIcon size={28} />
+        <div className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md hover:bg-muted focus:bg-muted">
+          <MenuIcon className="size-6" />
         </div>
       </DrawerTrigger>
       <DrawerContent>
