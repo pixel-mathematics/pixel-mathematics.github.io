@@ -5,20 +5,20 @@ import { Heading } from "@/components/heading";
 import { Hero } from "@/components/hero";
 import {
   fetchStudentCoursesQueryOptions,
-  fetchStudentRecentLessonsQueryOptions,
+  fetchStudentLessonsQueryOptions,
 } from "@/queries/courses";
 import { CourseCard } from "./-components/course-card";
-import { RecentLessonItem } from "./-components/recent-lesson-item";
+import { LessonListItem } from "./-components/lesson-list-item";
 
 export const Route = createFileRoute("/dashboard/")({
   loader: async ({ context: { queryClient, profile } }) => {
     const courses = await queryClient.query(
       fetchStudentCoursesQueryOptions(profile.id)
     );
-    const recentLessons = await queryClient.query(
-      fetchStudentRecentLessonsQueryOptions(profile.id)
+    const lessons = await queryClient.query(
+      fetchStudentLessonsQueryOptions(profile.id)
     );
-    return { courses, recentLessons };
+    return { courses, lessons };
   },
   pendingComponent: () => <div>Loading...</div>,
   errorComponent: ErrorMessage,
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/dashboard/")({
 });
 
 function Dashboard() {
-  const { courses, recentLessons } = Route.useLoaderData();
+  const { courses, lessons } = Route.useLoaderData();
 
   return (
     <>
@@ -39,18 +39,18 @@ function Dashboard() {
       </section>
       <Container>
         <section className="mt-6">
-          <Heading>Khóa học</Heading>
+          <Heading>Khóa học PIXEL2027</Heading>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {courses.map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}
           </div>
         </section>
-        <section className="mt-6">
+        <section className="my-6">
           <Heading>Bài học gần đây</Heading>
           <div className="grid grid-cols-1 gap-2">
-            {recentLessons.map((lesson) => (
-              <RecentLessonItem key={lesson.id} lesson={lesson} />
+            {lessons.slice(0, 8).map((lesson) => (
+              <LessonListItem key={lesson.id} lesson={lesson} />
             ))}
           </div>
         </section>

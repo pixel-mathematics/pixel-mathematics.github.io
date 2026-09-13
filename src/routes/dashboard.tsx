@@ -1,5 +1,9 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { fetchCurrentUserProfileQueryOptions } from "@/queries/auth";
+import {
+  fetchStudentCoursesQueryOptions,
+  fetchStudentLessonsQueryOptions,
+} from "@/queries/courses";
 import { Footer } from "@/routes/dashboard/-components/footer";
 import { Header } from "@/routes/dashboard/-components/header";
 
@@ -28,17 +32,26 @@ export const Route = createFileRoute("/dashboard")({
       throw redirect({ to: "/sign-in" });
     }
   },
+  loader: async ({ context: { queryClient, profile } }) => {
+    const courses = await queryClient.query(
+      fetchStudentCoursesQueryOptions(profile.id)
+    );
+    const lessons = await queryClient.query(
+      fetchStudentLessonsQueryOptions(profile.id)
+    );
+    return { profile, courses, lessons };
+  },
   component: DashboardLayout,
 });
 
 function DashboardLayout() {
   return (
-    <div className="p-2">
+    <>
       <Header />
       <main className="min-h-svh">
         <Outlet />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }

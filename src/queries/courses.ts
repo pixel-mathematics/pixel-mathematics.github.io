@@ -93,13 +93,7 @@ export const fetchStudentCourseDetailQueryOptions = (courseId: string) =>
   });
 
 /* Fetch recent lessons of current user */
-const today = new Date();
-const last2Weeks = new Date();
-last2Weeks.setDate(today.getDate() - 14);
-const startDate = last2Weeks.toISOString().split("T")[0];
-const endDate = today.toISOString().split("T")[0];
-
-const fetchStudentRecentLessonsQuery = (studentId: string) =>
+const fetchStudentLessonsQuery = (studentId: string) =>
   supabase
     .from("lessons")
     .select(
@@ -118,19 +112,16 @@ const fetchStudentRecentLessonsQuery = (studentId: string) =>
     )
     // Lọc những bài học thuộc về học sinh này (thông qua JOIN)
     .eq("chapters.courses.enrollments.student_id", studentId)
-    // Lọc ngày học nằm trong khoảng 1 tuần
-    .gte("updated_on", startDate)
-    .lte("updated_on", endDate)
     .order("updated_on", { ascending: false });
 
-export type StudentRecentLesson = QueryData<
-  ReturnType<typeof fetchStudentRecentLessonsQuery>
+export type StudentLesson = QueryData<
+  ReturnType<typeof fetchStudentLessonsQuery>
 >[0];
 
-export async function fetchStudentRecentLessons(
+export async function fetchStudentLessons(
   studentId: string
-): Promise<StudentRecentLesson[]> {
-  const { data, error } = await fetchStudentRecentLessonsQuery(studentId);
+): Promise<StudentLesson[]> {
+  const { data, error } = await fetchStudentLessonsQuery(studentId);
 
   if (!data || error) {
     throw new Error(`Lỗi lấy dữ liệu các bài học gần đây`);
@@ -139,10 +130,10 @@ export async function fetchStudentRecentLessons(
   return data;
 }
 
-export const fetchStudentRecentLessonsQueryOptions = (studentId: string) =>
+export const fetchStudentLessonsQueryOptions = (studentId: string) =>
   queryOptions({
-    queryKey: ["recent-lessons", "student", studentId],
-    queryFn: () => fetchStudentRecentLessons(studentId),
+    queryKey: ["lessons", "student", studentId],
+    queryFn: () => fetchStudentLessons(studentId),
     enabled: !!studentId,
     staleTime: 1000 * 60 * 5,
   });

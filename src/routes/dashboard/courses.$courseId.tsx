@@ -1,9 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
+import * as z from "zod";
 import { Container } from "@/components/container";
 import { ErrorMessage } from "@/components/error-message";
 import { Hero } from "@/components/hero";
 import { fetchStudentCourseDetailQueryOptions } from "@/queries/courses";
 import { CourseDetail } from "./-components/course-detail";
+
+const searchSchema = z.object({
+  chapterId: z.string().optional(),
+  lessonId: z.string().optional(),
+});
 
 export const Route = createFileRoute("/dashboard/courses/$courseId")({
   loader: async ({ params, context }) => {
@@ -17,6 +23,7 @@ export const Route = createFileRoute("/dashboard/courses/$courseId")({
   },
   pendingComponent: () => <div>Loading...</div>,
   errorComponent: ErrorMessage,
+  validateSearch: searchSchema,
   component: DashboardStudentCourse,
 });
 
@@ -32,7 +39,7 @@ function DashboardStudentCourse() {
           quote={course.description ?? ""}
         />
       </section>
-      <section className="mt-6">
+      <section className="my-6">
         <Container>
           <CourseDetail course={course} />
         </Container>

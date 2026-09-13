@@ -17,7 +17,7 @@ function DashboardSchedule() {
   const { events } = Route.useLoaderData();
 
   return (
-    <section className="mt-6">
+    <section className="my-6">
       <Container className="block text-center md:hidden">
         Kéo/cuộn sang trái/phải và click để xem thông tin buổi học
       </Container>

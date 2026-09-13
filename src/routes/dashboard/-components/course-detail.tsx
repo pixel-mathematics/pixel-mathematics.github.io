@@ -1,3 +1,4 @@
+import { useNavigate, useSearch } from "@tanstack/react-router";
 import {
   Accordion,
   AccordionContent,
@@ -6,45 +7,49 @@ import {
 } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { StudentCourseDetail } from "@/queries/courses";
+import { ChapterLessonListItem } from "./chapter-lesson-list-item";
 import { DocumentListItem } from "./document-list-item";
-import { LessonListItem } from "./lesson-list-item";
 
 interface Props {
   course: StudentCourseDetail;
 }
 
 export function CourseDetail({ course: { chapters, documents } }: Props) {
-  const url = new URL(window.location.href);
-  const chapter_id = url.searchParams.get("chapter_id");
+  const search = useSearch({ from: "/dashboard/courses/$courseId" });
+  const navigate = useNavigate({ from: "/dashboard/courses/$courseId" });
+
   const handleChapterOpenChange = (open: boolean, id: string) => {
     if (open) {
-      const url = new URL(window.location.href);
-      url.searchParams.set("chapter_id", id);
-      url.searchParams.delete("lesson_id");
-      window.history.pushState({}, "", url.toString());
+      navigate({
+        search: {
+          chapterId: id,
+        },
+        resetScroll: false, // prevent scroll to the beginning of the page
+        replace: true,
+      });
     }
   };
 
   return (
     <div>
       <Tabs defaultValue="chapters">
-        <TabsList>
+        <TabsList className="group-data-horizontal/tabs:h-12">
           <TabsTrigger
             value="chapters"
-            className="px-4 text-base font-bold uppercase md:text-lg"
+            className="px-8 text-lg font-bold uppercase md:text-xl"
           >
             Bài học
           </TabsTrigger>
           <TabsTrigger
             value="documents"
-            className="px-4 text-base font-bold uppercase md:text-lg"
+            className="px-8 text-lg font-bold uppercase md:text-xl"
           >
             Tài liệu
           </TabsTrigger>
         </TabsList>
         <TabsContent value="chapters">
           {chapters.length > 0 ? (
-            <Accordion defaultValue={[chapter_id]}>
+            <Accordion defaultValue={[search.chapterId]}>
               {chapters.map((chapter) => (
                 <AccordionItem
                   value={chapter.id}
@@ -53,12 +58,12 @@ export function CourseDetail({ course: { chapters, documents } }: Props) {
                     handleChapterOpenChange(open, chapter.id)
                   }
                 >
-                  <AccordionTrigger className="flex cursor-pointer items-center text-base md:text-lg">
+                  <AccordionTrigger className="flex cursor-pointer items-center py-4 **:data-[slot=accordion-trigger-icon]:size-6">
                     <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
-                      <span className="bg-primary text-primary-foreground flex h-6 w-16 items-center justify-center rounded-sm text-sm font-semibold text-nowrap uppercase">
+                      <span className="bg-primary text-primary-foreground flex h-8 w-22 items-center justify-center rounded-sm text-lg font-semibold text-nowrap uppercase">
                         {chapter.id}
                       </span>{" "}
-                      <span className="text-primary max-w-[80vw] truncate uppercase md:max-w-full">
+                      <span className="text-primary max-w-[80vw] truncate text-xl font-semibold md:max-w-[800px]">
                         {chapter.title}
                       </span>
                     </div>
@@ -66,7 +71,7 @@ export function CourseDetail({ course: { chapters, documents } }: Props) {
                   <AccordionContent>
                     <div className="ml-0 flex flex-col items-stretch gap-2 md:ml-14">
                       {chapter.lessons.map((lesson) => (
-                        <LessonListItem
+                        <ChapterLessonListItem
                           key={lesson.id}
                           lesson={lesson}
                           chapter={{

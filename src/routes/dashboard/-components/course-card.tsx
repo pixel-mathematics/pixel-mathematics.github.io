@@ -15,10 +15,10 @@ interface CourseCardProps {
 
 export function CourseCard({ course }: CourseCardProps) {
   return (
-    <Link to={`/dashboard/courses/${course.id}`}>
+    <Link to="/dashboard/courses/$courseId" params={{ courseId: course.id }}>
       <Card className="group border-primary/0 border-1 duration-300 hover:shadow-md">
         <CardHeader>
-          <CardTitle className="group-hover:text-primary text-lg font-semibold uppercase duration-300">
+          <CardTitle className="group-hover:text-primary text-xl font-bold uppercase duration-300">
             {course.title}
           </CardTitle>
           <CardDescription className="truncate">
@@ -26,13 +26,13 @@ export function CourseCard({ course }: CourseCardProps) {
           </CardDescription>
         </CardHeader>
         <CardFooter>
-          <div className="flex w-full items-center justify-between gap-4">
-            <div className="text-primary flex items-center gap-1 font-semibold uppercase">
-              <KeyRoundIcon size={16} />
+          <div className="flex w-full items-center justify-between">
+            <div className="text-primary flex items-center gap-2 font-semibold uppercase">
+              <KeyRoundIcon size={24} />
               {course.id}
             </div>
-            <div className="flex items-center gap-1 font-semibold">
-              <BookIcon size={16} />
+            <div className="flex items-center gap-2 font-semibold">
+              <BookIcon size={24} />
               {course.subjects?.title}
             </div>
           </div>
