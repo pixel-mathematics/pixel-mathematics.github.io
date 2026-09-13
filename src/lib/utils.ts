@@ -10,7 +10,7 @@ export function formatDate(
   return format(date, fmt);
 }
 
-export function getDayOfWeek(dayOfWeek: number) {
-  if (dayOfWeek === 0) return "Chủ Nhật";
+export function getDayOfWeek(dayOfWeek: number | null) {
+  if (dayOfWeek === 0 || !dayOfWeek) return "Chủ Nhật";
   return `Thứ ${dayOfWeek + 1}`;
 }

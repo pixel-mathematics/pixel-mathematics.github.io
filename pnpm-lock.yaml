@@ -14,6 +14,15 @@ importers:
       '@fontsource-variable/noto-sans':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fullcalendar/core':
+        specifier: ^6.1.21
+        version: 6.1.21
+      '@fullcalendar/react':
+        specifier: ^6.1.21
+        version: 6.1.21(@fullcalendar/core@6.1.21)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@fullcalendar/timegrid':
+        specifier: ^6.1.21
+        version: 6.1.21(@fullcalendar/core@6.1.21)
       '@supabase/supabase-js':
         specifier: ^2.116.0
         version: 2.116.0
@@ -25,7 +34,7 @@ importers:
         version: 1.33.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@tanstack/react-form-devtools':
         specifier: ^0.2.34
-        version: 0.2.34(@types/react@19.3.0)(csstype@3.2.3)(react@19.3.0)(solid-js@1.9.15)
+        version: 0.2.34(@types/react@19.3.0)(csstype@3.2.3)(preact@10.12.1)(react@19.3.0)(solid-js@1.9.15)
       '@tanstack/react-query':
         specifier: ^5.102.8
         version: 5.102.8(react@19.3.0)
@@ -370,6 +379,26 @@ packages:
 
   '@fontsource-variable/noto-sans@5.3.0':
     resolution: {integrity: sha512-e3ZuxzY9AL2psXPZlhwhnYrHUHv6PMoyK9MQ7croF0CUgURLqu9EMjW7q2FgVLwij1tjLsIHQrnwQ8aUcg4BiA==}
+
+  '@fullcalendar/core@6.1.21':
+    resolution: {integrity: sha512-t3u/+sqh3Iq7TWtUnVLcGDUE6OWZh0UD3c04bI/l7lSLAgAKr3kngBmhHiQD1QXpwC8ZN5iNqG7a7gOVixhSKQ==}
+
+  '@fullcalendar/daygrid@6.1.21':
+    resolution: {integrity: sha512-QYb1y40RGYLlOxKpYWg8O+7njEnKnFG8Tt7qjnubJGR35s1phQg67E+81y2TyAbbm59p2JFOCXGDk9t6KDujIA==}
+    peerDependencies:
+      '@fullcalendar/core': ~6.1.21
+
+  '@fullcalendar/react@6.1.21':
+    resolution: {integrity: sha512-TLpmGUd5k/PMdCh8XbeFC9PW9wuGvMms1oCxWgXyjK3EFPXAAd0PLfcvwKdyxoAS5eK1E4RJFkjMHvsYHpimcg==}
+    peerDependencies:
+      '@fullcalendar/core': ~6.1.21
+      react: ^16.7.0 || ^17 || ^18 || ^19
+      react-dom: ^16.7.0 || ^17 || ^18 || ^19
+
+  '@fullcalendar/timegrid@6.1.21':
+    resolution: {integrity: sha512-2DnShx/jallGmb8QCkr6pAOu/zuPhJrP7+uTrAtSnbqsX7GF3lTxqSeNGkTQwsgF5g/ia8udhQ+JNYaE+TN1cQ==}
+    peerDependencies:
+      '@fullcalendar/core': ~6.1.21
 
   '@hono/node-server@2.1.1':
     resolution: {integrity: sha512-ELuehkj5VCBdgEw9zs+ivkKwyzzUCSQuE96YmiPvn1ECBoZCczbFXJLeEGMTYjphP6gydh4pHMqEYPVMYUVgQg==}
@@ -2353,6 +2382,9 @@ packages:
     resolution: {integrity: sha512-C+y9x90UElAddDZmV4qOx9W53B61PO7cIqWz2dQsWlwswuq4mr8NEwytdGKboYbQlGZ3awrkTeNvcZiZNHnQ8A==}
     engines: {node: '>=20'}
 
+  preact@10.12.1:
+    resolution: {integrity: sha512-l8386ixSsBdbreOAkqtrwqHwdvR35ID8c3rKPa8lCWuO86dBi32QWHV4vfsZK1utLLFMvw+Z5Ad4XLkZzchscg==}
+
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
@@ -3237,6 +3269,25 @@ snapshots:
 
   '@fontsource-variable/noto-sans@5.3.0': {}
 
+  '@fullcalendar/core@6.1.21':
+    dependencies:
+      preact: 10.12.1
+
+  '@fullcalendar/daygrid@6.1.21(@fullcalendar/core@6.1.21)':
+    dependencies:
+      '@fullcalendar/core': 6.1.21
+
+  '@fullcalendar/react@6.1.21(@fullcalendar/core@6.1.21)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+    dependencies:
+      '@fullcalendar/core': 6.1.21
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
+
+  '@fullcalendar/timegrid@6.1.21(@fullcalendar/core@6.1.21)':
+    dependencies:
+      '@fullcalendar/core': 6.1.21
+      '@fullcalendar/daygrid': 6.1.21(@fullcalendar/core@6.1.21)
+
   '@hono/node-server@2.1.1(hono@4.13.7)':
     dependencies:
       hono: 4.13.7
@@ -3639,9 +3690,10 @@ snapshots:
     transitivePeerDependencies:
       - csstype
 
-  '@tanstack/devtools-utils@0.4.0(@types/react@19.3.0)(react@19.3.0)(solid-js@1.9.15)':
+  '@tanstack/devtools-utils@0.4.0(@types/react@19.3.0)(preact@10.12.1)(react@19.3.0)(solid-js@1.9.15)':
     optionalDependencies:
       '@types/react': 19.3.0
+      preact: 10.12.1
       react: 19.3.0
       solid-js: 1.9.15
 
@@ -3660,10 +3712,10 @@ snapshots:
       '@tanstack/pacer-lite': 0.1.1
       '@tanstack/store': 0.11.1
 
-  '@tanstack/form-devtools@0.2.34(@types/react@19.3.0)(csstype@3.2.3)(react@19.3.0)(solid-js@1.9.15)':
+  '@tanstack/form-devtools@0.2.34(@types/react@19.3.0)(csstype@3.2.3)(preact@10.12.1)(react@19.3.0)(solid-js@1.9.15)':
     dependencies:
       '@tanstack/devtools-ui': 0.5.3(csstype@3.2.3)(solid-js@1.9.15)
-      '@tanstack/devtools-utils': 0.4.0(@types/react@19.3.0)(react@19.3.0)(solid-js@1.9.15)
+      '@tanstack/devtools-utils': 0.4.0(@types/react@19.3.0)(preact@10.12.1)(react@19.3.0)(solid-js@1.9.15)
       '@tanstack/form-core': 1.33.5
       clsx: 2.1.1
       dayjs: 1.11.23
@@ -3684,10 +3736,10 @@ snapshots:
 
   '@tanstack/query-devtools@5.102.8': {}
 
-  '@tanstack/react-form-devtools@0.2.34(@types/react@19.3.0)(csstype@3.2.3)(react@19.3.0)(solid-js@1.9.15)':
+  '@tanstack/react-form-devtools@0.2.34(@types/react@19.3.0)(csstype@3.2.3)(preact@10.12.1)(react@19.3.0)(solid-js@1.9.15)':
     dependencies:
-      '@tanstack/devtools-utils': 0.4.0(@types/react@19.3.0)(react@19.3.0)(solid-js@1.9.15)
-      '@tanstack/form-devtools': 0.2.34(@types/react@19.3.0)(csstype@3.2.3)(react@19.3.0)(solid-js@1.9.15)
+      '@tanstack/devtools-utils': 0.4.0(@types/react@19.3.0)(preact@10.12.1)(react@19.3.0)(solid-js@1.9.15)
+      '@tanstack/form-devtools': 0.2.34(@types/react@19.3.0)(csstype@3.2.3)(preact@10.12.1)(react@19.3.0)(solid-js@1.9.15)
       react: 19.3.0
     transitivePeerDependencies:
       - '@types/react'
@@ -5023,6 +5075,8 @@ snapshots:
   powershell-utils@0.1.0: {}
 
   powershell-utils@0.2.1: {}
+
+  preact@10.12.1: {}
 
   prelude-ls@1.2.1: {}
 

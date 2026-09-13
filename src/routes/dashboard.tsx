@@ -1,5 +1,7 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { fetchCurrentUserProfileQueryOptions } from "@/queries/auth";
+import { Footer } from "@/routes/dashboard/-components/footer";
+import { Header } from "@/routes/dashboard/-components/header";
 
 export const Route = createFileRoute("/dashboard")({
   beforeLoad: async ({ context, location }) => {
@@ -32,8 +34,11 @@ export const Route = createFileRoute("/dashboard")({
 function DashboardLayout() {
   return (
     <div className="p-2">
-      <div>From Dashboard Layout</div>
-      <Outlet />
+      <Header />
+      <main className="min-h-svh">
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   );
 }
