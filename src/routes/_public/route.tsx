@@ -11,7 +11,6 @@ function PublicLayout() {
     <>
       <Header />
       <main className="min-h-svh">
-        <Link to="/dashboard">Dashboard</Link>
         <Outlet />
       </main>
       <Footer />

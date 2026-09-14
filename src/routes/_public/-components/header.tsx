@@ -34,10 +34,15 @@ export function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about">
+                  <Link to="/contact">
                     <Button variant="ghost" size="lg">
-                      Về chúng tôi
+                      Liên hệ
                     </Button>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/auth/sign-in">
+                    <Button size="lg">Đăng nhập</Button>
                   </Link>
                 </li>
               </ul>
@@ -64,10 +69,18 @@ export function Header() {
                       </li>
                       <li>
                         <Link
-                          to="/about"
+                          to="/contact"
                           className="flex h-12 items-center text-2xl font-semibold"
                         >
-                          Về chúng tôi
+                          Liên hệ
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/auth/sign-in"
+                          className="text-primary flex h-12 items-center text-2xl font-semibold"
+                        >
+                          Đăng nhập
                         </Link>
                       </li>
                     </ul>

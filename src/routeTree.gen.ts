@@ -13,7 +13,7 @@ import { Route as PublicRouteRouteImport } from './routes/_public/route'
 import { Route as AuthRouteRouteImport } from './routes/auth/route'
 import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as PublicIndexRouteImport } from './routes/_public/index'
-import { Route as PublicAboutRouteImport } from './routes/_public/about'
+import { Route as PublicContactRouteImport } from './routes/_public/contact'
 import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardAccountRouteImport } from './routes/dashboard/account'
@@ -39,9 +39,9 @@ const PublicIndexRoute = PublicIndexRouteImport.update({
   path: '/',
   getParentRoute: () => PublicRouteRoute,
 } as any)
-const PublicAboutRoute = PublicAboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const PublicContactRoute = PublicContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => PublicRouteRoute,
 } as any)
 const AuthSignInRoute = AuthSignInRouteImport.update({
@@ -75,7 +75,7 @@ export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
   '/auth': typeof AuthRouteRouteWithChildren
   '/dashboard': typeof DashboardRouteRouteWithChildren
-  '/about': typeof PublicAboutRoute
+  '/contact': typeof PublicContactRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/schedule': typeof DashboardScheduleRoute
@@ -84,7 +84,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRouteRouteWithChildren
-  '/about': typeof PublicAboutRoute
+  '/contact': typeof PublicContactRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/schedule': typeof DashboardScheduleRoute
@@ -97,7 +97,7 @@ export interface FileRoutesById {
   '/_public': typeof PublicRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
   '/dashboard': typeof DashboardRouteRouteWithChildren
-  '/_public/about': typeof PublicAboutRoute
+  '/_public/contact': typeof PublicContactRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/schedule': typeof DashboardScheduleRoute
@@ -111,7 +111,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/dashboard'
-    | '/about'
+    | '/contact'
     | '/auth/sign-in'
     | '/dashboard/account'
     | '/dashboard/schedule'
@@ -120,7 +120,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
-    | '/about'
+    | '/contact'
     | '/auth/sign-in'
     | '/dashboard/account'
     | '/dashboard/schedule'
@@ -132,7 +132,7 @@ export interface FileRouteTypes {
     | '/_public'
     | '/auth'
     | '/dashboard'
-    | '/_public/about'
+    | '/_public/contact'
     | '/auth/sign-in'
     | '/dashboard/account'
     | '/dashboard/schedule'
@@ -177,11 +177,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicIndexRouteImport
       parentRoute: typeof PublicRouteRoute
     }
-    '/_public/about': {
-      id: '/_public/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof PublicAboutRouteImport
+    '/_public/contact': {
+      id: '/_public/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof PublicContactRouteImport
       parentRoute: typeof PublicRouteRoute
     }
     '/auth/sign-in': {
@@ -223,12 +223,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface PublicRouteRouteChildren {
-  PublicAboutRoute: typeof PublicAboutRoute
+  PublicContactRoute: typeof PublicContactRoute
   PublicIndexRoute: typeof PublicIndexRoute
 }
 
 const PublicRouteRouteChildren: PublicRouteRouteChildren = {
-  PublicAboutRoute: PublicAboutRoute,
+  PublicContactRoute: PublicContactRoute,
   PublicIndexRoute: PublicIndexRoute,
 }
 
