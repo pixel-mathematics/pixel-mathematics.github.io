@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { BookIcon, KeyRoundIcon } from "lucide-react";
+import { BookIcon, CalendarIcon, KeyRoundIcon } from "lucide-react";
 import {
   Card,
   CardDescription,
@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { formatDate } from "@/lib/utils";
 import type { StudentCourse } from "@/queries/courses";
 
 interface CourseCardProps {
@@ -16,24 +17,32 @@ interface CourseCardProps {
 export function CourseCard({ course }: CourseCardProps) {
   return (
     <Link to="/dashboard/courses/$courseId" params={{ courseId: course.id }}>
-      <Card className="group border-primary/0 border-1 duration-300 hover:shadow-md">
+      <Card className="group border-border border-1 duration-300">
         <CardHeader>
-          <CardTitle className="group-hover:text-primary text-xl font-bold uppercase duration-300">
+          <CardTitle className="group-hover:text-primary text-2xl font-bold uppercase duration-300">
             {course.title}
           </CardTitle>
-          <CardDescription className="truncate">
+          <CardDescription className="truncate text-lg">
             {course.description}
           </CardDescription>
         </CardHeader>
-        <CardFooter>
+        <CardFooter className="text-base">
           <div className="flex w-full items-center justify-between">
-            <div className="text-primary flex items-center gap-2 font-semibold uppercase">
-              <KeyRoundIcon size={24} />
-              {course.id}
+            <div className="flex items-center gap-4">
+              <div className="text-primary flex items-center gap-2 font-semibold uppercase">
+                <KeyRoundIcon size={20} />
+                {course.id}
+              </div>
+              <div className="flex items-center gap-2 font-semibold">
+                <BookIcon size={20} />
+                {course.subjects?.title}
+              </div>
             </div>
-            <div className="flex items-center gap-2 font-semibold">
-              <BookIcon size={24} />
-              {course.subjects?.title}
+            <div>
+              <div className="text-muted-foreground flex items-center gap-2 font-medium">
+                <CalendarIcon size={20} />
+                {formatDate(course.start_date)}
+              </div>
             </div>
           </div>
         </CardFooter>

@@ -58,12 +58,12 @@ export function CourseDetail({ course: { chapters, documents } }: Props) {
                     handleChapterOpenChange(open, chapter.id)
                   }
                 >
-                  <AccordionTrigger className="flex cursor-pointer items-center py-4 **:data-[slot=accordion-trigger-icon]:size-6">
+                  <AccordionTrigger className="flex cursor-pointer items-center py-4 hover:no-underline **:data-[slot=accordion-trigger-icon]:size-5">
                     <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
                       <span className="bg-primary text-primary-foreground flex h-8 w-22 items-center justify-center rounded-sm text-lg font-semibold text-nowrap uppercase">
                         {chapter.id}
                       </span>{" "}
-                      <span className="text-primary max-w-[80vw] truncate text-xl font-semibold md:max-w-[800px]">
+                      <span className="text-primary max-w-[80vw] truncate text-xl font-medium md:max-w-[800px]">
                         {chapter.title}
                       </span>
                     </div>

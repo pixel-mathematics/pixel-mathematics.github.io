@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Container } from "@/components/container";
-import { ErrorMessage } from "@/components/error-message";
-import { Heading } from "@/components/heading";
-import { Hero } from "@/components/hero";
+import { Container } from "@/components/shared/container";
+import { ErrorMessage } from "@/components/shared/error-message";
+import { Heading } from "@/components/shared/heading";
+import { Hero } from "@/components/shared/hero";
 import {
   fetchStudentCoursesQueryOptions,
   fetchStudentLessonsQueryOptions,

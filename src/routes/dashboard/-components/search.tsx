@@ -61,7 +61,7 @@ export function Search({ data: { lessons } }: Props) {
         <span className="hidden md:inline">Tìm kiếm</span>
       </Button>
       <CommandDialog
-        className="top-[96px] min-w-full p-2 md:min-w-[960px]"
+        className="top-[96px] min-w-full p-2 md:min-w-[1280px]"
         open={open}
         onOpenChange={setOpen}
       >

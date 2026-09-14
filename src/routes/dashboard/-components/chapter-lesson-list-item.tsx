@@ -74,12 +74,12 @@ export function ChapterLessonListItem({
           </div>
           <div className="ml-auto flex items-center gap-4">
             <div className="text-foreground/60 flex items-center gap-2">
-              <PaperclipIcon size={18} />
+              <PaperclipIcon size={20} />
               <span>{lesson.lesson_attachments.length}</span>
             </div>
             {lesson.deadline && new Date(lesson.deadline) >= new Date() && (
               <div className="text-destructive flex items-center gap-2">
-                <HourglassIcon size={18} />
+                <HourglassIcon size={20} />
               </div>
             )}
           </div>
@@ -116,8 +116,8 @@ export function ChapterLessonListItem({
         </DrawerHeader>
         <div className="flex flex-col gap-4 p-4 text-base">
           <div className="border-border rounded-md border p-4">
-            <div className="text-primary mb-2 flex items-center gap-2 font-medium">
-              <PaperclipIcon size={18} />
+            <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+              <PaperclipIcon size={20} />
               <span>Tài liệu đính kèm</span>
             </div>
             <div className="ml-7 flex flex-col gap-2">
@@ -125,8 +125,8 @@ export function ChapterLessonListItem({
                 <div className="flex items-center gap-4" key={file.id}>
                   <span className="w-20">{file.file_name}</span>
                   <a href={file.file_url} target="_blank">
-                    <button className="text-primary hover:text-primary/70 flex items-center gap-2 uppercase">
-                      <DownloadIcon size={18} />
+                    <button className="text-primary hover:text-primary/70 flex items-center gap-2 font-medium uppercase">
+                      <DownloadIcon size={20} />
                       {file.file_type}
                     </button>
                   </a>
@@ -135,8 +135,8 @@ export function ChapterLessonListItem({
             </div>
           </div>
           <div className="border-border rounded-md border p-4">
-            <div className="text-primary mb-2 flex items-center gap-2 font-medium">
-              <CalendarIcon size={18} />
+            <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+              <CalendarIcon size={20} />
               <span>Ngày học</span>
             </div>
             <div className="ml-7">
@@ -145,8 +145,8 @@ export function ChapterLessonListItem({
           </div>
 
           <div className="border-border rounded-md border p-4">
-            <div className="text-primary mb-2 flex items-center gap-2 font-medium">
-              <ClockIcon size={18} />
+            <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+              <ClockIcon size={20} />
               <span>Cập nhật lần cuối</span>
             </div>
             <div className="ml-7">
@@ -155,8 +155,8 @@ export function ChapterLessonListItem({
           </div>
           {lesson.deadline && new Date(lesson.deadline) >= new Date() && (
             <div className="border-destructive rounded-md border p-4">
-              <div className="text-destructive mb-1 flex items-center gap-1 font-medium">
-                <HourglassIcon size={18} />
+              <div className="text-destructive mb-1 flex items-center gap-1 text-lg font-medium">
+                <HourglassIcon size={20} />
                 <span>Hạn cuối BTVN</span>
               </div>
               <div className="ml-6">

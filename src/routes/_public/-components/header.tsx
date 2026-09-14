@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { MenuIcon } from "lucide-react";
 import { Container } from "@/components/shared/container";
 import { LogoIcon } from "@/components/shared/custom-icons";
@@ -10,11 +10,8 @@ import {
   DrawerFooter,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Search } from "./search";
 
 export function Header() {
-  const { lessons } = useLoaderData({ from: "/dashboard" });
-
   return (
     <header className="bg-background sticky top-0 z-10 shadow-lg">
       <Container className="flex h-20 items-center justify-between md:h-24">
@@ -27,28 +24,20 @@ export function Header() {
           </div>
         </a>
         <div className="flex items-center gap-4 md:gap-0">
-          <Search data={{ lessons }} />
           <div className="hidden md:block">
             <nav>
               <ul className="flex items-center">
                 <li>
-                  <Link to="/dashboard">
+                  <Link to="/">
                     <Button variant="ghost" size="lg" className="text-lg">
-                      Bảng điều khiển
+                      Trang chủ
                     </Button>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/schedule">
+                  <Link to="/about">
                     <Button variant="ghost" size="lg" className="text-lg">
-                      Lịch học
-                    </Button>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/dashboard/account">
-                    <Button variant="ghost" size="lg" className="text-lg">
-                      Tài khoản
+                      Về chúng tôi
                     </Button>
                   </Link>
                 </li>
@@ -68,26 +57,18 @@ export function Header() {
                     <ul className="flex flex-col items-stretch gap-2">
                       <li>
                         <Link
-                          to="/dashboard"
+                          to="/"
                           className="flex h-12 items-center text-2xl font-semibold"
                         >
-                          Dashboard
+                          Trang chủ
                         </Link>
                       </li>
                       <li>
                         <Link
-                          to="/dashboard/schedule"
+                          to="/about"
                           className="flex h-12 items-center text-2xl font-semibold"
                         >
-                          Lịch học
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/dashboard/account"
-                          className="flex h-12 items-center text-2xl font-semibold"
-                        >
-                          Tài khoản
+                          Về chúng tôi
                         </Link>
                       </li>
                     </ul>

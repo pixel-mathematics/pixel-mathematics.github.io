@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Container } from "@/components/container";
+import { Container } from "@/components/shared/container";
 import { fetchScheduleEventsQueryOptions } from "@/queries/schedules";
 import { CourseSchedule } from "./-components/course-schedule";
 

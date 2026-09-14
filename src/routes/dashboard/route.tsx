@@ -4,8 +4,8 @@ import {
   fetchStudentCoursesQueryOptions,
   fetchStudentLessonsQueryOptions,
 } from "@/queries/courses";
-import { Footer } from "@/routes/dashboard/-components/footer";
-import { Header } from "@/routes/dashboard/-components/header";
+import { Footer } from "./-components/footer";
+import { Header } from "./-components/header";
 
 export const Route = createFileRoute("/dashboard")({
   beforeLoad: async ({ context, location }) => {
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/dashboard")({
 
       if (!profile) {
         throw redirect({
-          to: "/sign-in",
+          to: "/auth/sign-in",
           search: {
             redirect: location.href,
           },
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/dashboard")({
         throw err;
       }
 
-      throw redirect({ to: "/sign-in" });
+      throw redirect({ to: "/auth/sign-in" });
     }
   },
   loader: async ({ context: { queryClient, profile } }) => {

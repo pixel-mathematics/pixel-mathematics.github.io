@@ -7,7 +7,7 @@ import {
   CalendarIcon,
   ClockArrowLeftIcon,
   ClockArrowRightIcon,
-  GraduationCapIcon,
+  UsersIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -100,7 +100,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                   <div className="mt-2 flex items-center gap-4">
                     <div className="flex items-center gap-1">
                       Mã lớp:
-                      <div className="bg-primary/10 text-primary flex h-6 w-26 items-center justify-center rounded-sm text-sm font-semibold uppercase">
+                      <div className="bg-primary/10 text-primary flex h-7 w-26 items-center justify-center rounded-sm text-sm font-semibold uppercase">
                         {selectedEvent.id}
                       </div>
                     </div>
@@ -109,8 +109,8 @@ export function CourseSchedule({ scheduleEvents }: Props) {
               </DrawerHeader>
               <div className="flex flex-col gap-4 p-4 text-base">
                 <div className="border-primary rounded-md border p-4">
-                  <div className="text-primary mb-1 flex items-center gap-1 font-medium">
-                    <CalendarIcon size={18} />
+                  <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+                    <CalendarIcon size={20} />
                     <span>Ngày học trong tuần</span>
                   </div>
                   <div className="ml-6">
@@ -119,8 +119,8 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 </div>
 
                 <div className="border-primary rounded-md border p-4">
-                  <div className="text-primary mb-1 flex items-center gap-1 font-medium">
-                    <ClockArrowLeftIcon size={18} />
+                  <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+                    <ClockArrowLeftIcon size={20} />
                     <span>Giờ vào lớp</span>
                   </div>
                   <div className="ml-6">
@@ -129,8 +129,8 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 </div>
 
                 <div className="border-destructive rounded-md border p-4">
-                  <div className="text-destructive mb-1 flex items-center gap-1 font-medium">
-                    <ClockArrowRightIcon size={18} />
+                  <div className="text-destructive mb-2 flex items-center gap-2 text-lg font-medium">
+                    <ClockArrowRightIcon size={20} />
                     <span>Giờ kết thúc</span>
                   </div>
                   <div className="ml-6">
@@ -139,8 +139,8 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 </div>
 
                 <div className="border-primary rounded-md border p-4">
-                  <div className="text-primary mb-1 flex items-center gap-1 font-medium">
-                    <GraduationCapIcon size={18} />
+                  <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+                    <UsersIcon size={20} />
                     <span>Học sinh</span>
                   </div>
                   <div className="ml-6">{selectedEvent.students}</div>

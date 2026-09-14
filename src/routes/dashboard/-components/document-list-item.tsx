@@ -18,8 +18,8 @@ export function DocumentListItem({ document }: DocumentListItemProps) {
       </div>
       <div className="ml-auto flex items-center gap-4">
         <a href={document.file_url} target="_blank">
-          <div className="text-primary hover:text-primary/70 flex items-center gap-2 uppercase">
-            <DownloadIcon size={18} />
+          <div className="text-primary hover:text-primary/70 flex items-center gap-2 font-medium uppercase">
+            <DownloadIcon size={20} />
             {document.file_type}
           </div>
         </a>
