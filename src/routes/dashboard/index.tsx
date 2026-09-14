@@ -3,6 +3,7 @@ import { Container } from "@/components/shared/container";
 import { ErrorMessage } from "@/components/shared/error-message";
 import { Heading } from "@/components/shared/heading";
 import { Hero } from "@/components/shared/hero";
+import { Separator } from "@/components/ui/separator";
 import {
   fetchStudentCoursesQueryOptions,
   fetchStudentLessonsQueryOptions,
@@ -38,14 +39,15 @@ function Dashboard() {
         />
       </section>
       <Container>
-        <section className="mt-6">
+        <section className="my-6">
           <Heading>Khóa học PIXEL2027</Heading>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {courses.map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}
           </div>
         </section>
+        <Separator />
         <section className="my-6">
           <Heading>Bài học gần đây</Heading>
           <div className="grid grid-cols-1 gap-2">

@@ -24,7 +24,7 @@ export function LessonListItem({ lesson }: LessonListItemProps) {
           <span className="bg-primary/10 text-primary flex h-8 w-26 items-center justify-center rounded-sm font-semibold text-nowrap uppercase">
             {lesson.id}
           </span>
-          <span className="block max-w-[80vw] truncate text-lg text-nowrap md:max-w-[800px]">
+          <span className="block max-w-[80vw] truncate text-lg text-nowrap md:max-w-[480px] lg:max-w-[720px]">
             {lesson.title}
           </span>
         </div>

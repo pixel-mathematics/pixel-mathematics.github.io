@@ -51,7 +51,7 @@ export function Search({ data: { lessons } }: Props) {
       <Button
         size="lg"
         variant="ghost"
-        className="px-0 text-lg md:px-3"
+        className="px-0 md:px-3"
         onClick={() => {
           setOpen(true);
           setKeyword("");

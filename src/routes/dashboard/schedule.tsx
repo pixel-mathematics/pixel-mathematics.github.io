@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Container } from "@/components/shared/container";
+import { Hero } from "@/components/shared/hero";
 import { fetchScheduleEventsQueryOptions } from "@/queries/schedules";
 import { CourseSchedule } from "./-components/course-schedule";
 
@@ -17,11 +18,19 @@ function DashboardSchedule() {
   const { events } = Route.useLoaderData();
 
   return (
-    <section className="my-6">
-      <Container className="block text-center md:hidden">
-        Kéo/cuộn sang trái/phải và click để xem thông tin buổi học
-      </Container>
-      <CourseSchedule scheduleEvents={events} />
-    </section>
+    <>
+      <section>
+        <Hero text="Lịch học" highlightText="PIXEL2027" />
+      </section>
+      <section className="my-6">
+        <Container>
+          <div className="text-muted-foreground block text-center md:hidden">
+            <p>Kéo sang trái/phải để xem</p>
+            <p>Click để xem thông tin buổi học</p>
+          </div>
+        </Container>
+        <CourseSchedule scheduleEvents={events} />
+      </section>
+    </>
   );
 }

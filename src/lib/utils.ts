@@ -14,3 +14,8 @@ export function getDayOfWeek(dayOfWeek: number | null) {
   if (dayOfWeek === 0 || !dayOfWeek) return "Chủ Nhật";
   return `Thứ ${dayOfWeek + 1}`;
 }
+
+export function getAvatarFallbackTextFromFullName(name: string) {
+  const words = name.split(" ");
+  return words.at(-2)?.[0] + "" + words.at(-1)?.[0];
+}

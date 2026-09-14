@@ -8,7 +8,7 @@ export function Footer() {
       <Separator />
       <Container className="py-4">
         <div className="flex items-center justify-between">
-          <div className="text-muted-foreground text-lg">
+          <div className="text-muted-foreground">
             Make by <span className="text-primary font-semibold">dm1nh</span>{" "}
             without <span className="text-lg">☕</span>
           </div>

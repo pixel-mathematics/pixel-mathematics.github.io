@@ -5,7 +5,6 @@ import { LogoIcon } from "@/components/shared/custom-icons";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerFooter,
   DrawerTrigger,
@@ -14,11 +13,11 @@ import {
 export function Header() {
   return (
     <header className="bg-background sticky top-0 z-10 shadow-lg">
-      <Container className="flex h-20 items-center justify-between md:h-24">
+      <Container className="flex h-18 items-center justify-between md:h-20">
         <a href="/">
           <div className="flex items-center gap-2">
             <LogoIcon className="size-10" />
-            <div className="hidden text-3xl font-bold tracking-tight md:block">
+            <div className="hidden text-3xl font-bold tracking-tight lg:block">
               <span className="text-primary">Pixel</span> Mathematics
             </div>
           </div>
@@ -29,14 +28,14 @@ export function Header() {
               <ul className="flex items-center">
                 <li>
                   <Link to="/">
-                    <Button variant="ghost" size="lg" className="text-lg">
+                    <Button variant="ghost" size="lg">
                       Trang chủ
                     </Button>
                   </Link>
                 </li>
                 <li>
                   <Link to="/about">
-                    <Button variant="ghost" size="lg" className="text-lg">
+                    <Button variant="ghost" size="lg">
                       Về chúng tôi
                     </Button>
                   </Link>
@@ -52,7 +51,7 @@ export function Header() {
                 </Button>
               </DrawerTrigger>
               <DrawerContent>
-                <div className="px-6 py-8">
+                <div className="mt-18 ml-4">
                   <nav>
                     <ul className="flex flex-col items-stretch gap-2">
                       <li>
@@ -74,11 +73,7 @@ export function Header() {
                     </ul>
                   </nav>
                 </div>
-                <DrawerFooter>
-                  <DrawerClose
-                    render={<Button variant="outline">Đóng</Button>}
-                  />
-                </DrawerFooter>
+                <DrawerFooter></DrawerFooter>
               </DrawerContent>
             </Drawer>
           </div>

@@ -19,6 +19,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
 import { supabase } from "@/lib/supabase";
 import { signInWithPassword } from "@/queries/auth";
 
@@ -51,7 +52,14 @@ function SignIn() {
   const signInWithPasswordMutation = useMutation({
     mutationFn: signInWithPassword,
     onSuccess: () => {
+      form.reset();
       navigate({ to: "/dashboard" });
+    },
+    onError: (error) => {
+      toast.add({
+        type: "error",
+        description: error?.message,
+      });
     },
   });
 

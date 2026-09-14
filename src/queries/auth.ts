@@ -22,7 +22,7 @@ export async function signInWithPassword(
   const { data, error } = await signInWithPasswordMutation(credentials);
 
   if (!data || error) {
-    throw new Error(`Lỗi đăng nhập #${credentials.id}`);
+    throw new Error(`Lỗi đăng nhập #${credentials.id}: ${error?.message}`);
   }
 
   return data;
