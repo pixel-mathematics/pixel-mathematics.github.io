@@ -1,0 +1,70 @@
+name: Deploy Astro to GitHub Pages
+
+on:
+  # Chạy workflow khi push code lên nhánh main (hoặc master)
+  push:
+    branches: [main]
+
+  schedule:
+    - cron: "0 */8 * * *"
+  # Cho phép chạy workflow thủ công từ tab Actions
+  workflow_dispatch:
+
+# Cho phép workflow đọc code và ghi lên GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "11"
+
+      - name: Set up node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "pnpm"
+
+      - name: install deps
+        run: pnpm install
+
+      - name: build
+        run: pnpm run build
+
+      - name: Fix SPA routing
+        run: cp dist/index.html dist/404.html
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./dist"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
