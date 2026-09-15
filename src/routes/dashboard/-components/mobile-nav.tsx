@@ -49,7 +49,7 @@ export function MobileNav() {
                     setOpen(false);
                   }}
                 >
-                  Dashboard
+                  Bảng điều khiển
                 </Link>
               </li>
               <li>
