@@ -28,18 +28,18 @@ export function CourseCard({ course }: CourseCardProps) {
         </CardHeader>
         <CardFooter className="text-base">
           <div className="flex w-full items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="text-primary flex items-center gap-2 font-semibold uppercase">
+            <div className="flex items-center gap-8">
+              <div className="text-primary flex items-center gap-1 font-semibold uppercase">
                 <KeyRoundIcon size={20} />
                 {course.id}
               </div>
-              <div className="flex items-center gap-2 font-semibold">
+              <div className="flex items-center gap-1 font-semibold">
                 <BookIcon size={20} />
                 {course.subjects?.title}
               </div>
             </div>
             <div>
-              <div className="text-muted-foreground flex items-center gap-2 font-medium">
+              <div className="text-muted-foreground flex items-center gap-1 font-medium">
                 <CalendarIcon size={20} />
                 {formatDate(course.start_date)}
               </div>

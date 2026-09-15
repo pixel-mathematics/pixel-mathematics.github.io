@@ -6,23 +6,16 @@ export function Nav() {
     <nav>
       <ul className="flex items-center">
         <li>
-          <Link to="/dashboard">
+          <Link to="/">
             <Button variant="ghost" size="lg">
-              Bảng điều khiển
+              Trang chủ
             </Button>
           </Link>
         </li>
         <li>
-          <Link to="/dashboard/schedule">
+          <Link to="/contact">
             <Button variant="ghost" size="lg">
-              Lịch học
-            </Button>
-          </Link>
-        </li>
-        <li>
-          <Link to="/dashboard/account">
-            <Button variant="ghost" size="lg">
-              Tài khoản
+              Liên hệ
             </Button>
           </Link>
         </li>

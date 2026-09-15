@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useLoaderData } from "@tanstack/react-router";
+import { createFileRoute, useLoaderData } from "@tanstack/react-router";
 import { Container } from "@/components/shared/container";
 import { ErrorMessage } from "@/components/shared/error-message";
 import { Heading } from "@/components/shared/heading";
@@ -27,8 +27,8 @@ function DashboardAccount() {
           <Heading>Thông tin tài khoản</Heading>
           <div>
             <div className="flex items-center gap-2">
-              <Avatar className="h-18 w-18">
-                <AvatarFallback className="text-primary-foreground bg-primary text-3xl font-semibold">
+              <Avatar className="size-14">
+                <AvatarFallback className="text-primary-foreground bg-primary rounded-md text-3xl font-medium">
                   {getAvatarFallbackTextFromFullName(profile.full_name)}
                 </AvatarFallback>
               </Avatar>
@@ -36,7 +36,7 @@ function DashboardAccount() {
                 <p className="text-primary text-xl font-semibold">
                   {profile.full_name}
                 </p>
-                <p>Mã: {profile.user_id}</p>
+                <p className="text-muted-foreground">#{profile.user_id}</p>
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@ function DashboardAccount() {
         <Separator />
         <section className="my-6">
           <Heading>Bảo mật và Xác thực</Heading>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <ChangePassword />
           </div>
         </section>

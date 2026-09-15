@@ -73,12 +73,12 @@ export function ChapterLessonListItem({
             </span>
           </div>
           <div className="ml-auto flex items-center gap-4">
-            <div className="text-foreground/60 flex items-center gap-2">
+            <div className="text-foreground/60 flex items-center gap-1">
               <PaperclipIcon size={20} />
               <span>{lesson.lesson_attachments.length}</span>
             </div>
             {lesson.deadline && new Date(lesson.deadline) >= new Date() && (
-              <div className="text-destructive flex items-center gap-2">
+              <div className="text-destructive flex items-center gap-1">
                 <HourglassIcon size={20} />
               </div>
             )}

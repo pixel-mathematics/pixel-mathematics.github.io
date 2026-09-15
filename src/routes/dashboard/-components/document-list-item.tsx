@@ -9,7 +9,7 @@ export function DocumentListItem({ document }: DocumentListItemProps) {
   return (
     <div className="flex flex-col items-start gap-4 rounded-md border p-4 md:flex-row md:items-center">
       <div className="flex flex-col items-start gap-2 text-lg font-medium md:flex-row md:items-center">
-        <span className="bg-primary/10 text-primary flex h-10 w-34 items-center justify-center rounded-sm font-semibold text-nowrap uppercase">
+        <span className="bg-primary/10 text-primary flex h-8 w-34 items-center justify-center rounded-sm font-semibold text-nowrap uppercase">
           {document.id}
         </span>
         <span className="max-w-[80vw] truncate md:max-w-[500px]">

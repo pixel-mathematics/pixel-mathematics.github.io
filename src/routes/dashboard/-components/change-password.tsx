@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { KeyRoundIcon } from "lucide-react";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -75,12 +75,10 @@ export function ChangePassword() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
         <div className="border-border flex items-center gap-4 rounded-md border p-4 text-left">
-          <KeyRoundIcon size={32} className="text-primary" />
+          <KeyRoundIcon className="text-primary size-8" />
           <div>
             <p className="text-lg font-medium">Đổi mật khẩu tài khoản</p>
-            <p className="text-muted-foreground">
-              Nên sử dụng mật khẩu ít nhất 8 kí tự
-            </p>
+            <p className="text-muted-foreground">Mật khẩu ít nhất 6 kí tự</p>
           </div>
         </div>
       </DialogTrigger>

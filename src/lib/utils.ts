@@ -16,6 +16,5 @@ export function getDayOfWeek(dayOfWeek: number | null) {
 }
 
 export function getAvatarFallbackTextFromFullName(name: string) {
-  const words = name.split(" ");
-  return words.at(-2)?.[0] + "" + words.at(-1)?.[0];
+  return name.split(" ").at(-1)?.at(0);
 }

@@ -6,7 +6,7 @@ export function Heading({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <h2
-      className={cn("text-primary mb-4 text-3xl font-bold", className)}
+      className={cn("text-primary mb-4 text-2xl font-bold", className)}
       {...props}
     />
   );

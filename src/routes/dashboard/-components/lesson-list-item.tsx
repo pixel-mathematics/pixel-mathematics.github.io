@@ -29,7 +29,7 @@ export function LessonListItem({ lesson }: LessonListItemProps) {
           </span>
         </div>
         <div className="ml-auto">
-          <div className="text-foreground/60 flex items-center gap-2">
+          <div className="text-foreground/60 flex items-center gap-1">
             <ClockIcon size={20} />
             <span>{formatDate(lesson.updated_on)}</span>
           </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLoaderData } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -7,11 +7,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { CurrentUser } from "./current-user";
+import { SignInButton } from "./sign-in-button";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
-  const { profile } = useLoaderData({ from: "/dashboard" });
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -43,39 +42,28 @@ export function MobileNav() {
             <ul className="flex flex-col items-stretch">
               <li>
                 <Link
-                  to="/dashboard"
+                  to="/"
                   className="flex items-center px-4 py-2 text-xl font-medium"
                   onClick={() => {
                     setOpen(false);
                   }}
                 >
-                  Dashboard
+                  Trang chủ
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/dashboard/schedule"
+                  to="/contact"
                   className="flex items-center px-4 py-2 text-xl font-medium"
                   onClick={() => {
                     setOpen(false);
                   }}
                 >
-                  Lịch học
+                  Liên hệ
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/dashboard/account"
-                  className="flex items-center px-4 py-2 text-xl font-medium"
-                  onClick={() => {
-                    setOpen(false);
-                  }}
-                >
-                  Tài khoản
-                </Link>
-              </li>
-              <li>
-                <CurrentUser profile={profile} />
+                <SignInButton />
               </li>
             </ul>
           </nav>

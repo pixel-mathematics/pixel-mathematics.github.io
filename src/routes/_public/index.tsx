@@ -137,7 +137,7 @@ function Home() {
               mình sẽ phù hợp với bạn.
             </p>
           </div>
-          <div className="mt-8 grid grid-cols-3 gap-4">
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             {methodItems.map(({ icon: Icon, title, description }) => (
               <div className="border-border flex flex-col items-center gap-4 rounded-xl border-2 p-8">
                 <div>
