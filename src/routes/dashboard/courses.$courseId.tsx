@@ -5,6 +5,8 @@ import { ErrorMessage } from "@/components/shared/error-message";
 import { Hero } from "@/components/shared/hero";
 import { fetchStudentCourseDetailQueryOptions } from "@/queries/courses";
 import { CourseDetail } from "./-components/course-detail";
+import { CourseDetailSkeleton } from "./-components/skeletons/course-detail-skeleton";
+import { HeroSkeleton } from "./-components/skeletons/hero-skeleton";
 
 const searchSchema = z.object({
   chapterId: z.string().optional(),
@@ -13,6 +15,7 @@ const searchSchema = z.object({
 
 export const Route = createFileRoute("/dashboard/courses/$courseId")({
   loader: async ({ params, context }) => {
+    // await new Promise(() => {});
     const { courseId } = params;
 
     const course = await context.queryClient.query(
@@ -21,7 +24,18 @@ export const Route = createFileRoute("/dashboard/courses/$courseId")({
 
     return { course };
   },
-  pendingComponent: () => <div>Loading...</div>,
+  pendingComponent: () => (
+    <>
+      <section>
+        <HeroSkeleton />
+      </section>
+      <section className="my-6">
+        <Container>
+          <CourseDetailSkeleton />
+        </Container>
+      </section>
+    </>
+  ),
   errorComponent: ErrorMessage,
   validateSearch: searchSchema,
   component: DashboardStudentCourse,

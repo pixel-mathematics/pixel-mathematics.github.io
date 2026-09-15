@@ -289,21 +289,18 @@ export type Database = {
       }
       profiles: {
         Row: {
-          custom_code: string | null
           full_name: string
           id: string
           role: Database["public"]["Enums"]["user_role"]
           user_id: string | null
         }
         Insert: {
-          custom_code?: string | null
           full_name: string
           id: string
           role: Database["public"]["Enums"]["user_role"]
           user_id?: string | null
         }
         Update: {
-          custom_code?: string | null
           full_name?: string
           id?: string
           role?: Database["public"]["Enums"]["user_role"]
@@ -318,7 +315,6 @@ export type Database = {
           end_time: string | null
           id: string
           start_time: string | null
-          students: string | null
           text_color: string | null
           title: string | null
         }
@@ -328,7 +324,6 @@ export type Database = {
           end_time?: string | null
           id?: string
           start_time?: string | null
-          students?: string | null
           text_color?: string | null
           title?: string | null
         }
@@ -338,11 +333,43 @@ export type Database = {
           end_time?: string | null
           id?: string
           start_time?: string | null
-          students?: string | null
           text_color?: string | null
           title?: string | null
         }
         Relationships: []
+      }
+      student_schedule_events: {
+        Row: {
+          id: string
+          schedule_event_id: string | null
+          student_id: string | null
+        }
+        Insert: {
+          id?: string
+          schedule_event_id?: string | null
+          student_id?: string | null
+        }
+        Update: {
+          id?: string
+          schedule_event_id?: string | null
+          student_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_schedule_events_schedule_event_id_fkey"
+            columns: ["schedule_event_id"]
+            isOneToOne: false
+            referencedRelation: "schedule_events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "student_schedule_events_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       subjects: {
         Row: {

@@ -1,6 +1,7 @@
 import { useForm } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
+import { LoaderCircleIcon } from "lucide-react";
 import * as z from "zod";
 import { Container } from "@/components/shared/container";
 import { Button } from "@/components/ui/button";
@@ -110,7 +111,7 @@ function SignIn() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                         aria-invalid={isInvalid}
-                        placeholder="HV1234"
+                        placeholder="Ví dụ: 27T09ABC01"
                       />
                       {isInvalid && (
                         <FieldError errors={field.state.meta.errors} />
@@ -135,7 +136,7 @@ function SignIn() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                         aria-invalid={isInvalid}
-                        placeholder="******"
+                        placeholder="********"
                       />
                       {isInvalid && (
                         <FieldError errors={field.state.meta.errors} />
@@ -155,7 +156,11 @@ function SignIn() {
               className="w-full"
               disabled={signInWithPasswordMutation.isPending}
             >
-              Tiếp tục
+              {signInWithPasswordMutation.isPending ? (
+                <LoaderCircleIcon className="animate-spin" />
+              ) : (
+                "Tiếp tục"
+              )}
             </Button>
           </Field>
         </CardFooter>

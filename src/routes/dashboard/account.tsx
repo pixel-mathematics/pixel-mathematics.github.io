@@ -5,11 +5,58 @@ import { Heading } from "@/components/shared/heading";
 import { Hero } from "@/components/shared/hero";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getAvatarFallbackTextFromFullName } from "@/lib/utils";
 import { ChangePassword } from "./-components/change-password";
+import { HeadingSkeleton } from "./-components/skeletons/heading-skeleton";
+import { HeroSkeleton } from "./-components/skeletons/hero-skeleton";
 
 export const Route = createFileRoute("/dashboard/account")({
-  pendingComponent: () => <div>Loading...</div>,
+  pendingComponent: () => (
+    <>
+      <section>
+        <HeroSkeleton />
+      </section>
+      <Container>
+        <section className="my-6">
+          <HeadingSkeleton />
+          <div>
+            <div className="flex items-center gap-2">
+              <Skeleton className="size-14 rounded-md text-3xl font-medium text-transparent">
+                M
+              </Skeleton>
+              <div>
+                <Skeleton className="w-[160px] text-xl font-semibold text-transparent">
+                  name
+                </Skeleton>
+                <Skeleton className="w-[240px] text-transparent">id</Skeleton>
+              </div>
+            </div>
+          </div>
+        </section>
+        <Separator />
+        <section className="my-6">
+          <HeadingSkeleton />
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {Array.from({ length: 6 }, (_, i) => i).map((i) => (
+              <div
+                className="border-border flex items-center gap-4 rounded-md border p-4 text-left"
+                key={i}
+              >
+                <Skeleton className="size-8" />
+                <div className="flex-1">
+                  <Skeleton className="w-1/2 text-lg font-medium text-transparent">
+                    title
+                  </Skeleton>
+                  <Skeleton className="text-transparent">description</Skeleton>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </Container>
+    </>
+  ),
   errorComponent: ErrorMessage,
   component: DashboardAccount,
 });

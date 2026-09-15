@@ -3,6 +3,7 @@ import { type EventClickArg } from "@fullcalendar/core";
 import viLocale from "@fullcalendar/core/locales/vi";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import { useLoaderData } from "@tanstack/react-router";
 import {
   CalendarIcon,
   ClockArrowLeftIcon,
@@ -27,6 +28,7 @@ interface Props {
 }
 
 export function CourseSchedule({ scheduleEvents }: Props) {
+  const { profile } = useLoaderData({ from: "/dashboard" });
   const [open, setOpen] = useState(false);
 
   const [selectedEvent, setSelectedEvent] = useState<ScheduleEvent | null>(
@@ -53,7 +55,11 @@ export function CourseSchedule({ scheduleEvents }: Props) {
               startTime: event.start_time,
               endTime: event.end_time,
               daysOfWeek: [event.dayOfWeek],
-              backgroundColor: event.background_color ?? "#000",
+              backgroundColor: event.student_schedule_events.some(
+                ({ profiles }) => profiles?.user_id === profile.user_id
+              )
+                ? (event.background_color ?? "#000")
+                : "#eee",
               textColor: event.text_color ?? "#000",
               borderColor: event.background_color ?? "#000",
             }))}
@@ -143,7 +149,13 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                     <UsersIcon size={20} />
                     <span>Học sinh</span>
                   </div>
-                  <div className="ml-6">{selectedEvent.students}</div>
+                  <div className="ml-6 flex flex-col gap-1">
+                    {selectedEvent.student_schedule_events.map(
+                      ({ profiles }) => (
+                        <div>{profiles?.full_name}</div>
+                      )
+                    )}
+                  </div>
                 </div>
               </div>
               <DrawerFooter>

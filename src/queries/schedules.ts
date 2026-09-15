@@ -5,7 +5,18 @@ import { supabase } from "@/lib/supabase";
 /* Fetch all schedule events */
 const fetchScheduleEventsQuery = supabase
   .from("schedule_events")
-  .select()
+  .select(
+    `
+    *,
+    student_schedule_events!inner (
+      profiles (
+        id,
+        full_name,
+        user_id
+      )
+    )
+  `
+  )
   .order("id");
 
 export type ScheduleEvent = QueryData<typeof fetchScheduleEventsQuery>[0];
