@@ -18,27 +18,25 @@ export function CourseCard({ course }: CourseCardProps) {
     <Link to="/dashboard/courses/$courseId" params={{ courseId: course.id }}>
       <Card className="group border-border border-1 duration-300">
         <CardHeader>
-          <CardTitle className="group-hover:text-primary text-xl font-bold uppercase duration-300 md:text-2xl">
+          <CardTitle className="group-hover:text-primary text-lg font-bold uppercase duration-300 md:text-xl">
             {course.title}
           </CardTitle>
-          <CardDescription className="truncate text-lg">
+          <CardDescription className="truncate text-base">
             {course.description}
           </CardDescription>
         </CardHeader>
-        <CardFooter className="text-base">
-          <div className="flex w-full items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="text-primary flex items-center gap-1 font-medium uppercase">
-                <KeyRoundIcon size={20} />
-                {course.id}
-              </div>
-              <div className="flex items-center gap-1 font-medium">
-                <BookIcon size={20} />
-                {course.subjects?.title}
-              </div>
+        <div className="flex w-full items-center justify-between px-4 text-base">
+          <div className="ml-auto flex items-center gap-4">
+            <div className="text-primary flex items-center gap-1 font-medium uppercase">
+              <KeyRoundIcon className="size-4.5" />
+              {course.id}
+            </div>
+            <div className="text-muted-foreground flex items-center gap-1 font-medium">
+              <BookIcon className="size-4.5" />
+              {course.subjects?.title}
             </div>
           </div>
-        </CardFooter>
+        </div>
       </Card>
     </Link>
   );

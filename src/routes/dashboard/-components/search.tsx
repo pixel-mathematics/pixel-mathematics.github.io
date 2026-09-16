@@ -49,7 +49,7 @@ export function Search({ data: { lessons } }: Props) {
   return (
     <div>
       <Button
-        size="lg"
+        size="icon"
         variant="ghost"
         className="px-0 md:px-3"
         onClick={() => {
@@ -57,7 +57,7 @@ export function Search({ data: { lessons } }: Props) {
           setKeyword("");
         }}
       >
-        <SearchIcon className="size-6 md:size-5" />
+        <SearchIcon className="md:size-5" />
         <span className="hidden md:inline">Tìm kiếm</span>
       </Button>
       <CommandDialog
