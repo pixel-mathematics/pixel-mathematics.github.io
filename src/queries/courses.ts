@@ -40,7 +40,7 @@ export const fetchStudentCoursesQueryOptions = (studentId: string) =>
     queryKey: ["courses", "student", studentId],
     queryFn: () => fetchStudentCourses(studentId),
     enabled: !!studentId,
-    staleTime: 1000 * 60 * 15,
+    staleTime: 1000 * 60 * 60 * 24,
   });
 
 /* Fetch a course of current user */
@@ -89,7 +89,7 @@ export const fetchStudentCourseDetailQueryOptions = (courseId: string) =>
   queryOptions({
     queryKey: ["courses", courseId],
     queryFn: () => fetchStudentCourseDetail(courseId),
-    staleTime: 1000 * 60 * 15,
+    staleTime: 1000 * 60 * 60 * 24,
   });
 
 /* Fetch recent lessons of current user */
@@ -135,5 +135,5 @@ export const fetchStudentLessonsQueryOptions = (studentId: string) =>
     queryKey: ["lessons", "student", studentId],
     queryFn: () => fetchStudentLessons(studentId),
     enabled: !!studentId,
-    staleTime: 1000 * 60 * 15,
+    staleTime: 1000 * 60 * 60 * 24,
   });

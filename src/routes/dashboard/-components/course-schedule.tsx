@@ -115,7 +115,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
               </DrawerHeader>
               <div className="flex flex-col gap-4 p-4 text-base">
                 <div className="border-primary rounded-md border p-4">
-                  <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+                  <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
                     <CalendarIcon size={20} />
                     <span>Ngày học trong tuần</span>
                   </div>
@@ -125,7 +125,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 </div>
 
                 <div className="border-primary rounded-md border p-4">
-                  <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+                  <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
                     <ClockArrowLeftIcon size={20} />
                     <span>Giờ vào lớp</span>
                   </div>
@@ -135,7 +135,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 </div>
 
                 <div className="border-destructive rounded-md border p-4">
-                  <div className="text-destructive mb-2 flex items-center gap-2 text-lg font-medium">
+                  <div className="text-destructive mb-1 flex items-center gap-2 text-lg font-medium">
                     <ClockArrowRightIcon size={20} />
                     <span>Giờ kết thúc</span>
                   </div>
@@ -145,7 +145,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 </div>
 
                 <div className="border-primary rounded-md border p-4">
-                  <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+                  <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
                     <UsersIcon size={20} />
                     <span>Học sinh</span>
                   </div>

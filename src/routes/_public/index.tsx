@@ -46,7 +46,7 @@ function Home() {
               </p>
             </div>
           </div>
-          <div className="mt-6 text-justify text-xl leading-relaxed">
+          <div className="mt-6 text-justify text-lg leading-relaxed">
             <p>
               Chào các bạn học sinh! Mình là{" "}
               <span className="text-primary font-medium">Đăng Minh</span>. Mình
@@ -88,7 +88,7 @@ function Home() {
               </p>
             </div>
           </div>
-          <div className="mt-6 text-justify text-xl leading-relaxed">
+          <div className="mt-6 text-justify text-lg leading-relaxed">
             <p className="mt-3">
               <span className="text-primary font-medium">
                 Pixel Mathematics
@@ -129,7 +129,7 @@ function Home() {
               </p>
             </div>
           </div>
-          <div className="mt-6 text-justify text-xl leading-relaxed">
+          <div className="mt-6 text-justify text-lg leading-relaxed">
             <p>
               Giống như các thầy cô khác, mình cũng có phương pháp và công cụ
               giảng dạy của riêng mình. Mỗi học sinh sẽ phù hợp với các phương

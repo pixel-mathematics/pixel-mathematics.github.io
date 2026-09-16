@@ -57,7 +57,7 @@ export function Search({ data: { lessons } }: Props) {
           setKeyword("");
         }}
       >
-        <SearchIcon className="size-7 md:size-5" />
+        <SearchIcon className="size-6 md:size-5" />
         <span className="hidden md:inline">Tìm kiếm</span>
       </Button>
       <CommandDialog

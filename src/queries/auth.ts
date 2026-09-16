@@ -59,6 +59,6 @@ export async function fetchCurrentUserProfile(): Promise<UserProfile | null> {
 export const fetchCurrentUserProfileQueryOptions = queryOptions({
   queryKey: ["user_profile"],
   queryFn: fetchCurrentUserProfile,
-  staleTime: 1000 * 60 * 15,
+  staleTime: 1000 * 60 * 60 * 24,
   refetchOnWindowFocus: false,
 });

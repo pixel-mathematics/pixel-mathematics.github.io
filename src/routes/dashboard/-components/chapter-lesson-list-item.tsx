@@ -63,9 +63,9 @@ export function ChapterLessonListItem({
   return (
     <Drawer open={open} onOpenChange={handleOpenChange} swipeDirection="right">
       <DrawerTrigger>
-        <div className="flex cursor-pointer flex-col items-start gap-4 rounded-md border p-4 text-base md:flex-row md:items-center">
+        <div className="flex cursor-pointer flex-col items-start gap-4 rounded-md border p-3 text-base md:flex-row md:items-center">
           <div className="flex flex-col items-start gap-2 font-medium md:flex-row md:items-center">
-            <span className="bg-primary/10 text-primary flex h-8 w-26 items-center justify-center rounded-sm text-lg font-semibold text-nowrap uppercase">
+            <span className="bg-primary/10 text-primary flex h-8 w-26 items-center justify-center rounded-sm text-base font-semibold text-nowrap uppercase">
               {lesson.id}
             </span>
             <span className="max-w-[80vw] truncate text-left text-lg md:max-w-[500px]">
@@ -92,7 +92,7 @@ export function ChapterLessonListItem({
               <div className="bg-primary/10 text-primary flex h-8 w-26 items-center justify-center rounded-sm font-semibold uppercase">
                 {lesson.id}
               </div>
-              <div className="self-stretch truncate text-xl">
+              <div className="self-stretch truncate text-base md:text-lg">
                 {lesson.title}
               </div>
             </div>
@@ -116,7 +116,7 @@ export function ChapterLessonListItem({
         </DrawerHeader>
         <div className="flex flex-col gap-4 p-4 text-base">
           <div className="border-border rounded-md border p-4">
-            <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+            <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
               <PaperclipIcon size={20} />
               <span>Tài liệu đính kèm</span>
             </div>
@@ -125,8 +125,8 @@ export function ChapterLessonListItem({
                 <div className="flex items-center gap-4" key={file.id}>
                   <span className="w-20">{file.file_name}</span>
                   <a href={file.file_url} target="_blank">
-                    <button className="text-primary hover:text-primary/70 flex items-center gap-2 font-medium uppercase">
-                      <DownloadIcon size={20} />
+                    <button className="text-primary hover:text-primary/70 flex items-center gap-1 text-sm font-medium uppercase">
+                      <DownloadIcon size={18} />
                       {file.file_type}
                     </button>
                   </a>
@@ -135,7 +135,7 @@ export function ChapterLessonListItem({
             </div>
           </div>
           <div className="border-border rounded-md border p-4">
-            <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+            <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
               <CalendarIcon size={20} />
               <span>Ngày học</span>
             </div>
@@ -145,7 +145,7 @@ export function ChapterLessonListItem({
           </div>
 
           <div className="border-border rounded-md border p-4">
-            <div className="text-primary mb-2 flex items-center gap-2 text-lg font-medium">
+            <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
               <ClockIcon size={20} />
               <span>Cập nhật lần cuối</span>
             </div>

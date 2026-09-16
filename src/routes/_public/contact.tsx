@@ -36,7 +36,7 @@ function Contact() {
                   <Icon className="size-7" />
                 </div>
                 <div>
-                  <div className="text-primary text-lg font-medium uppercase">
+                  <div className="text-primary font-medium uppercase">
                     {label}
                   </div>
                   <div>{text}</div>

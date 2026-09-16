@@ -21,10 +21,10 @@ export function LessonListItem({ lesson }: LessonListItemProps) {
     >
       <div className="flex flex-col items-start gap-2 rounded-md border p-3 md:flex-row md:items-center">
         <div className="flex flex-col items-start gap-2 font-medium md:flex-row md:items-center">
-          <span className="bg-primary/10 text-primary flex h-8 w-26 items-center justify-center rounded-sm font-semibold text-nowrap uppercase">
+          <span className="bg-primary/10 text-primary flex h-8 w-26 items-center justify-center rounded-sm text-base font-semibold text-nowrap uppercase">
             {lesson.id}
           </span>
-          <span className="block max-w-[80vw] truncate text-lg text-nowrap md:max-w-[480px] lg:max-w-[720px]">
+          <span className="block max-w-[80vw] truncate text-base text-nowrap md:max-w-[480px] md:text-lg lg:max-w-[720px]">
             {lesson.title}
           </span>
         </div>

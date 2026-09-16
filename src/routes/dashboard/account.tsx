@@ -80,7 +80,7 @@ function DashboardAccount() {
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-primary text-xl font-semibold">
+                <p className="text-primary text-lg font-semibold">
                   {profile.full_name}
                 </p>
                 <p className="text-muted-foreground">#{profile.user_id}</p>

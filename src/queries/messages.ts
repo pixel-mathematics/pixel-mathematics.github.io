@@ -36,5 +36,5 @@ export async function fetchActiveMessages(): Promise<Message[]> {
 export const fetchActiveMessagesQueryOptions = queryOptions({
   queryKey: ["scheduleEvents"],
   queryFn: fetchActiveMessages,
-  staleTime: 1000 * 60 * 15,
+  staleTime: 1000 * 60 * 60 * 24,
 });

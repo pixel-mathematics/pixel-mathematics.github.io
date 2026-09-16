@@ -151,6 +151,7 @@ function SignIn() {
         <CardFooter>
           <Field orientation="horizontal">
             <Button
+              size="lg"
               type="submit"
               form="sign-in-form"
               className="w-full"

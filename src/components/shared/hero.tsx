@@ -22,7 +22,7 @@ export function Hero({
       {...props}
     >
       <div className="mx-4 flex flex-col items-center gap-4 text-center md:mx-0">
-        <div className="text-4xl font-bold lg:text-5xl">
+        <div className="text-3xl font-bold md:text-4xl lg:text-5xl">
           <span className="text-white">{text}</span>{" "}
           <span className="text-teal-400">{highlightText}</span>
         </div>
