@@ -37,7 +37,10 @@ export function MobileNav() {
           </div>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="mt-2 w-svw -translate-x-1" align="end">
+      <PopoverContent
+        className="mt-2 w-svw -translate-x-1 rounded-none"
+        align="end"
+      >
         <div>
           <nav>
             <ul className="flex flex-col items-stretch">
