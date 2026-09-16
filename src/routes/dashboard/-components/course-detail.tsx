@@ -33,16 +33,16 @@ export function CourseDetail({ course: { chapters, documents } }: Props) {
   return (
     <div>
       <Tabs defaultValue="chapters">
-        <TabsList className="group-data-horizontal/tabs:h-12">
+        <TabsList className="group-data-horizontal/tabs:h-10">
           <TabsTrigger
             value="chapters"
-            className="px-8 text-lg font-bold uppercase md:text-xl"
+            className="px-8 text-base font-bold uppercase md:text-lg"
           >
             Bài học
           </TabsTrigger>
           <TabsTrigger
             value="documents"
-            className="px-8 text-lg font-bold uppercase md:text-xl"
+            className="px-8 text-base font-bold uppercase md:text-lg"
           >
             Tài liệu
           </TabsTrigger>
@@ -87,7 +87,9 @@ export function CourseDetail({ course: { chapters, documents } }: Props) {
               ))}
             </Accordion>
           ) : (
-            <p className="text-muted-foreground p-4">Chưa cập nhật bài học.</p>
+            <p className="text-muted-foreground p-4 text-base">
+              Chưa cập nhật bài học.
+            </p>
           )}
         </TabsContent>
         <TabsContent value="documents">
@@ -98,7 +100,9 @@ export function CourseDetail({ course: { chapters, documents } }: Props) {
               ))}
             </div>
           ) : (
-            <p className="text-muted-foreground p-4">Chưa cập nhật tài liệu.</p>
+            <p className="text-muted-foreground p-4 text-base">
+              Chưa cập nhật tài liệu.
+            </p>
           )}
         </TabsContent>
       </Tabs>
