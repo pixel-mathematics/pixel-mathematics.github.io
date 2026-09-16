@@ -27,6 +27,7 @@ export default defineConfig([
           allowExportNames: ["Route"],
         },
       ],
+      "@typescript-eslint/no-unused-vars": "warn",
     },
   },
   prettier,

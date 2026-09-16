@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { BookIcon, CalendarIcon, KeyRoundIcon } from "lucide-react";
+import { BookIcon, KeyRoundIcon } from "lucide-react";
 import {
   Card,
   CardDescription,
@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { formatDate } from "@/lib/utils";
 import type { StudentCourse } from "@/queries/courses";
 
 interface CourseCardProps {
