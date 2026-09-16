@@ -14,7 +14,7 @@ export function Flashcard({ flashcard }: FlashcardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isLoadingAudio, setIsLoadingAudio] = useState(false);
 
-  // Fallback đọc bằng trình duyệt nếu API lỗi hoặc không tìm thấy (thường là với cụm từ dài)
+  // Fallback: Dùng giọng đọc trình duyệt nếu Google TTS gặp sự cố
   const speakWithBrowser = (text: string) => {
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
@@ -29,64 +29,36 @@ export function Flashcard({ flashcard }: FlashcardProps) {
     }
   };
 
-  // Hàm xử lý lấy mp3 từ Free Dictionary API
-  const playAudio = async (e: React.MouseEvent) => {
-    e.stopPropagation(); // Chặn lật thẻ
-
-    // Đang tải thì không cho bấm liên tục
+  // Xử lý phát âm bằng Google Translate TTS
+  const playAudio = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Chặn sự kiện lật thẻ
     if (isLoadingAudio) return;
 
     setIsLoadingAudio(true);
+    const wordToFetch = flashcard.front_content;
 
     try {
-      // Xử lý từ vựng: cắt khoảng trắng thừa để gọi API
-      const wordToFetch = flashcard.front_content.trim();
-      const response = await fetch(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${wordToFetch}`
-      );
+      // Gọi URL của Google Translate (client=tw-ob giúp đọc tốt qua thẻ Audio)
+      const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=en-GB&client=tw-ob&q=${encodeURIComponent(wordToFetch)}`;
 
-      if (!response.ok) {
-        throw new Error("Word not found in API");
-      }
+      const audio = new Audio(url);
 
-      const data = await response.json();
+      // Tắt icon loading khi phát xong
+      audio.onended = () => setIsLoadingAudio(false);
 
-      // Tìm link audio trong mảng phonetics của kết quả trả về
-      const phonetics = data[0]?.phonetics || [];
-      let audioUrl = "";
-
-      // Ưu tiên 1: Tìm audio của Anh (UK)
-      const ukPhonetic = phonetics.find(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (p: any) => p.audio && p.audio.includes("-uk.mp3")
-      );
-      if (ukPhonetic) {
-        audioUrl = ukPhonetic.audio;
-      } else {
-        // Ưu tiên 2: Lấy bất kỳ audio nào có sẵn (US, AU...) nếu không có UK
-        const anyPhonetic = phonetics.find(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (p: any) => p.audio && p.audio !== ""
-        );
-        if (anyPhonetic) {
-          audioUrl = anyPhonetic.audio;
-        }
-      }
-
-      // Phát file MP3
-      if (audioUrl) {
-        const audio = new Audio(audioUrl);
-        audio.play();
-      } else {
-        // API có từ này nhưng không có file âm thanh
+      // Nếu lỗi mạng, fallback về giọng trình duyệt
+      audio.onerror = () => {
         speakWithBrowser(wordToFetch);
-      }
-    } catch (err) {
-      console.error(err);
-      // Nếu lỗi (ví dụ 404 do là cụm từ "break time", "boarding school") -> Dùng trình duyệt đọc
-      console.log("Chuyển sang dùng giọng đọc trình duyệt...");
-      speakWithBrowser(flashcard.front_content);
-    } finally {
+        setIsLoadingAudio(false);
+      };
+
+      // Play audio, nếu bị trình duyệt block thì fallback
+      audio.play().catch(() => {
+        speakWithBrowser(wordToFetch);
+        setIsLoadingAudio(false);
+      });
+    } catch (error) {
+      speakWithBrowser(wordToFetch);
       setIsLoadingAudio(false);
     }
   };
@@ -103,7 +75,7 @@ export function Flashcard({ flashcard }: FlashcardProps) {
         )}
       >
         {/* MẶT TRƯỚC */}
-        <Card className="absolute inset-0 flex h-full w-full items-center justify-center bg-white shadow-lg transition-shadow [backface-visibility:hidden] hover:shadow-xl">
+        <Card className="absolute inset-0 flex h-full w-full [transform:translateZ(1px)] items-center justify-center bg-white antialiased shadow-lg transition-shadow [-webkit-backface-visibility:hidden] [backface-visibility:hidden] hover:shadow-xl">
           <CardContent className="p-6 text-center">
             {/* Nút phát âm ở góc trên bên phải */}
             <Button
@@ -113,9 +85,9 @@ export function Flashcard({ flashcard }: FlashcardProps) {
               disabled={isLoadingAudio}
             >
               {isLoadingAudio ? (
-                <Loader2Icon className="h-5 w-5 animate-spin text-blue-500" />
+                <Loader2Icon className="text-primary size-5 animate-spin" />
               ) : (
-                <Volume2Icon className="h-5 w-5" />
+                <Volume2Icon className="size-5" />
               )}
             </Button>
             <h2 className="text-2xl font-bold text-slate-800">
@@ -126,11 +98,9 @@ export function Flashcard({ flashcard }: FlashcardProps) {
         </Card>
 
         {/* MẶT SAU */}
-        <Card className="absolute inset-0 flex h-full w-full [transform:rotateY(180deg)] items-center justify-center border-blue-200 shadow-lg [backface-visibility:hidden]">
+        <Card className="absolute inset-0 flex h-full w-full [transform:rotateY(180deg)_translateZ(1px)] items-center justify-center border-blue-200 shadow-lg [backface-visibility:hidden]">
           <CardContent className="flex h-full flex-col items-center justify-center p-6 text-center">
-            <p className="text-lg font-medium whitespace-pre-line text-slate-700">
-              <MarkdownContent content={flashcard.back_content} />
-            </p>
+            <MarkdownContent content={flashcard.back_content} />
           </CardContent>
         </Card>
       </div>
