@@ -155,6 +155,73 @@ export type Database = {
           },
         ]
       }
+      flashcard_decks: {
+        Row: {
+          course_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          title: string
+        }
+        Insert: {
+          course_id?: string | null
+          created_at?: string
+          description?: string | null
+          id: string
+          title: string
+        }
+        Update: {
+          course_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flashcard_decks_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      flashcards: {
+        Row: {
+          back_content: string | null
+          created_at: string
+          deck_id: string | null
+          front_content: string
+          id: string
+          sort_order: number | null
+        }
+        Insert: {
+          back_content?: string | null
+          created_at?: string
+          deck_id?: string | null
+          front_content: string
+          id?: string
+          sort_order?: number | null
+        }
+        Update: {
+          back_content?: string | null
+          created_at?: string
+          deck_id?: string | null
+          front_content?: string
+          id?: string
+          sort_order?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flashcards_deck_id_fkey"
+            columns: ["deck_id"]
+            isOneToOne: false
+            referencedRelation: "flashcard_decks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lesson_attachments: {
         Row: {
           file_name: string
@@ -397,7 +464,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      user_role: "student" | "parent"
+      user_role: "student" | "parent" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -525,7 +592,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      user_role: ["student", "parent"],
+      user_role: ["student", "parent", "admin"],
     },
   },
 } as const
