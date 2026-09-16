@@ -15,8 +15,7 @@ export function Header() {
         <div className="flex items-center gap-4 md:gap-0">
           {isMobile ? <MobileNav /> : <Nav />}
           {!isMobile && (
-            <div className="ml-5">
-              {" "}
+            <div className="ml-3.5">
               <SignInButton />
             </div>
           )}

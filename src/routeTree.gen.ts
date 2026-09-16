@@ -19,6 +19,7 @@ import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardAccountRouteImport } from './routes/dashboard/account'
 import { Route as DashboardScheduleRouteImport } from './routes/dashboard/schedule'
 import { Route as DashboardCoursesCourseIdRouteImport } from './routes/dashboard/courses.$courseId'
+import { Route as DashboardStudyDecksDeckIdRouteImport } from './routes/dashboard/study.decks.$deckId'
 
 const PublicRouteRoute = PublicRouteRouteImport.update({
   id: '/_public',
@@ -70,6 +71,12 @@ const DashboardCoursesCourseIdRoute =
     path: '/courses/$courseId',
     getParentRoute: () => DashboardRouteRoute,
   } as any)
+const DashboardStudyDecksDeckIdRoute =
+  DashboardStudyDecksDeckIdRouteImport.update({
+    id: '/study/decks/$deckId',
+    path: '/study/decks/$deckId',
+    getParentRoute: () => DashboardRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/schedule': typeof DashboardScheduleRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/courses/$courseId': typeof DashboardCoursesCourseIdRoute
+  '/dashboard/study/decks/$deckId': typeof DashboardStudyDecksDeckIdRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRouteRouteWithChildren
@@ -91,6 +99,7 @@ export interface FileRoutesByTo {
   '/': typeof PublicIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/dashboard/courses/$courseId': typeof DashboardCoursesCourseIdRoute
+  '/dashboard/study/decks/$deckId': typeof DashboardStudyDecksDeckIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -104,6 +113,7 @@ export interface FileRoutesById {
   '/_public/': typeof PublicIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/courses/$courseId': typeof DashboardCoursesCourseIdRoute
+  '/dashboard/study/decks/$deckId': typeof DashboardStudyDecksDeckIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/dashboard/schedule'
     | '/dashboard/'
     | '/dashboard/courses/$courseId'
+    | '/dashboard/study/decks/$deckId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard'
     | '/dashboard/courses/$courseId'
+    | '/dashboard/study/decks/$deckId'
   id:
     | '__root__'
     | '/_public'
@@ -139,6 +151,7 @@ export interface FileRouteTypes {
     | '/_public/'
     | '/dashboard/'
     | '/dashboard/courses/$courseId'
+    | '/dashboard/study/decks/$deckId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -219,6 +232,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardCoursesCourseIdRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
+    '/dashboard/study/decks/$deckId': {
+      id: '/dashboard/study/decks/$deckId'
+      path: '/study/decks/$deckId'
+      fullPath: '/dashboard/study/decks/$deckId'
+      preLoaderRoute: typeof DashboardStudyDecksDeckIdRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
   }
 }
 
@@ -253,6 +273,7 @@ interface DashboardRouteRouteChildren {
   DashboardScheduleRoute: typeof DashboardScheduleRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   DashboardCoursesCourseIdRoute: typeof DashboardCoursesCourseIdRoute
+  DashboardStudyDecksDeckIdRoute: typeof DashboardStudyDecksDeckIdRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
@@ -260,6 +281,7 @@ const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardScheduleRoute: DashboardScheduleRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   DashboardCoursesCourseIdRoute: DashboardCoursesCourseIdRoute,
+  DashboardStudyDecksDeckIdRoute: DashboardStudyDecksDeckIdRoute,
 }
 
 const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(

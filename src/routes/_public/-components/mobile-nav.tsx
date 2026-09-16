@@ -14,28 +14,28 @@ export function MobileNav() {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger>
-        <Button
-          size="lg"
-          variant="ghost"
-          className="bg-transparent px-0 hover:bg-transparent"
-        >
-          <div className="relative h-4 w-6">
+      <PopoverTrigger
+        render={
+          <Button
+            size="icon"
+            variant="ghost"
+            className="relative size-7 bg-transparent px-0 hover:bg-transparent"
+          >
             <span
               className={cn(
-                "bg-foreground absolute top-0 left-0 block h-1 w-full origin-center rounded-full duration-150",
-                open ? "translate-y-1.5 rotate-45" : ""
+                "bg-foreground absolute left-0 block h-[3px] w-full origin-center rounded-full duration-150",
+                open ? "rotate-45" : "top-[6.33px]"
               )}
             ></span>
             <span
               className={cn(
-                "bg-foreground absolute bottom-0 left-0 block h-1 w-full origin-center rounded-full duration-150",
-                open ? "-translate-y-1.5 -rotate-45" : ""
+                "bg-foreground absolute left-0 block h-[3px] w-full origin-center rounded-full duration-150",
+                open ? "-rotate-45" : "top-[15.67px]"
               )}
             ></span>
-          </div>
-        </Button>
-      </PopoverTrigger>
+          </Button>
+        }
+      />
       <PopoverContent
         className="mt-2 w-svw -translate-x-1 rounded-none"
         align="end"

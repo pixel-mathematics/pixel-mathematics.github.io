@@ -62,7 +62,11 @@ const fetchStudentCourseDetailQuery = (courseId: string) =>
         )
       )
     ),
-    documents (*)
+    documents (*),
+    flashcard_decks (
+      *,
+      flashcards (count)
+    )
   `
     )
     .order("id", { referencedTable: "chapters", ascending: true })
@@ -135,5 +139,42 @@ export const fetchStudentLessonsQueryOptions = (studentId: string) =>
     queryKey: ["lessons", "student", studentId],
     queryFn: () => fetchStudentLessons(studentId),
     enabled: !!studentId,
+    staleTime: 1000 * 60 * 60 * 24,
+  });
+
+const fetchFlashcardDeckDetailQuery = (deckId: string) =>
+  supabase
+    .from("flashcard_decks")
+    .select(
+      `
+  *,
+  courses (*),
+  flashcards (*)
+`
+    )
+    .eq("id", deckId)
+    .single();
+
+export type FlashcardDeckDetail = QueryData<
+  ReturnType<typeof fetchFlashcardDeckDetailQuery>
+>;
+
+export async function fetchFlashcardDeckDetail(
+  deckId: string
+): Promise<FlashcardDeckDetail> {
+  const { data, error } = await fetchFlashcardDeckDetailQuery(deckId);
+
+  if (!data || error) {
+    throw new Error(`Lỗi lấy dữ liệu của bộ thẻ #${deckId}`);
+  }
+
+  return data;
+}
+
+export const fetchFlashcardDeckDetailQueryOptions = (deckId: string) =>
+  queryOptions({
+    queryKey: ["courses", "flashcard_decks", deckId],
+    queryFn: () => fetchFlashcardDeckDetail(deckId),
+    enabled: !!deckId,
     staleTime: 1000 * 60 * 60 * 24,
   });

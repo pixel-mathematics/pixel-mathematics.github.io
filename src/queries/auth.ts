@@ -47,7 +47,7 @@ export async function fetchCurrentUserProfile(): Promise<UserProfile | null> {
   }
 
   const { data, error } = await fetchCurrentUserProfileQuery(user.id);
-  console.log(user.id, data);
+  // console.log(user.id, data);
 
   if (!data || error) {
     throw new Error("Lỗi lấy dữ liệu thông tin tài khoản");

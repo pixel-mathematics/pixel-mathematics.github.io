@@ -116,7 +116,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
               <div className="flex flex-col gap-4 p-4 text-base">
                 <div className="border-primary rounded-md border p-4">
                   <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
-                    <CalendarIcon size={20} />
+                    <CalendarIcon className="size-4.5" />
                     <span>Ngày học trong tuần</span>
                   </div>
                   <div className="ml-6">
@@ -126,7 +126,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
 
                 <div className="border-primary rounded-md border p-4">
                   <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
-                    <ClockArrowLeftIcon size={20} />
+                    <ClockArrowLeftIcon className="size-4.5" />
                     <span>Giờ vào lớp</span>
                   </div>
                   <div className="ml-6">
@@ -136,7 +136,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
 
                 <div className="border-destructive rounded-md border p-4">
                   <div className="text-destructive mb-1 flex items-center gap-2 text-lg font-medium">
-                    <ClockArrowRightIcon size={20} />
+                    <ClockArrowRightIcon className="size-4.5" />
                     <span>Giờ kết thúc</span>
                   </div>
                   <div className="ml-6">
@@ -146,7 +146,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
 
                 <div className="border-primary rounded-md border p-4">
                   <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
-                    <UsersIcon size={20} />
+                    <UsersIcon className="size-4.5" />
                     <span>Học sinh</span>
                   </div>
                   <div className="ml-6 flex flex-col gap-1">

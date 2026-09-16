@@ -63,25 +63,28 @@ export function ChapterLessonListItem({
   return (
     <Drawer open={open} onOpenChange={handleOpenChange} swipeDirection="right">
       <DrawerTrigger>
-        <div className="flex cursor-pointer flex-col items-start gap-4 rounded-md border p-3 text-base md:flex-row md:items-center">
-          <div className="flex flex-col items-start gap-2 font-medium md:flex-row md:items-center">
-            <span className="bg-primary/10 text-primary flex h-8 w-26 items-center justify-center rounded-sm text-base font-semibold text-nowrap uppercase">
+        <div className="flex cursor-pointer flex-col items-start gap-2 overflow-hidden rounded-md border p-2 text-base md:flex-row md:items-center md:p-0 md:pr-3">
+          <div className="flex flex-col items-start gap-2 text-base font-medium md:flex-row md:items-center">
+            <span className="bg-primary/10 text-primary flex h-7 w-22 items-center justify-center rounded-md text-sm font-semibold text-nowrap uppercase md:h-11 md:rounded-none">
               {lesson.id}
             </span>
-            <span className="max-w-[80vw] truncate text-left text-lg md:max-w-[500px]">
+            <span className="max-w-[80svw] truncate text-left text-nowrap md:max-w-[480px] lg:max-w-[720px]">
               {lesson.title}
             </span>
           </div>
           <div className="ml-auto flex items-center gap-4">
-            <div className="text-foreground/60 flex items-center gap-1">
-              <PaperclipIcon size={20} />
-              <span>{lesson.lesson_attachments.length}</span>
-            </div>
             {lesson.deadline && new Date(lesson.deadline) >= new Date() && (
               <div className="text-destructive flex items-center gap-1">
-                <HourglassIcon size={20} />
+                <HourglassIcon className="size-4.5" />
+                <span>
+                  {differenceInCalendarDays(lesson.deadline, new Date())} ngày
+                </span>
               </div>
             )}
+            <div className="text-muted-foreground flex items-center gap-1">
+              <PaperclipIcon className="size-4.5" />
+              <span>{lesson.lesson_attachments.length}</span>
+            </div>
           </div>
         </div>
       </DrawerTrigger>
@@ -116,8 +119,8 @@ export function ChapterLessonListItem({
         </DrawerHeader>
         <div className="flex flex-col gap-4 p-4 text-base">
           <div className="border-border rounded-md border p-4">
-            <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
-              <PaperclipIcon size={20} />
+            <div className="text-primary mb-1 flex items-center gap-1 font-medium">
+              <PaperclipIcon className="size-4.5" />
               <span>Tài liệu đính kèm</span>
             </div>
             <div className="ml-7 flex flex-col gap-2">
@@ -135,8 +138,8 @@ export function ChapterLessonListItem({
             </div>
           </div>
           <div className="border-border rounded-md border p-4">
-            <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
-              <CalendarIcon size={20} />
+            <div className="text-primary mb-1 flex items-center gap-1 font-medium">
+              <CalendarIcon className="size-4.5" />
               <span>Ngày học</span>
             </div>
             <div className="ml-7">
@@ -145,8 +148,8 @@ export function ChapterLessonListItem({
           </div>
 
           <div className="border-border rounded-md border p-4">
-            <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
-              <ClockIcon size={20} />
+            <div className="text-primary mb-1 flex items-center gap-1 font-medium">
+              <ClockIcon className="size-4.5" />
               <span>Cập nhật lần cuối</span>
             </div>
             <div className="ml-7">
@@ -155,15 +158,14 @@ export function ChapterLessonListItem({
           </div>
           {lesson.deadline && new Date(lesson.deadline) >= new Date() && (
             <div className="border-destructive rounded-md border p-4">
-              <div className="text-destructive mb-1 flex items-center gap-1 text-lg font-medium">
-                <HourglassIcon size={20} />
-                <span>Hạn cuối BTVN</span>
+              <div className="text-destructive mb-1 flex items-center gap-1 font-medium">
+                <HourglassIcon className="size-4.5" />
+                <span>Hạn cuối</span>
               </div>
               <div className="ml-6">
                 <span>{formatDate(lesson.deadline, "dd/MM/yyyy")}</span>{" "}
                 <span>
-                  (Còn {differenceInCalendarDays(lesson.deadline, new Date())}{" "}
-                  ngày)
+                  ({differenceInCalendarDays(lesson.deadline, new Date())} ngày)
                 </span>
               </div>
             </div>
