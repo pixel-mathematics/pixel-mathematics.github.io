@@ -3,8 +3,9 @@
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
+import { validateFormData } from "@/lib/utils";
 
-import { signInFormInputSchema, SignInInput } from "./schemas";
+import { signInFormInputSchema } from "./schemas";
 
 export interface AuthState {
   success?: boolean;
@@ -21,14 +22,11 @@ export async function signInAction(
   _initialState: AuthState,
   formData: FormData
 ): Promise<AuthState> {
-  const id = formData.get("id") as string;
-  const password = formData.get("password") as string;
-
-  const validatedFields = signInFormInputSchema.safeParse({ id, password });
+  const validatedFields = validateFormData(formData, signInFormInputSchema);
 
   if (!validatedFields.success) {
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors: validatedFields.errors,
       message: "Vui lòng kiểm tra lại thông tin",
     };
   }

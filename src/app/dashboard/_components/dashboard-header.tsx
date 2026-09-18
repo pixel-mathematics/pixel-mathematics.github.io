@@ -1,0 +1,31 @@
+"use client";
+
+import { useMobile } from "@/hooks/use-mobile";
+import { Container } from "@/components/shared/container";
+import { Logo } from "@/components/shared/logo";
+
+import { CurrentUser } from "./current-user";
+import { DashboardMobileNav } from "./dashboard-mobile-nav";
+import { DashboardNav } from "./dashboard-nav";
+import { SearchButton } from "./search-button";
+
+export function DashboardHeader() {
+  const isMobile = useMobile();
+
+  return (
+    <header className="bg-background sticky top-0 z-10 shadow-lg">
+      <Container className="flex h-16 items-center justify-between md:h-20">
+        <Logo />
+        <div className="flex items-center gap-4 md:gap-0">
+          <SearchButton />
+          {isMobile ? <DashboardMobileNav /> : <DashboardNav />}
+          {!isMobile && (
+            <div className="ml-3.5">
+              <CurrentUser />
+            </div>
+          )}
+        </div>
+      </Container>
+    </header>
+  );
+}
