@@ -43,7 +43,8 @@ export async function updateSession(request: NextRequest) {
   // Phân loại các route
   const url = request.nextUrl.clone();
   const isAuthRoute = url.pathname.startsWith("/sign-in");
-  const isProtectedRoute = url.pathname.startsWith("/dashboard");
+  const isProtectedRoute =
+    url.pathname.startsWith("/dashboard") || url.pathname.startsWith("/admin");
 
   // Logic 1: Chưa đăng nhập mà ráng vào Dashboard -> Đuổi về trang Login
   if (!user && isProtectedRoute) {
@@ -53,7 +54,8 @@ export async function updateSession(request: NextRequest) {
 
   // Logic 2: Đã đăng nhập rồi mà ráng vào lại trang Login/Register -> Đẩy thẳng vào Dashboard
   if (user && isAuthRoute) {
-    url.pathname = "/dashboard"; // Hoặc đường dẫn dashboard mặc định của bạn
+    const { data: profile } = await supabase.from("profiles").select().eq("id", user.id).single();
+    url.pathname = profile.role === "admin" ? "/admin" : "/dashboard"; // Hoặc đường dẫn dashboard mặc định của bạn
     return NextResponse.redirect(url);
   }
 

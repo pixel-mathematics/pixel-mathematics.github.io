@@ -33,7 +33,10 @@ export async function signInAction(
 
   const supabase = await createClient();
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.signInWithPassword({
     email: validatedFields.data.id + EMAIL_DOMAIN,
     password: validatedFields.data.password,
   });
@@ -45,5 +48,15 @@ export async function signInAction(
     return { success: false, message: errorMessage };
   }
 
-  redirect("/dashboard");
+  if (!user) {
+    return { success: false, message: "Người dùng không tồn tại" };
+  }
+
+  const { data: profile } = await supabase.from("profiles").select().eq("id", user.id).single();
+
+  if (profile?.role === "admin") {
+    redirect("/admin");
+  } else {
+    redirect("/dashboard");
+  }
 }
