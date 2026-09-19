@@ -40,7 +40,7 @@ export function Flashcard({ flashcard }: FlashcardProps) {
 
     try {
       // Gọi URL của Google Translate (client=tw-ob giúp đọc tốt qua thẻ Audio)
-      const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=en-GB&client=tw-ob&q=${encodeURIComponent(wordToFetch)}`;
+      const url = `/api/tts?text=${encodeURIComponent(wordToFetch)}&lang=en-GB`;
 
       const audio = new Audio(url);
 
@@ -72,24 +72,24 @@ export function Flashcard({ flashcard }: FlashcardProps) {
     >
       <div
         className={cn(
-          "border-border relative h-full w-full rounded-xl border transition-transform duration-500 [transform-style:preserve-3d]",
+          "border-border relative h-full w-full rounded-xl border transition-transform duration-500 will-change-transform [transform-style:preserve-3d]",
           isFlipped ? "[transform:rotateY(180deg)]" : ""
         )}
       >
         {/* MẶT TRƯỚC */}
-        <Card className="absolute inset-0 flex h-full w-full [transform:translateZ(1px)] items-center justify-center bg-white antialiased shadow-lg transition-shadow [-webkit-backface-visibility:hidden] [backface-visibility:hidden] hover:shadow-xl">
+        <Card className="absolute inset-0 flex h-full w-full [transform:translateZ(0)] items-center justify-center bg-white antialiased shadow-lg transition-shadow [-webkit-backface-visibility:hidden] [backface-visibility:hidden] hover:shadow-xl">
           <CardContent className="p-6 text-center">
             {/* Nút phát âm ở góc trên bên phải */}
             <Button
               variant="ghost"
-              className="hover:bg-primary/10 text-primary hover:text-primary absolute top-4 right-4 size-12 rounded-full"
+              className="hover:bg-primary/10 text-primary hover:text-primary absolute top-4 right-4 size-10 rounded-full"
               onClick={playAudio}
               disabled={isLoadingAudio}
             >
               {isLoadingAudio ? (
-                <Loader2Icon className="text-primary size-5 animate-spin" />
+                <Loader2Icon className="text-primary size-4 animate-spin" />
               ) : (
-                <Volume2Icon className="size-5" />
+                <Volume2Icon className="size-4" />
               )}
             </Button>
             <h2 className="text-2xl font-bold text-slate-800">{flashcard.front_content}</h2>
@@ -98,7 +98,7 @@ export function Flashcard({ flashcard }: FlashcardProps) {
         </Card>
 
         {/* MẶT SAU */}
-        <Card className="absolute inset-0 flex h-full w-full [transform:rotateY(180deg)_translateZ(1px)] items-center justify-center border-blue-200 shadow-lg [backface-visibility:hidden]">
+        <Card className="absolute inset-0 flex h-full w-full [transform:rotateY(180deg)_translateZ(0)] items-center justify-center border-blue-200 shadow-lg [-webkit-backface-visibility:hidden] [backface-visibility:hidden]">
           <CardContent className="flex h-full flex-col items-center justify-center p-6 text-center">
             <MarkdownContent content={flashcard.back_content} />
           </CardContent>

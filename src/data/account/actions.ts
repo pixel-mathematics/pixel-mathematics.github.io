@@ -1,28 +1,15 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { validateFormData } from "@/lib/utils";
 
-import { changePasswordFormInputSchema } from "./schemas";
+import { ChangePasswordInput, changePasswordInputSchema } from "./schemas";
 
-export interface ChangePasswordState {
-  success?: boolean;
-  errors?: {
-    email?: string[];
-    password?: string[];
-  };
-  message?: string;
-}
+export async function changePasswordAction(input: ChangePasswordInput) {
+  const validatedInputs = changePasswordInputSchema.safeParse(input);
 
-export async function changePasswordAction(
-  _initialState: ChangePasswordState,
-  formData: FormData
-): Promise<ChangePasswordState> {
-  const validatedFields = validateFormData(formData, changePasswordFormInputSchema);
-
-  if (!validatedFields.success) {
+  if (!validatedInputs.success) {
     return {
-      errors: validatedFields.errors,
+      success: false,
       message: "Vui lòng kiểm tra lại mật khẩu",
     };
   }
@@ -30,10 +17,14 @@ export async function changePasswordAction(
   const supabase = await createClient();
 
   const { error } = await supabase.auth.updateUser({
-    password: validatedFields.data.newPassword,
+    password: validatedInputs.data.newPassword,
   });
 
   if (error) {
+    if (error.message.includes("should be different")) {
+      return { success: false, message: "Mật khẩu mới không được trùng với mật khẩu cũ" };
+    }
+
     return { success: false, message: error.message };
   }
 

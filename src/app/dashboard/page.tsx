@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { Container } from "@/components/shared/container";
 import { Heading } from "@/components/shared/heading";
 import { Hero } from "@/components/shared/hero";
+import { ReusableBreadcrumb } from "@/components/shared/reusable-breadcrumb";
 
 import { CourseCard } from "./_components/course-card";
 import { LessonItem } from "./_components/lesson-item";
@@ -28,6 +29,9 @@ export default async function DashboardPage() {
           quote={`"The more I learn, the less I realize I know"`}
         />
       </section>
+      <Container className="mt-6">
+        <ReusableBreadcrumb items={[{ href: "/dashboard", label: "Góc học tập" }]} />
+      </Container>
       <section className="my-6">
         <Container>
           <Heading>Khóa học PIXEL2027</Heading>
@@ -43,9 +47,11 @@ export default async function DashboardPage() {
         <Container>
           <Heading>Bài học gần đây</Heading>
           <div className="grid grid-cols-1 gap-2">
-            {lessons.slice(0, 8).map((lesson) => (
-              <LessonItem key={lesson.id} lesson={lesson} />
-            ))}
+            {lessons.length > 0 ? (
+              lessons.slice(0, 8).map((lesson) => <LessonItem key={lesson.id} lesson={lesson} />)
+            ) : (
+              <p className="text-muted-foreground">Chưa có bài học nào được cập nhật</p>
+            )}
           </div>
         </Container>
       </section>

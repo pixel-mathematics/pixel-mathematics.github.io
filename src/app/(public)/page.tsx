@@ -41,7 +41,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="mt-6 text-justify text-lg leading-relaxed">
+          <div className="mt-6 text-justify text-lg leading-[1.5]">
             <p>
               Chào các bạn học sinh! Mình là{" "}
               <span className="text-primary font-medium">Đăng Minh</span>. Mình không phải giáo viên
@@ -76,7 +76,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="mt-6 text-justify text-lg leading-relaxed">
+          <div className="mt-6 text-justify text-lg leading-[1.5]">
             <p className="mt-3">
               <span className="text-primary font-medium">Pixel Mathematics</span> là cái tên hoàn
               toàn mới cho lớp học mình xây dựng từ năm 2023 đến nay, từ khi mới chỉ có những học
@@ -112,7 +112,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="mt-6 text-justify text-lg leading-relaxed">
+          <div className="mt-6 text-justify text-lg leading-[1.5]">
             <p>
               Giống như các thầy cô khác, mình cũng có phương pháp và công cụ giảng dạy của riêng
               mình. Mỗi học sinh sẽ phù hợp với các phương pháp khác nhau, dĩ nhiên là không ai
@@ -122,15 +122,15 @@ export default function Home() {
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             {methodItems.map(({ icon: Icon, title, description }) => (
               <div
-                className="border-border flex flex-col items-center gap-4 rounded-xl border-2 p-8"
+                className="border-border flex flex-col items-center gap-2 rounded-xl border-2 p-8"
                 key={title}
               >
                 <div>
                   <Icon className="text-primary size-12" />
                 </div>
                 <div className="self-start text-center">
-                  <p className="text-primary text-lg font-semibold uppercase">{title}</p>
-                  <p className="mt-2 text-center text-base leading-relaxed">{description}</p>
+                  <p className="text-primary text-lg font-semibold">{title}</p>
+                  <p className="mt-2 text-center text-base text-lg leading-[1.5]">{description}</p>
                 </div>
               </div>
             ))}

@@ -30,7 +30,7 @@ export function CourseLessons({ chapters }: CourseLessonsProps) {
   };
 
   return chapters.length > 0 ? (
-    <Accordion defaultValue={[chapterId]} className="gap-2">
+    <Accordion value={[chapterId]} className="gap-2">
       {chapters.map((chapter) => (
         <AccordionItem
           className="not-last:border-b-[0px]"
@@ -67,6 +67,6 @@ export function CourseLessons({ chapters }: CourseLessonsProps) {
       ))}
     </Accordion>
   ) : (
-    <p className="text-muted-foreground p-4 text-base">Chưa cập nhật bài học.</p>
+    <p className="text-muted-foreground text-base">Chưa cập nhật bài học.</p>
   );
 }

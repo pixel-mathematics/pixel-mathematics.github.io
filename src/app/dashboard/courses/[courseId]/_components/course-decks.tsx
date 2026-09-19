@@ -14,6 +14,6 @@ export function CourseDecks({ decks }: CourseDecksProps) {
       ))}
     </div>
   ) : (
-    <p className="text-muted-foreground p-4 text-base">Chưa cập nhật bộ thẻ.</p>
+    <p className="text-muted-foreground text-base">Chưa cập nhật bộ thẻ.</p>
   );
 }

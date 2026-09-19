@@ -24,10 +24,13 @@ export default function Contact() {
               </p>
             </div>
           </div>
-          <div className="mt-6 grid grid-cols-1 gap-6">
+          <div className="mt-6 grid grid-cols-1 gap-4">
             {contacts.map(({ icon: Icon, label, text }) => (
-              <div key={label} className="flex items-center gap-4">
-                <div className="text-primary bg-primary/20 grid size-12 shrink-0 place-items-center rounded-md">
+              <div
+                key={label}
+                className="border-border flex items-center gap-4 rounded-md border p-4"
+              >
+                <div className="text-primary bg-primary/20 grid size-14 shrink-0 place-items-center rounded-md">
                   <Icon className="size-6" />
                 </div>
                 <div>

@@ -17,7 +17,7 @@ export function MobileNav() {
           <Button
             size="icon"
             variant="ghost"
-            className="relative size-7 bg-transparent px-0 hover:bg-transparent"
+            className="relative size-7 bg-transparent px-0 hover:bg-transparent aria-expanded:bg-transparent"
           >
             <span
               className={cn(
@@ -34,39 +34,48 @@ export function MobileNav() {
           </Button>
         }
       />
-      <PopoverContent className="mt-2 w-svw -translate-x-1 rounded-none" align="end">
-        <div>
-          <nav>
+      <PopoverContent
+        className="mt-[15px] h-[calc(100svh-63px)] w-svw -translate-x-1 rounded-none p-0"
+        align="end"
+      >
+        <div className="h-full px-4 text-base">
+          <nav className="h-full">
             <ul className="flex flex-col items-stretch">
-              <li>
-                <Link
-                  href="/"
-                  className="flex items-center px-4 py-2 text-xl font-medium"
-                  onClick={() => {
-                    setOpen(false);
-                  }}
+              {navLinks.map(({ href, label }, index) => (
+                <li
+                  key={href}
+                  className="border-border animate-in fade-in-0 slide-in-from-bottom-8 fill-mode-both border-b duration-500"
+                  style={{ animationDelay: `${150 + index * 100}ms` }}
                 >
-                  Trang chủ
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="flex items-center px-4 py-2 text-xl font-medium"
-                  onClick={() => {
-                    setOpen(false);
-                  }}
-                >
-                  Liên hệ
-                </Link>
-              </li>
-              <li>
-                <AuthButton />
-              </li>
+                  <Link
+                    href={href}
+                    className="flex h-12 items-center font-medium"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
+        </div>
+        <div className="bg-primary/10 flex items-center p-4">
+          <AuthButton />
         </div>
       </PopoverContent>
     </Popover>
   );
 }
+
+const navLinks = [
+  {
+    label: "Trang chủ",
+    href: "/",
+  },
+  {
+    label: "Liên hệ",
+    href: "/contact",
+  },
+];

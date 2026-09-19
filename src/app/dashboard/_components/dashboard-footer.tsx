@@ -4,7 +4,7 @@ import { GithubIcon, ZaloIcon } from "@/components/shared/custom-icons";
 
 export function DashboardFooter() {
   return (
-    <footer>
+    <footer className="mt-6">
       <Separator />
       <Container className="py-4">
         <div className="flex items-center justify-between">

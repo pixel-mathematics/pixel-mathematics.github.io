@@ -15,7 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { Spinner } from "@/components/ui/spinner";
@@ -26,7 +26,7 @@ export function SignInForm() {
   const { pending } = useFormStatus();
 
   return (
-    <Container>
+    <Container className="min-w-full md:min-w-[480px]">
       <Card>
         <CardHeader>
           <CardTitle>Đăng nhập</CardTitle>
@@ -36,7 +36,7 @@ export function SignInForm() {
           <form id="sign-in-form" action={formAction}>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="id">Mã học viên/phụ huynh</FieldLabel>
+                <FieldLabel htmlFor="id">Mã học viên</FieldLabel>
                 <Input id="id" name="id" placeholder="27T09ABC01" />
               </Field>
               <Field>

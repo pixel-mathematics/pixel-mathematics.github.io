@@ -7,6 +7,7 @@ import { getUserProfile } from "@/data/auth/queries";
 import { RootProvider } from "@/providers/root-provider";
 
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toast";
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -22,6 +23,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={cn("h-full", "antialiased", "font-sans", fontSans.variable)}>
       <body className="flex min-h-full flex-col">
         <RootProvider data={{ profile }}>{children}</RootProvider>
+        <Toaster />
       </body>
     </html>
   );

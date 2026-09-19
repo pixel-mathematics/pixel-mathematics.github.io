@@ -14,6 +14,6 @@ export function CourseDocuments({ documents }: CourseDocumentsProps) {
       ))}
     </div>
   ) : (
-    <p className="text-muted-foreground p-4 text-base">Chưa cập nhật tài liệu.</p>
+    <p className="text-muted-foreground text-base">Chưa cập nhật tài liệu.</p>
   );
 }

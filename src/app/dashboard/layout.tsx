@@ -3,6 +3,7 @@ import { getUserProfile } from "@/data/auth/queries";
 import { getStudentLessons } from "@/data/courses/queries";
 import { DashboardProvider } from "@/providers/dashboard-provider";
 
+import { DashboardFooter } from "./_components/dashboard-footer";
 import { DashboardHeader } from "./_components/dashboard-header";
 
 export default async function DashboardLayout({ children }: LayoutProps<"/">) {
@@ -16,7 +17,8 @@ export default async function DashboardLayout({ children }: LayoutProps<"/">) {
   return (
     <DashboardProvider data={{ profile, lessons }}>
       <DashboardHeader />
-      <main>{children}</main>
+      <main className="min-h-svh">{children}</main>
+      <DashboardFooter />
     </DashboardProvider>
   );
 }

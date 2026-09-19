@@ -13,11 +13,10 @@ export function AuthButton() {
   return profile ? (
     <>
       {isMobile ? (
-        <Link
-          href="/dashboard"
-          className="text-primary flex items-center px-4 py-2 text-xl font-semibold"
-        >
-          Bảng điều khiển
+        <Link href="/dashboard" className="block flex-1">
+          <Button size="lg" className="w-full">
+            Góc học tập
+          </Button>
         </Link>
       ) : (
         <Link href="/dashboard">
@@ -28,26 +27,17 @@ export function AuthButton() {
               </AvatarFallback>
             </Avatar>
             <div className="bg-primary/10 text-primary flex flex-1 items-center gap-2 px-2.5 font-medium">
-              Bảng điều khiển
+              Góc học tập
             </div>
           </div>
         </Link>
       )}
     </>
   ) : (
-    <>
-      {isMobile ? (
-        <Link
-          href="/auth/sign-in"
-          className="text-primary flex items-center px-4 py-2 text-xl font-semibold"
-        >
-          Đăng nhập
-        </Link>
-      ) : (
-        <Link href="/auth/sign-in">
-          <Button>Đăng nhập</Button>
-        </Link>
-      )}
-    </>
+    <Link href="/sign-in" className="block flex-1">
+      <Button size="lg" className="w-full">
+        Đăng nhập
+      </Button>
+    </Link>
   );
 }
