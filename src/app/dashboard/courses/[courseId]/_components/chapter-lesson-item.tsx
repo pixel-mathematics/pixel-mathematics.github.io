@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import type { StudentCourseDetail } from "@/data/courses/queries";
+import type { CourseChapter } from "@/data/courses/queries";
 import { differenceInCalendarDays } from "date-fns";
 import { CalendarIcon, ClockIcon, DownloadIcon, HourglassIcon, PaperclipIcon } from "lucide-react";
 
@@ -17,8 +17,8 @@ import {
 } from "@/components/ui/sheet";
 
 interface ChapterLessonItemProps {
-  lesson: StudentCourseDetail["chapters"][number]["lessons"][number];
-  chapter: Pick<StudentCourseDetail["chapters"][number], "id" | "title" | "course_id">;
+  lesson: CourseChapter["lessons"][number];
+  chapter: Pick<CourseChapter, "id" | "title" | "course_id">;
 }
 export function ChapterLessonItem({ lesson, chapter }: ChapterLessonItemProps) {
   const pathname = usePathname();

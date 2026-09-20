@@ -1,8 +1,8 @@
-import type { StudentCourseDetail } from "@/data/courses/queries";
+import type { CourseDocument } from "@/data/courses/queries";
 import { DownloadIcon } from "lucide-react";
 
 interface DocumentItemProps {
-  document: StudentCourseDetail["documents"][number];
+  document: CourseDocument;
 }
 
 export function DocumentItem({ document }: DocumentItemProps) {

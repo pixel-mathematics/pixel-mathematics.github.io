@@ -1,9 +1,9 @@
 import Link from "next/link";
-import type { StudentCourseDetail } from "@/data/courses/queries";
+import type { CourseDeck } from "@/data/courses/queries";
 import { PlayingCardsFanIcon } from "lucide-react";
 
 interface DeckItemProps {
-  deck: StudentCourseDetail["flashcard_decks"][number];
+  deck: CourseDeck;
 }
 
 export function DeckItem({ deck }: DeckItemProps) {

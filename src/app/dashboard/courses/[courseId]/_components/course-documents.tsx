@@ -1,9 +1,9 @@
-import type { StudentCourseDetail } from "@/data/courses/queries";
+import type { CourseDocument } from "@/data/courses/queries";
 
 import { DocumentItem } from "./document-item";
 
 interface CourseDocumentsProps {
-  documents: StudentCourseDetail["documents"];
+  documents: CourseDocument[];
 }
 
 export function CourseDocuments({ documents }: CourseDocumentsProps) {

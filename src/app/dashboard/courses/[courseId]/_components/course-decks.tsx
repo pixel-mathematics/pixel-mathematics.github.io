@@ -1,9 +1,9 @@
-import type { StudentCourseDetail } from "@/data/courses/queries";
+import type { CourseDeck } from "@/data/courses/queries";
 
 import { DeckItem } from "./deck-item";
 
 interface CourseDecksProps {
-  decks: StudentCourseDetail["flashcard_decks"];
+  decks: CourseDeck[];
 }
 
 export function CourseDecks({ decks }: CourseDecksProps) {
