@@ -1,8 +1,11 @@
+"use client";
+
 import { useMemo, useState } from "react";
 import { useDashboardContext } from "@/providers/dashboard-provider";
 import Fuse from "fuse.js/min-basic";
 import { SearchIcon } from "lucide-react";
 
+import { useMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -18,6 +21,8 @@ import { LessonItem } from "./lesson-item";
 
 export function SearchButton() {
   const { lessons } = useDashboardContext();
+
+  const isMobile = useMobile();
   const [open, setOpen] = useState(false);
   const [keyword, setKeyword] = useState("");
 
@@ -47,13 +52,13 @@ export function SearchButton() {
     <>
       <Button
         variant="ghost"
-        className="size-7 md:h-9 md:w-auto"
+        size={isMobile ? "icon" : "lg"}
         onClick={() => {
           setOpen(true);
           setKeyword("");
         }}
       >
-        <SearchIcon className="md:size-5" />
+        <SearchIcon className="size-6 md:size-5" />
         <span className="hidden md:inline">Tìm kiếm</span>
       </Button>
       <CommandDialog

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import type { StudentCourseDetail } from "@/data/courses/queries";
 import { differenceInCalendarDays } from "date-fns";
 import { CalendarIcon, ClockIcon, DownloadIcon, HourglassIcon, PaperclipIcon } from "lucide-react";
@@ -21,7 +21,6 @@ interface ChapterLessonItemProps {
   chapter: Pick<StudentCourseDetail["chapters"][number], "id" | "title" | "course_id">;
 }
 export function ChapterLessonItem({ lesson, chapter }: ChapterLessonItemProps) {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const lessonId = searchParams.get("lessonId");
@@ -29,11 +28,16 @@ export function ChapterLessonItem({ lesson, chapter }: ChapterLessonItemProps) {
 
   const handleOpenChange = (open: boolean) => {
     setOpen(open);
+
+    const params = new URLSearchParams(searchParams.toString());
+
     if (!open && lessonId) {
-      router.push(`${pathname}?chapterId=${chapter.id}`, { scroll: false });
+      params.delete("lessonId");
     } else {
-      router.push(`${pathname}?chapterId=${chapter.id}&lessonId=${lesson.id}`);
+      params.set("lessonId", lesson.id);
     }
+
+    window.history.replaceState(null, "", `${pathname}?${params.toString()}`);
   };
 
   return (
@@ -41,7 +45,7 @@ export function ChapterLessonItem({ lesson, chapter }: ChapterLessonItemProps) {
       <SheetTrigger>
         <div className="flex cursor-pointer flex-col items-start gap-2 overflow-hidden rounded-md border p-2 text-base md:flex-row md:items-center md:p-0 md:pr-3">
           <div className="flex flex-col items-start gap-2 text-base font-medium md:flex-row md:items-center">
-            <span className="bg-primary/10 text-primary flex h-7 w-22 items-center justify-center rounded-md text-sm font-semibold text-nowrap uppercase md:h-11 md:rounded-none">
+            <span className="bg-primary/10 text-primary flex h-7 w-20 items-center justify-center rounded-md text-sm text-nowrap uppercase md:h-11 md:rounded-none">
               {lesson.id}
             </span>
             <span className="max-w-[80svw] truncate text-left text-nowrap md:max-w-[480px] lg:max-w-[720px]">
@@ -62,7 +66,7 @@ export function ChapterLessonItem({ lesson, chapter }: ChapterLessonItemProps) {
           </div>
         </div>
       </SheetTrigger>
-      <SheetContent className="md:w-[30vw]">
+      <SheetContent className="gap-0 md:w-[30vw]">
         <SheetHeader>
           <SheetTitle>
             <div className="flex flex-col items-start gap-2">
@@ -87,7 +91,7 @@ export function ChapterLessonItem({ lesson, chapter }: ChapterLessonItemProps) {
             </div>
           </div>
         </SheetHeader>
-        <div className="flex flex-col gap-4 p-4 text-base">
+        <div className="flex flex-col gap-4 px-4 text-base">
           <div className="border-border rounded-md border p-4">
             <div className="text-primary mb-1 flex items-center gap-1 font-medium">
               <PaperclipIcon className="size-4.5" />

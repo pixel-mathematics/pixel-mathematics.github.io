@@ -3,6 +3,8 @@
 import { createContext, ReactNode, useContext } from "react";
 import type { UserProfile } from "@/data/auth/queries";
 
+import { TooltipProvider } from "@/components/ui/tooltip";
+
 interface RootData {
   profile: UserProfile | null;
 }
@@ -12,7 +14,11 @@ const RootContext = createContext<RootData>({
 });
 
 export function RootProvider({ children, data }: { children: ReactNode; data: RootData }) {
-  return <RootContext.Provider value={data}>{children}</RootContext.Provider>;
+  return (
+    <RootContext.Provider value={data}>
+      <TooltipProvider>{children}</TooltipProvider>
+    </RootContext.Provider>
+  );
 }
 
 // Hook tùy chỉnh để sử dụng ở bất kỳ Client Component nào

@@ -44,7 +44,7 @@ export function CourseDetailSkeleton() {
                   className="flex flex-col items-start gap-2 md:flex-row md:items-center"
                   key={i}
                 >
-                  <Skeleton className="h-8 w-22 rounded-sm text-lg font-semibold text-nowrap text-transparent uppercase">
+                  <Skeleton className="h-8 w-22 rounded-sm text-lg font-medium text-nowrap text-transparent uppercase">
                     id
                   </Skeleton>{" "}
                   <Skeleton className="w-[80vw] text-xl font-medium text-transparent md:w-[800px]">

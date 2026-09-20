@@ -101,7 +101,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 <div className="mt-2 flex items-center gap-4">
                   <div className="flex items-center gap-1">
                     Mã lớp:
-                    <div className="bg-primary/10 text-primary flex h-7 w-26 items-center justify-center rounded-sm text-sm font-semibold uppercase">
+                    <div className="bg-primary/10 text-primary flex h-7 w-26 items-center justify-center rounded-sm text-sm font-medium uppercase">
                       {selectedEvent.id}
                     </div>
                   </div>
@@ -146,7 +146,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 </div>
               </div>
               <SheetFooter>
-                <SheetClose render={<Button variant="outline" />}>Đóng</SheetClose>
+                <SheetClose render={<Button variant="outline" />}>Trở lại</SheetClose>
               </SheetFooter>
             </>
           )}

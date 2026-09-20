@@ -39,7 +39,7 @@ export function CurrentUser() {
     router.push("/sign-in");
   };
   return isMobile ? (
-    <Button size="lg" className="w-full" onClick={handleLogout}>
+    <Button size="lg" variant="destructive" className="w-full" onClick={handleLogout}>
       Đăng xuất
     </Button>
   ) : (

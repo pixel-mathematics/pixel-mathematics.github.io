@@ -26,13 +26,15 @@ export default async function DashboardAccount() {
           <Heading>Thông tin tài khoản</Heading>
           <div>
             <div className="flex items-center gap-2">
-              <Avatar className="size-14">
-                <AvatarFallback className="text-primary-foreground bg-primary rounded-md text-3xl font-medium">
+              <Avatar className="size-12 md:size-14">
+                <AvatarFallback className="text-primary-foreground bg-primary rounded-md text-2xl font-medium md:text-3xl">
                   {getAvatarFallbackText(profile.full_name)}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-primary text-lg font-semibold">{profile.full_name}</p>
+                <p className="text-primary text-base font-semibold md:text-lg">
+                  {profile.full_name}
+                </p>
                 <p className="text-muted-foreground">#{profile.user_id}</p>
               </div>
             </div>

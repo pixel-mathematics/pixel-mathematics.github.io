@@ -21,7 +21,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
 
   return (
     <html lang="en" className={cn("h-full", "antialiased", "font-sans", fontSans.variable)}>
-      <body className="flex min-h-full flex-col">
+      <body className="overflow-x-hidden">
         <RootProvider data={{ profile }}>{children}</RootProvider>
         <Toaster />
       </body>

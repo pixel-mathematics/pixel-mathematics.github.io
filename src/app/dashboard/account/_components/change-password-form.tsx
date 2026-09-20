@@ -51,7 +51,7 @@ export function ChangePasswordForm() {
         <div className="border-border flex items-center gap-4 rounded-md border p-4 text-left">
           <KeyRoundIcon className="text-primary size-8" />
           <div>
-            <p className="text-lg font-medium">Đổi mật khẩu tài khoản</p>
+            <p className="text-primary font-medium">Đổi mật khẩu tài khoản</p>
             <p className="text-muted-foreground">Mật khẩu ít nhất 8 kí tự</p>
           </div>
         </div>
