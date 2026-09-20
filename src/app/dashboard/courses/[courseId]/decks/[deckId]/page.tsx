@@ -1,8 +1,10 @@
+import Link from "next/link";
 import { getFlashcardDeckDetail } from "@/data/courses/queries";
+import { ChevronLeftIcon } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { Container } from "@/components/shared/container";
-import { Hero } from "@/components/shared/hero";
-import { ReusableBreadcrumb } from "@/components/shared/reusable-breadcrumb";
+import { Heading } from "@/components/shared/heading";
 
 import { FlashcardCarousel } from "./_components/flashcard-carousel";
 
@@ -15,30 +17,19 @@ export default async function DashboardStudyDeck({
   const deck = await getFlashcardDeckDetail(deckId);
 
   return (
-    <>
-      <section>
-        <Hero text="Bộ thẻ" highlightText={deck.title} quote={deck.description ?? ""} />
-      </section>
-      <Container className="mt-6">
-        <ReusableBreadcrumb
-          items={[
-            { href: "/dashboard", label: "Góc học tập" },
-            { href: `/dashboard/courses/${deck.course_id}`, label: deck.courses?.title ?? "" },
-            {
-              href: `/dashboard/courses/${deck.course_id}/decks/${deck.id}`,
-              label: `Bộ thẻ ${deck.title}`,
-            },
-          ]}
-        />
+    <section className="my-6">
+      <Container>
+        <Link href={`/dashboard/courses/${deck.course_id}/decks`}>
+          <Button variant="link" className="px-0 hover:no-underline">
+            <ChevronLeftIcon />
+            Trở lại
+          </Button>
+        </Link>
+        <Heading className="mt-4 text-center">{deck.title}</Heading>
+        <div className="mx-auto max-w-full md:max-w-[768px]">
+          <FlashcardCarousel deck={deck} />
+        </div>
       </Container>
-
-      <section className="mt-6">
-        <Container>
-          <div className="mx-auto max-w-full md:max-w-[768px]">
-            <FlashcardCarousel deck={deck} />
-          </div>
-        </Container>
-      </section>
-    </>
+    </section>
   );
 }

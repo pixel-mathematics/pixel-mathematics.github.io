@@ -109,7 +109,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
               </SheetHeader>
               <div className="flex flex-col gap-4 px-4 text-base">
                 <div className="border-primary rounded-md border p-4">
-                  <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
+                  <div className="text-primary mb-1 flex items-center gap-1 font-medium">
                     <CalendarIcon className="size-4.5" />
                     <span>Ngày học trong tuần</span>
                   </div>
@@ -117,7 +117,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 </div>
 
                 <div className="border-primary rounded-md border p-4">
-                  <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
+                  <div className="text-primary mb-1 flex items-center gap-1 font-medium">
                     <ClockArrowLeftIcon className="size-4.5" />
                     <span>Giờ vào lớp</span>
                   </div>
@@ -125,7 +125,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 </div>
 
                 <div className="border-destructive rounded-md border p-4">
-                  <div className="text-destructive mb-1 flex items-center gap-2 text-lg font-medium">
+                  <div className="text-destructive mb-1 flex items-center gap-1 font-medium">
                     <ClockArrowRightIcon className="size-4.5" />
                     <span>Giờ kết thúc</span>
                   </div>
@@ -133,7 +133,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 </div>
 
                 <div className="border-primary rounded-md border p-4">
-                  <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
+                  <div className="text-primary mb-1 flex items-center gap-1 font-medium">
                     <UsersIcon className="size-4.5" />
                     <span>Học sinh</span>
                   </div>

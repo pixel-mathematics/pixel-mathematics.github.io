@@ -10,13 +10,13 @@ export function Hero({ className, text, highlightText, quote, ...props }: HeroPr
   return (
     <div
       className={cn(
-        "relative flex min-h-[25vh] items-center justify-center bg-[url('/hero.svg')] bg-cover md:min-h-[30vh]",
+        "relative flex min-h-[20vh] items-center justify-center bg-[url('/hero.svg')] bg-cover md:min-h-[30vh]",
         className
       )}
       {...props}
     >
-      <div className="mx-4 flex flex-col items-center gap-4 text-center md:mx-0">
-        <div className="text-3xl font-bold md:text-4xl">
+      <div className="mx-4 flex flex-col items-center gap-1 text-center md:mx-0 md:gap-4">
+        <div className="text-2xl font-bold sm:text-3xl md:text-4xl">
           <span className="text-white">{text}</span>{" "}
           <span className="text-teal-400">{highlightText}</span>
         </div>

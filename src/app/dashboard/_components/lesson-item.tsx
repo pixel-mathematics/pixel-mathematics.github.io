@@ -11,7 +11,7 @@ interface LessonItemProps {
 export function LessonItem({ lesson }: LessonItemProps) {
   return (
     <Link
-      href={`/dashboard/courses/${lesson.chapters.courses.id}?chapterId=${lesson.chapters.id}&lessonId=${lesson.id}`}
+      href={`/dashboard/courses/${lesson.chapters.courses.id}/lessons?chapterId=${lesson.chapters.id}&lessonId=${lesson.id}`}
     >
       <div className="flex flex-col items-start gap-2 overflow-hidden rounded-md border p-2 md:flex-row md:items-center md:p-0 md:pr-3">
         <div className="flex flex-col items-start gap-2 font-medium md:flex-row md:items-center">

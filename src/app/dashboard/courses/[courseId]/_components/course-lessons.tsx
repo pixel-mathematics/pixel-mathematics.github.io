@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { StudentCourseDetail } from "@/data/courses/queries";
+import type { CourseChapter } from "@/data/courses/queries";
 
 import {
   Accordion,
@@ -14,7 +14,7 @@ import {
 import { ChapterLessonItem } from "./chapter-lesson-item";
 
 interface CourseLessonsProps {
-  chapters: StudentCourseDetail["chapters"];
+  chapters: CourseChapter[];
 }
 
 export function CourseLessons({ chapters }: CourseLessonsProps) {

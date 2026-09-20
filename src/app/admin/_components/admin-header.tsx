@@ -6,7 +6,7 @@ import { useMobile } from "@/hooks/use-mobile";
 import { Container } from "@/components/shared/container";
 import { Logo } from "@/components/shared/logo";
 
-import { AdminAuthButton } from "./admin-auth-button";
+import { AdminCurrentUser } from "./admin-current-user";
 import { AdminMobileNav } from "./admin-mobile-nav";
 import { AdminNav } from "./admin-nav";
 
@@ -23,7 +23,7 @@ export function AdminHeader() {
           {isMobile ? <AdminMobileNav /> : <AdminNav />}
           {!isMobile && (
             <div className="ml-3.5">
-              <AdminAuthButton />
+              <AdminCurrentUser />
             </div>
           )}
         </div>

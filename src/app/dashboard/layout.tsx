@@ -17,7 +17,7 @@ export default async function DashboardLayout({ children }: LayoutProps<"/">) {
   return (
     <DashboardProvider data={{ profile, lessons }}>
       <DashboardHeader />
-      <main className="min-h-svh">{children}</main>
+      <main className="min-h-screen">{children}</main>
       <DashboardFooter />
     </DashboardProvider>
   );

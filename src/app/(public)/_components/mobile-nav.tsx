@@ -50,7 +50,7 @@ export function MobileNav() {
         }
       />
       <PopoverContent
-        className="mt-[15px] h-[calc(100svh-63px)] w-svw -translate-x-1 gap-0 rounded-none p-0"
+        className="mt-[15px] h-[calc(100svh-63px)] w-svw -translate-x-1 gap-0 overflow-auto rounded-none p-0"
         align="end"
       >
         <div className="h-full px-4 text-base">

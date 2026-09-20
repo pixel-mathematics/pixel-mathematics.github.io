@@ -52,24 +52,10 @@ export async function buildStudentCourseDetailQuery(
     *,
     subjects (
       *
-    ),
-    chapters (
-      *,
-      lessons (
-        *,
-        lesson_attachments (
-          *
-        )
-      )
-    ),
-    documents (*),
-    flashcard_decks (
-      *,
-      flashcards (count)
     )
   `
     )
-    .order("id", { referencedTable: "chapters", ascending: true })
+    .order("id", { ascending: true })
     .eq("id", courseId)
     .single();
 }
@@ -88,6 +74,96 @@ export const getStudentCourseDetail = cache(
     return data;
   }
 );
+
+/* get chapters with lessons in a course */
+export async function buildCourseChaptersQuery(client: SupabaseClient<Database>, courseId: string) {
+  return client
+    .from("chapters")
+    .select(
+      `
+      *,
+      lessons (
+        *,
+        lesson_attachments (
+          *
+        )
+      )
+  `
+    )
+    .order("id", { ascending: true })
+    .eq("course_id", courseId);
+}
+
+export type CourseChapter = QueryData<ReturnType<typeof buildCourseChaptersQuery>>[number];
+
+export const getCourseChapters = cache(async (courseId: string): Promise<CourseChapter[]> => {
+  const supabase = await createClient();
+
+  const { data, error } = await buildCourseChaptersQuery(supabase, courseId);
+  if (!data || error) {
+    throw new Error(`Lỗi lấy dữ liệu bài học của khóa #${courseId}`);
+  }
+
+  return data;
+});
+
+/* get decks in a course */
+export async function buildCourseDecksQuery(client: SupabaseClient<Database>, courseId: string) {
+  return client
+    .from("flashcard_decks")
+    .select(
+      `
+      *,
+      flashcards (count)
+
+  `
+    )
+    .order("id", { ascending: true })
+    .eq("course_id", courseId);
+}
+
+export type CourseDeck = QueryData<ReturnType<typeof buildCourseDecksQuery>>[number];
+
+export const getCourseDecks = cache(async (courseId: string): Promise<CourseDeck[]> => {
+  const supabase = await createClient();
+
+  const { data, error } = await buildCourseDecksQuery(supabase, courseId);
+  if (!data || error) {
+    throw new Error(`Lỗi lấy dữ liệu  của khóa #${courseId}`);
+  }
+
+  return data;
+});
+
+/* get documents in a course */
+export async function buildCourseDocumentsQuery(
+  client: SupabaseClient<Database>,
+  courseId: string
+) {
+  return client
+    .from("documents")
+    .select(
+      `
+      *
+
+  `
+    )
+    .order("id", { ascending: true })
+    .eq("course_id", courseId);
+}
+
+export type CourseDocument = QueryData<ReturnType<typeof buildCourseDocumentsQuery>>[number];
+
+export const getCourseDocuments = cache(async (courseId: string): Promise<CourseDocument[]> => {
+  const supabase = await createClient();
+
+  const { data, error } = await buildCourseDocumentsQuery(supabase, courseId);
+  if (!data || error) {
+    throw new Error(`Lỗi lấy dữ liệu tài liệu của khóa #${courseId}`);
+  }
+
+  return data;
+});
 
 /* get recent lessons of current user */
 export async function buildStudentLessonsQuery(
