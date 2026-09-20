@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { Container } from "@/components/shared/container";
 import { Heading } from "@/components/shared/heading";
 import { Hero } from "@/components/shared/hero";
+import { ReusableBreadcrumb } from "@/components/shared/reusable-breadcrumb";
 
 import { ChangePasswordForm } from "./_components/change-password-form";
 
@@ -21,7 +22,13 @@ export default async function DashboardAccount() {
       <section>
         <Hero highlightText="Tài khoản" />
       </section>
-      <Container>
+      <Container className="mt-6">
+        <ReusableBreadcrumb
+          items={[
+            { href: "/dashboard", label: "Góc học tập" },
+            { href: "/dashboard/account", label: "Tài khoản" },
+          ]}
+        />
         <section className="my-6">
           <Heading>Thông tin tài khoản</Heading>
           <div>
