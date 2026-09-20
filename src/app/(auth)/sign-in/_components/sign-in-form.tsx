@@ -3,7 +3,6 @@
 import { useActionState } from "react";
 import { signInAction } from "@/data/auth/actions";
 import { AlertCircleIcon } from "lucide-react";
-import { useFormStatus } from "react-dom";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -22,8 +21,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { Container } from "@/components/shared/container";
 
 export function SignInForm() {
-  const [state, formAction] = useActionState(signInAction, {});
-  const { pending } = useFormStatus();
+  const [state, formAction, isPending] = useActionState(signInAction, {});
 
   return (
     <Container className="min-w-full md:min-w-[480px]">
@@ -44,6 +42,10 @@ export function SignInForm() {
                 <PasswordInput id="password" name="password" placeholder="********" />
               </Field>
             </FieldGroup>
+            {/* Thêm nút submit ẩn này để bắt sự kiện nhấn Enter từ bàn phím */}
+            <button type="submit" className="hidden" aria-hidden="true" tabIndex={-1}>
+              Submit ẩn
+            </button>
           </form>
         </CardContent>
         <CardFooter>
@@ -53,9 +55,9 @@ export function SignInForm() {
               type="submit"
               form="sign-in-form"
               className="w-full"
-              disabled={pending}
+              disabled={isPending}
             >
-              {pending ? <Spinner /> : "Tiếp tục"}
+              {isPending ? <Spinner /> : "Tiếp tục"}
             </Button>
           </Field>
           {/* Thông báo lỗi chung từ Supabase (nếu sai mật khẩu) */}
