@@ -10,7 +10,7 @@ interface CourseCardProps {
 
 export function CourseCard({ course }: CourseCardProps) {
   return (
-    <Link href={`/dashboard/courses/${course.id}`}>
+    <Link href={`/dashboard/courses/${course.id}/lessons`}>
       <Card>
         <CardHeader>
           <CardTitle className="text-primary text-lg font-bold duration-300 md:text-xl">

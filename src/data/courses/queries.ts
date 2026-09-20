@@ -1,9 +1,11 @@
 "use server";
 
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import type { QueryData, SupabaseClient } from "@supabase/supabase-js";
 
 import { Database } from "@/types/database.types";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
 /* get all courses of current user */
@@ -62,9 +64,9 @@ export async function buildStudentCourseDetailQuery(
 
 export type StudentCourseDetail = QueryData<ReturnType<typeof buildStudentCourseDetailQuery>>;
 
-export const getStudentCourseDetail = cache(
+export const getStudentCourseDetail = unstable_cache(
   async (courseId: string): Promise<StudentCourseDetail> => {
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     const { data, error } = await buildStudentCourseDetailQuery(supabase, courseId);
     if (!data || error) {
@@ -72,7 +74,9 @@ export const getStudentCourseDetail = cache(
     }
 
     return data;
-  }
+  },
+  ["course-detail"],
+  { revalidate: 60 * 60, tags: ["course_detail"] }
 );
 
 /* get chapters with lessons in a course */
@@ -96,16 +100,20 @@ export async function buildCourseChaptersQuery(client: SupabaseClient<Database>,
 
 export type CourseChapter = QueryData<ReturnType<typeof buildCourseChaptersQuery>>[number];
 
-export const getCourseChapters = cache(async (courseId: string): Promise<CourseChapter[]> => {
-  const supabase = await createClient();
+export const getCourseChapters = unstable_cache(
+  async (courseId: string): Promise<CourseChapter[]> => {
+    const supabase = createAdminClient();
 
-  const { data, error } = await buildCourseChaptersQuery(supabase, courseId);
-  if (!data || error) {
-    throw new Error(`Lỗi lấy dữ liệu bài học của khóa #${courseId}`);
-  }
+    const { data, error } = await buildCourseChaptersQuery(supabase, courseId);
+    if (!data || error) {
+      throw new Error(`Lỗi lấy dữ liệu bài học của khóa #${courseId}`);
+    }
 
-  return data;
-});
+    return data;
+  },
+  ["course-detail"],
+  { revalidate: 60 * 60, tags: ["course_detail"] }
+);
 
 /* get decks in a course */
 export async function buildCourseDecksQuery(client: SupabaseClient<Database>, courseId: string) {
@@ -124,16 +132,20 @@ export async function buildCourseDecksQuery(client: SupabaseClient<Database>, co
 
 export type CourseDeck = QueryData<ReturnType<typeof buildCourseDecksQuery>>[number];
 
-export const getCourseDecks = cache(async (courseId: string): Promise<CourseDeck[]> => {
-  const supabase = await createClient();
+export const getCourseDecks = unstable_cache(
+  async (courseId: string): Promise<CourseDeck[]> => {
+    const supabase = createAdminClient();
 
-  const { data, error } = await buildCourseDecksQuery(supabase, courseId);
-  if (!data || error) {
-    throw new Error(`Lỗi lấy dữ liệu  của khóa #${courseId}`);
-  }
+    const { data, error } = await buildCourseDecksQuery(supabase, courseId);
+    if (!data || error) {
+      throw new Error(`Lỗi lấy dữ liệu  của khóa #${courseId}`);
+    }
 
-  return data;
-});
+    return data;
+  },
+  ["course-detail"],
+  { revalidate: 60 * 60, tags: ["course_detail"] }
+);
 
 /* get documents in a course */
 export async function buildCourseDocumentsQuery(
@@ -154,16 +166,20 @@ export async function buildCourseDocumentsQuery(
 
 export type CourseDocument = QueryData<ReturnType<typeof buildCourseDocumentsQuery>>[number];
 
-export const getCourseDocuments = cache(async (courseId: string): Promise<CourseDocument[]> => {
-  const supabase = await createClient();
+export const getCourseDocuments = unstable_cache(
+  async (courseId: string): Promise<CourseDocument[]> => {
+    const supabase = createAdminClient();
 
-  const { data, error } = await buildCourseDocumentsQuery(supabase, courseId);
-  if (!data || error) {
-    throw new Error(`Lỗi lấy dữ liệu tài liệu của khóa #${courseId}`);
-  }
+    const { data, error } = await buildCourseDocumentsQuery(supabase, courseId);
+    if (!data || error) {
+      throw new Error(`Lỗi lấy dữ liệu tài liệu của khóa #${courseId}`);
+    }
 
-  return data;
-});
+    return data;
+  },
+  ["course-detail"],
+  { revalidate: 60 * 60, tags: ["course_detail"] }
+);
 
 /* get recent lessons of current user */
 export async function buildStudentLessonsQuery(
@@ -194,16 +210,20 @@ export async function buildStudentLessonsQuery(
 
 export type StudentLesson = QueryData<ReturnType<typeof buildStudentLessonsQuery>>[0];
 
-export const getStudentLessons = cache(async (studentId: string): Promise<StudentLesson[]> => {
-  const supabase = await createClient();
+export const getStudentLessons = unstable_cache(
+  async (studentId: string): Promise<StudentLesson[]> => {
+    const supabase = createAdminClient();
 
-  const { data, error } = await buildStudentLessonsQuery(supabase, studentId);
-  if (!data || error) {
-    throw new Error(`Lỗi lấy dữ liệu các bài học gần đây`);
-  }
+    const { data, error } = await buildStudentLessonsQuery(supabase, studentId);
+    if (!data || error) {
+      throw new Error(`Lỗi lấy dữ liệu các bài học gần đây`);
+    }
 
-  return data;
-});
+    return data;
+  },
+  ["student-lessons"],
+  { revalidate: 60 * 60, tags: ["student_lessons"] }
+);
 
 export async function buildFlashcardDeckDetailQuery(
   client: SupabaseClient<Database>,
@@ -224,9 +244,9 @@ export async function buildFlashcardDeckDetailQuery(
 
 export type FlashcardDeckDetail = QueryData<ReturnType<typeof buildFlashcardDeckDetailQuery>>;
 
-export const getFlashcardDeckDetail = cache(
+export const getFlashcardDeckDetail = unstable_cache(
   async (deckId: string): Promise<FlashcardDeckDetail> => {
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     const { data, error } = await buildFlashcardDeckDetailQuery(supabase, deckId);
 
@@ -235,5 +255,7 @@ export const getFlashcardDeckDetail = cache(
     }
 
     return data;
-  }
+  },
+  ["flashcard-detail"],
+  { revalidate: 60 * 60, tags: ["flashcard_detail"] }
 );

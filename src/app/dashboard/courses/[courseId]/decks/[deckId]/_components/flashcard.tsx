@@ -92,13 +92,15 @@ export function Flashcard({ flashcard }: FlashcardProps) {
                 <Volume2Icon className="size-4" />
               )}
             </Button>
-            <h2 className="text-2xl font-bold text-slate-800">{flashcard.front_content}</h2>
+            <h2 className="text-xl font-bold text-slate-800 sm:text-2xl">
+              {flashcard.front_content}
+            </h2>
             <p className="mt-4 text-sm text-slate-400">(Nhấn để lật thẻ)</p>
           </CardContent>
         </Card>
 
         {/* MẶT SAU */}
-        <Card className="absolute inset-0 flex h-full w-full [transform:rotateY(180deg)_translateZ(0)] items-center justify-center border-blue-200 shadow-lg [-webkit-backface-visibility:hidden] [backface-visibility:hidden]">
+        <Card className="absolute inset-0 flex h-full w-full [transform:rotateY(180deg)_translateZ(0)] items-center justify-center border-blue-200 antialiased shadow-lg [-webkit-backface-visibility:hidden] [backface-visibility:hidden]">
           <CardContent className="flex h-full flex-col items-center justify-center p-6 text-center">
             <MarkdownContent content={flashcard.back_content} />
           </CardContent>

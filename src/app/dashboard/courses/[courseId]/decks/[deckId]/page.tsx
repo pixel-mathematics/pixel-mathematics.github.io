@@ -22,7 +22,7 @@ export default async function DashboardStudyDeck({
         <Link href={`/dashboard/courses/${deck.course_id}/decks`}>
           <Button variant="link" className="px-0 hover:no-underline">
             <ChevronLeftIcon />
-            Trở lại
+            Trở lại Bộ thẻ {deck.courses?.title}
           </Button>
         </Link>
         <Heading className="mt-4 text-center">{deck.title}</Heading>
