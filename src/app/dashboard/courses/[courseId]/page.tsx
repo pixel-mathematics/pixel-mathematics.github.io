@@ -23,6 +23,7 @@ export default async function DashboardCourseDetailPage({
         <ReusableBreadcrumb
           items={[
             { href: "/dashboard", label: "Góc học tập" },
+            { href: `/dashboard/courses`, label: "Khóa học" },
             { href: `/dashboard/courses/${course.id}`, label: course.title },
           ]}
         />

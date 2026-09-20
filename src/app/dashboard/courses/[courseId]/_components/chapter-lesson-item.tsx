@@ -70,7 +70,7 @@ export function ChapterLessonItem({ lesson, chapter }: ChapterLessonItemProps) {
         <SheetHeader>
           <SheetTitle>
             <div className="flex flex-col items-start gap-2">
-              <div className="bg-primary/10 text-primary flex h-8 w-26 items-center justify-center rounded-sm font-semibold uppercase">
+              <div className="bg-primary/10 text-primary flex h-8 w-24 items-center justify-center rounded-sm font-semibold uppercase">
                 {lesson.id}
               </div>
               <div className="self-stretch truncate text-base md:text-lg">{lesson.title}</div>
@@ -97,7 +97,7 @@ export function ChapterLessonItem({ lesson, chapter }: ChapterLessonItemProps) {
               <PaperclipIcon className="size-4.5" />
               <span>Tài liệu đính kèm</span>
             </div>
-            <div className="ml-7 flex flex-col gap-2">
+            <div className="ml-6 flex flex-col gap-2">
               {lesson.lesson_attachments.map((file) => (
                 <div className="flex items-center gap-4" key={file.id}>
                   <span className="w-20">{file.file_name}</span>
@@ -116,7 +116,7 @@ export function ChapterLessonItem({ lesson, chapter }: ChapterLessonItemProps) {
               <CalendarIcon className="size-4.5" />
               <span>Ngày học</span>
             </div>
-            <div className="ml-7">{formatDate(lesson.class_date, "dd/MM/yyyy")}</div>
+            <div className="ml-6">{formatDate(lesson.class_date, "dd/MM/yyyy")}</div>
           </div>
 
           <div className="border-border rounded-md border p-4">
@@ -124,7 +124,7 @@ export function ChapterLessonItem({ lesson, chapter }: ChapterLessonItemProps) {
               <ClockIcon className="size-4.5" />
               <span>Cập nhật lần cuối</span>
             </div>
-            <div className="ml-7">{formatDate(lesson.updated_on, "dd/MM/yyyy")}</div>
+            <div className="ml-6">{formatDate(lesson.updated_on, "dd/MM/yyyy")}</div>
           </div>
           {lesson.deadline && new Date(lesson.deadline) >= new Date() && (
             <div className="border-destructive rounded-md border p-4">

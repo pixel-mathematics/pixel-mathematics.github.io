@@ -89,7 +89,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
       </div>
       {/* Sheet */}
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent>
+        <SheetContent className="gap-0">
           {selectedEvent && (
             <>
               <SheetHeader>
@@ -98,7 +98,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                     <div className="self-stretch truncate text-lg">{selectedEvent.title}</div>
                   </div>
                 </SheetTitle>
-                <div className="mt-2 flex items-center gap-4">
+                <div className="flex items-center gap-4">
                   <div className="flex items-center gap-1">
                     Mã lớp:
                     <div className="bg-primary/10 text-primary flex h-7 w-26 items-center justify-center rounded-sm text-sm font-medium uppercase">
@@ -107,7 +107,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                   </div>
                 </div>
               </SheetHeader>
-              <div className="flex flex-col gap-4 p-4 text-base">
+              <div className="flex flex-col gap-4 px-4 text-base">
                 <div className="border-primary rounded-md border p-4">
                   <div className="text-primary mb-1 flex items-center gap-2 text-lg font-medium">
                     <CalendarIcon className="size-4.5" />

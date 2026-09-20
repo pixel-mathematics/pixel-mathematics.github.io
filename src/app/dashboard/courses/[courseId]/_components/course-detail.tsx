@@ -15,7 +15,7 @@ export function CourseDetail({ course: { title, chapters, documents, flashcard_d
   return (
     <div>
       <Tabs defaultValue="chapters">
-        <TabsList variant="line" className="border-border w-full border-b">
+        <TabsList variant="line" className="border-border w-full border-b md:w-auto">
           <TabsTrigger
             value="chapters"
             className="after:bg-primary group-data-[variant=line]/tabs-list:data-active:text-primary px-4 text-base font-medium"
