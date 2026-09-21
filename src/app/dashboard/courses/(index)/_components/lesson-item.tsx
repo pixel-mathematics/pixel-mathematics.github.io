@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { StudentLesson } from "@/data/courses/queries";
-import { ClockIcon } from "lucide-react";
+import { ClockIcon, HourglassIcon } from "lucide-react";
 
 import { formatDate } from "@/lib/utils";
 
@@ -22,7 +22,12 @@ export function LessonItem({ lesson }: LessonItemProps) {
             {lesson.title}
           </span>
         </div>
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-4">
+          {lesson.deadline && new Date(lesson.deadline) >= new Date() && (
+            <div className="text-destructive flex items-center gap-1 text-sm md:text-base">
+              <HourglassIcon className="size-4.5" />
+            </div>
+          )}
           <div className="text-muted-foreground flex items-center gap-1 text-sm md:text-base">
             <ClockIcon className="size-4.5" />
             <span>{formatDate(lesson.updated_on)}</span>

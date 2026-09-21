@@ -9,7 +9,6 @@ import { Logo } from "@/components/shared/logo";
 import { CurrentUser } from "./current-user";
 import { DashboardMobileNav } from "./dashboard-mobile-nav";
 import { DashboardNav } from "./dashboard-nav";
-import { SearchButton } from "./search-button";
 
 export function DashboardHeader() {
   const isMobile = useMobile();
@@ -21,7 +20,6 @@ export function DashboardHeader() {
           <Logo />
         </Link>
         <div className="flex items-center gap-4 md:gap-0">
-          <SearchButton />
           {isMobile ? <DashboardMobileNav /> : <DashboardNav />}
           {!isMobile && (
             <div className="ml-3.5">

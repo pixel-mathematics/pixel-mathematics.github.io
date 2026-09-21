@@ -24,8 +24,8 @@ export default async function DashboardPage() {
     <>
       <section className="w-full overflow-hidden">
         <Hero
-          text="Pixel"
-          highlightText="Mathematics"
+          text="Khóa học"
+          highlightText="PIXEL2027"
           quote={`"The more I learn, the less I realize I know"`}
         />
       </section>
@@ -39,7 +39,7 @@ export default async function DashboardPage() {
       </Container>
       <section className="my-6">
         <Container>
-          <Heading>Khóa học PIXEL2027</Heading>
+          <Heading>Danh sách khóa học</Heading>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {courses.length > 0 ? (
               courses.map((course) => <CourseCard key={course.id} course={course} />)

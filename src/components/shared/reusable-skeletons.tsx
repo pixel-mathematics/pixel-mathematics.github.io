@@ -27,7 +27,7 @@ export function HeroSkeleton() {
 
 export function HeadingSkeleton() {
   return (
-    <Skeleton className="bg-primary/30 mb-2 w-[300px] text-xl font-bold text-transparent">
+    <Skeleton className="bg-primary/30 mb-4 w-[300px] text-xl font-bold text-transparent md:text-2xl">
       heading
     </Skeleton>
   );
