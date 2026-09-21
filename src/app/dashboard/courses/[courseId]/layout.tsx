@@ -1,10 +1,7 @@
-import { getStudentCourseDetail } from "@/data/courses/queries";
+import { Suspense } from "react";
 
-import { Container } from "@/components/shared/container";
-import { Hero } from "@/components/shared/hero";
-import { ReusableBreadcrumb } from "@/components/shared/reusable-breadcrumb";
-
-import { CourseTabs } from "./_components/course-tabs";
+import { CourseHeader } from "./_components/course-header";
+import { CourseHeaderSkeleton } from "./_components/course-header-skeleton";
 
 export default async function CourseLayout({
   children,
@@ -13,23 +10,12 @@ export default async function CourseLayout({
   params: Promise<{ courseId: string }>;
 }) {
   const { courseId } = await params;
-  const course = await getStudentCourseDetail(courseId);
 
   return (
     <>
-      <section className="w-full overflow-hidden">
-        <Hero text="Khóa" highlightText={course.title} quote={course.description ?? ""} />
-      </section>
-      <Container className="mt-6">
-        <ReusableBreadcrumb
-          items={[
-            { href: "/dashboard", label: "Góc học tập" },
-            { href: `/dashboard/courses`, label: "Khóa học" },
-            { href: `/dashboard/courses/${course.id}`, label: course.title },
-          ]}
-        />
-      </Container>
-      <CourseTabs courseId={course.id} />
+      <Suspense fallback={<CourseHeaderSkeleton />}>
+        <CourseHeader courseId={courseId} />
+      </Suspense>
       {children}
     </>
   );

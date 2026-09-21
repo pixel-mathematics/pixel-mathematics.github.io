@@ -6,17 +6,20 @@ export function DashboardNav() {
   return (
     <nav>
       <ul className="flex items-center">
-        <li>
-          <Link href="/dashboard">
-            <Button variant="ghost">Góc học tập</Button>
-          </Link>
-        </li>
-        <li>
-          <Link href="/dashboard/schedule">
-            <Button variant="ghost">Thời khóa biểu</Button>
-          </Link>
-        </li>
+        {navItems.map(({ href, label }) => (
+          <li key={href}>
+            <Link href={href}>
+              <Button variant="ghost">{label}</Button>
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );
 }
+
+const navItems = [
+  { href: "/dashboard", label: "Góc học tập" },
+  { href: "/dashboard/courses", label: "Khóa học" },
+  { href: "/dashboard/schedule", label: "Thời khóa biểu" },
+];

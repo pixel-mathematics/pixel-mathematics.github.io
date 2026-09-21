@@ -91,6 +91,10 @@ const navLinks = [
     href: "/dashboard",
   },
   {
+    label: "Khóa học",
+    href: "/dashboard/courses",
+  },
+  {
     label: "Thời khóa biểu",
     href: "/dashboard/schedule",
   },

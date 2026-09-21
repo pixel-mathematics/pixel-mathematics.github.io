@@ -30,15 +30,22 @@ export default async function DashboardPage() {
         />
       </section>
       <Container className="mt-6">
-        <ReusableBreadcrumb items={[{ href: "/dashboard", label: "Góc học tập" }]} />
+        <ReusableBreadcrumb
+          items={[
+            { href: "/dashboard", label: "Góc học tập" },
+            { href: "/dashboard/courses", label: "Khóa học" },
+          ]}
+        />
       </Container>
       <section className="my-6">
         <Container>
           <Heading>Khóa học PIXEL2027</Heading>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {courses.map((course) => (
-              <CourseCard key={course.id} course={course} />
-            ))}
+            {courses.length > 0 ? (
+              courses.map((course) => <CourseCard key={course.id} course={course} />)
+            ) : (
+              <p className="text-muted-foreground">Chưa có khóa học nào.</p>
+            )}
           </div>
         </Container>
       </section>
@@ -50,7 +57,7 @@ export default async function DashboardPage() {
             {lessons.length > 0 ? (
               lessons.slice(0, 8).map((lesson) => <LessonItem key={lesson.id} lesson={lesson} />)
             ) : (
-              <p className="text-muted-foreground">Chưa có bài học nào được cập nhật</p>
+              <p className="text-muted-foreground">Chưa có bài học nào được cập nhật.</p>
             )}
           </div>
         </Container>

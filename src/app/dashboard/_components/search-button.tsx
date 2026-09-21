@@ -17,7 +17,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 
-import { LessonItem } from "./lesson-item";
+import { LessonItem } from "../courses/(index)/_components/lesson-item";
 
 export function SearchButton() {
   const { lessons } = useDashboardContext();
