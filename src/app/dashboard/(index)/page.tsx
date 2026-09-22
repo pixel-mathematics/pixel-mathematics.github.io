@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getUserProfile } from "@/data/auth/queries";
+import { getStudentLessons } from "@/data/courses/queries";
 import {
   CalendarDaysIcon,
   ChartSplineIcon,
@@ -24,6 +25,7 @@ export default async function DashboardPage() {
   if (!profile) {
     redirect("/");
   }
+  const lessons = await getStudentLessons(profile.id);
 
   return (
     <>
@@ -48,7 +50,7 @@ export default async function DashboardPage() {
               <p className="text-primary text-xl font-medium">{profile.full_name}</p>
             </div>
           </div>
-          <Search />
+          <Search data={{ lessons }} />
         </section>
         <Separator />
         <section>

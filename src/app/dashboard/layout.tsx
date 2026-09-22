@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { getUserProfile } from "@/data/auth/queries";
-import { getStudentLessons } from "@/data/courses/queries";
 import { DashboardProvider } from "@/providers/dashboard-provider";
 
 import { DashboardFooter } from "./_components/dashboard-footer";
@@ -12,10 +11,8 @@ export default async function DashboardLayout({ children }: LayoutProps<"/">) {
     redirect("/sign-in");
   }
 
-  const lessons = await getStudentLessons(profile?.id);
-
   return (
-    <DashboardProvider data={{ profile, lessons }}>
+    <DashboardProvider data={{ profile }}>
       <DashboardHeader />
       <main className="min-h-screen">{children}</main>
       <DashboardFooter />

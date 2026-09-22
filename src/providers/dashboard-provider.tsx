@@ -2,16 +2,13 @@
 
 import { createContext, ReactNode, useContext } from "react";
 import type { UserProfile } from "@/data/auth/queries";
-import { StudentLesson } from "@/data/courses/queries";
 
 interface DashboardData {
   profile: UserProfile | null;
-  lessons: StudentLesson[];
 }
 
 const DashboardContext = createContext<DashboardData>({
   profile: null,
-  lessons: [],
 });
 
 export function DashboardProvider({

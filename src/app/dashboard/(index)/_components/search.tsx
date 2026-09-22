@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import type { StudentLesson } from "@/data/courses/queries";
 import { useDashboardContext } from "@/providers/dashboard-provider";
 import Fuse from "fuse.js/min-basic";
 
@@ -14,7 +15,13 @@ import {
   CommandList,
 } from "@/components/ui/command";
 
-export function Search() {
+interface SearchProps {
+  data: {
+    lessons: StudentLesson[];
+  };
+}
+
+export function Search({ data: { lessons } }: SearchProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -32,7 +39,6 @@ export function Search() {
     }
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
-  const { lessons } = useDashboardContext();
 
   const [keyword, setKeyword] = useState("");
 
