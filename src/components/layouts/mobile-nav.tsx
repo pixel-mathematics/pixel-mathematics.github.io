@@ -8,9 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 
-import { AdminCurrentUser } from "./admin-current-user";
+import { CurrentUser } from "./current-user";
 
-export function AdminMobileNav() {
+interface MobileNavProps {
+  items: { href: string; label: string }[];
+}
+
+export function MobileNav({ items }: MobileNavProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -56,7 +60,7 @@ export function AdminMobileNav() {
         <div className="h-full px-4 text-base">
           <nav className="h-full">
             <ul className="flex flex-col items-stretch">
-              {navLinks.map(({ href, label }, index) => (
+              {items.map(({ href, label }, index) => (
                 <li
                   key={href}
                   className="border-border animate-in fade-in-0 slide-in-from-bottom-8 fill-mode-both border-b duration-500"
@@ -78,20 +82,9 @@ export function AdminMobileNav() {
         </div>
         <Separator />
         <div className="flex items-center p-4">
-          <AdminCurrentUser />
+          <CurrentUser />
         </div>
       </PopoverContent>
     </Popover>
   );
 }
-
-const navLinks = [
-  {
-    label: "Quản lí",
-    href: "/",
-  },
-  {
-    label: "Thống kê",
-    href: "/statistics",
-  },
-];

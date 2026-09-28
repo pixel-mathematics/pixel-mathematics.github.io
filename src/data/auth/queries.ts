@@ -6,13 +6,13 @@ import { QueryData, SupabaseClient } from "@supabase/supabase-js";
 import { Database } from "@/types/database.types";
 import { createClient } from "@/lib/supabase/server";
 
-export async function buildUserProfileQuery(client: SupabaseClient<Database>, userId: string) {
+export async function buildCurrentUserQuery(client: SupabaseClient<Database>, userId: string) {
   return client.from("profiles").select("*").eq("id", userId).single();
 }
 
-export type UserProfile = QueryData<ReturnType<typeof buildUserProfileQuery>>;
+export type User = QueryData<ReturnType<typeof buildCurrentUserQuery>>;
 
-export const getUserProfile = cache(async (): Promise<UserProfile | null> => {
+export const getCurrentUser = cache(async (): Promise<User | null> => {
   const supabase = await createClient();
 
   const {
@@ -21,7 +21,7 @@ export const getUserProfile = cache(async (): Promise<UserProfile | null> => {
 
   if (!user) return null;
 
-  const { data: profile } = await buildUserProfileQuery(supabase, user.id);
+  const { data: userProfile } = await buildCurrentUserQuery(supabase, user.id);
 
-  return profile;
+  return userProfile;
 });

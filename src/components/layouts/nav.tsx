@@ -2,11 +2,15 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
-export function DashboardNav() {
+interface NavProps {
+  items: { href: string; label: string }[];
+}
+
+export function Nav({ items }: NavProps) {
   return (
     <nav>
       <ul className="flex items-center">
-        {navItems.map(({ href, label }) => (
+        {items.map(({ href, label }) => (
           <li key={href}>
             <Link href={href}>
               <Button variant="ghost">{label}</Button>
@@ -17,9 +21,3 @@ export function DashboardNav() {
     </nav>
   );
 }
-
-const navItems = [
-  { href: "/dashboard", label: "Góc học tập" },
-  { href: "/dashboard/courses", label: "Khóa học" },
-  { href: "/dashboard/schedule", label: "Thời khóa biểu" },
-];

@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { getUserProfile } from "@/data/auth/queries";
+import { getCurrentUser } from "@/data/auth/queries";
 import { getStudentLessons } from "@/data/courses/queries";
 import {
   CalendarDaysIcon,
@@ -21,11 +20,8 @@ import { ReusableBreadcrumb } from "@/components/shared/reusable-breadcrumb";
 import { Search } from "./_components/search";
 
 export default async function DashboardPage() {
-  const profile = await getUserProfile();
-  if (!profile) {
-    redirect("/");
-  }
-  const lessons = await getStudentLessons(profile.id);
+  const currentUser = (await getCurrentUser())!;
+  const lessons = await getStudentLessons(currentUser.id);
 
   return (
     <>
@@ -42,12 +38,12 @@ export default async function DashboardPage() {
           <div className="flex items-center gap-2">
             <Avatar className="size-12 md:size-16">
               <AvatarFallback className="text-primary-foreground bg-primary rounded-md text-2xl font-medium md:text-4xl">
-                {getAvatarFallbackText(profile.full_name)}
+                {getAvatarFallbackText(currentUser.full_name)}
               </AvatarFallback>
             </Avatar>
             <div>
               <p className="text-lg font-medium">Xin chào,</p>
-              <p className="text-primary text-xl font-medium">{profile.full_name}</p>
+              <p className="text-primary text-xl font-medium">{currentUser.full_name}</p>
             </div>
           </div>
           <Search data={{ lessons }} />
@@ -84,15 +80,13 @@ const dashboardNavItems = [
     description: "Các khóa học PIXEL2027 của bạn",
   },
   {
-    href: "#results",
-    // href: "/dashboard/results",
+    href: "/dashboard/results",
     icon: ChartSplineIcon,
     title: "Kết quả học tập",
     description: "Kết quả các bài kiểm tra định kì",
   },
   {
-    href: "#feedback",
-    // href: "/dashboard/feedback",
+    href: "/dashboard/feedback",
     icon: FlameIcon,
     title: "Nhận xét hàng tuần",
     description: "Nhận xét thái độ học tập ở các buổi học",

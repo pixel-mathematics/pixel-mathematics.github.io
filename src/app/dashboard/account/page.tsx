@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-import { getUserProfile } from "@/data/auth/queries";
+import { getCurrentUser } from "@/data/auth/queries";
 
 import { getAvatarFallbackText } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -12,10 +11,7 @@ import { ReusableBreadcrumb } from "@/components/shared/reusable-breadcrumb";
 import { ChangePasswordForm } from "./_components/change-password-form";
 
 export default async function DashboardAccount() {
-  const profile = await getUserProfile();
-  if (!profile) {
-    redirect("/sign-in");
-  }
+  const currentUser = (await getCurrentUser())!;
 
   return (
     <>
@@ -35,14 +31,14 @@ export default async function DashboardAccount() {
             <div className="flex items-center gap-2">
               <Avatar className="size-12 md:size-14">
                 <AvatarFallback className="text-primary-foreground bg-primary rounded-md text-2xl font-medium md:text-3xl">
-                  {getAvatarFallbackText(profile.full_name)}
+                  {getAvatarFallbackText(currentUser.full_name)}
                 </AvatarFallback>
               </Avatar>
               <div>
                 <p className="text-primary text-base font-semibold md:text-lg">
-                  {profile.full_name}
+                  {currentUser.full_name}
                 </p>
-                <p className="text-muted-foreground">#{profile.user_id}</p>
+                <p className="text-muted-foreground">#{currentUser.user_id}</p>
               </div>
             </div>
           </div>

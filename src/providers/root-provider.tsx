@@ -1,16 +1,16 @@
 "use client";
 
 import { createContext, ReactNode, useContext } from "react";
-import type { UserProfile } from "@/data/auth/queries";
+import type { User } from "@/data/auth/queries";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 interface RootData {
-  profile: UserProfile | null;
+  currentUser: User | null;
 }
 
 const RootContext = createContext<RootData>({
-  profile: null,
+  currentUser: null,
 });
 
 export function RootProvider({ children, data }: { children: ReactNode; data: RootData }) {
@@ -25,7 +25,7 @@ export function RootProvider({ children, data }: { children: ReactNode; data: Ro
 export function useRootContext() {
   const context = useContext(RootContext);
   if (context === undefined) {
-    throw new Error("useDataContext phải được sử dụng trong RootProvider");
+    throw new Error("useRootContext phải được sử dụng trong RootProvider");
   }
   return context;
 }

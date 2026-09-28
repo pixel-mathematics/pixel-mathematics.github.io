@@ -324,56 +324,62 @@ export type Database = {
           },
         ]
       }
-      parent_student: {
+      profiles: {
         Row: {
-          parent_id: string
+          full_name: string
+          id: string
+          role: Database["public"]["Enums"]["user_role"]
+          user_code: string | null
+        }
+        Insert: {
+          full_name: string
+          id: string
+          role: Database["public"]["Enums"]["user_role"]
+          user_code?: string | null
+        }
+        Update: {
+          full_name?: string
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          user_code?: string | null
+        }
+        Relationships: []
+      }
+      results: {
+        Row: {
+          id: string
+          lesson_id: string
+          score: number
           student_id: string
         }
         Insert: {
-          parent_id: string
+          id?: string
+          lesson_id: string
+          score: number
           student_id: string
         }
         Update: {
-          parent_id?: string
+          id?: string
+          lesson_id?: string
+          score?: number
           student_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "parent_student_parent_id_fkey"
-            columns: ["parent_id"]
+            foreignKeyName: "test_results_lesson_id_fkey"
+            columns: ["lesson_id"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "lessons"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "parent_student_student_id_fkey"
+            foreignKeyName: "test_results_student_id_fkey"
             columns: ["student_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
-      }
-      profiles: {
-        Row: {
-          full_name: string
-          id: string
-          role: Database["public"]["Enums"]["user_role"]
-          user_id: string | null
-        }
-        Insert: {
-          full_name: string
-          id: string
-          role: Database["public"]["Enums"]["user_role"]
-          user_id?: string | null
-        }
-        Update: {
-          full_name?: string
-          id?: string
-          role?: Database["public"]["Enums"]["user_role"]
-          user_id?: string | null
-        }
-        Relationships: []
       }
       schedule_events: {
         Row: {
@@ -455,6 +461,50 @@ export type Database = {
           title?: string
         }
         Relationships: []
+      }
+      weekly_evaluations: {
+        Row: {
+          attendance_status: string | null
+          attitude_score: number | null
+          created_at: string | null
+          homework_completion: string | null
+          id: string
+          student_id: string
+          teacher_comments: string
+          updated_at: string | null
+          week_start_date: string
+        }
+        Insert: {
+          attendance_status?: string | null
+          attitude_score?: number | null
+          created_at?: string | null
+          homework_completion?: string | null
+          id?: string
+          student_id: string
+          teacher_comments: string
+          updated_at?: string | null
+          week_start_date: string
+        }
+        Update: {
+          attendance_status?: string | null
+          attitude_score?: number | null
+          created_at?: string | null
+          homework_completion?: string | null
+          id?: string
+          student_id?: string
+          teacher_comments?: string
+          updated_at?: string | null
+          week_start_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "weekly_evaluations_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

@@ -2,7 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import { Container } from "@/components/shared/container";
 import { GithubIcon, ZaloIcon } from "@/components/shared/custom-icons";
 
-export function DashboardFooter() {
+export function Footer() {
   return (
     <footer>
       <Separator />

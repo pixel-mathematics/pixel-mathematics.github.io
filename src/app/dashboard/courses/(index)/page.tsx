@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-import { getUserProfile } from "@/data/auth/queries";
+import { getCurrentUser } from "@/data/auth/queries";
 import { getStudentCourses, getStudentLessons } from "@/data/courses/queries";
 
 import { Separator } from "@/components/ui/separator";
@@ -12,13 +11,10 @@ import { CourseCard } from "./_components/course-card";
 import { LessonItem } from "./_components/lesson-item";
 
 export default async function DashboardPage() {
-  const profile = await getUserProfile();
-  if (!profile) {
-    redirect("/");
-  }
+  const currentUser = (await getCurrentUser())!;
 
-  const courses = await getStudentCourses(profile.id);
-  const lessons = await getStudentLessons(profile.id);
+  const courses = await getStudentCourses(currentUser.id);
+  const lessons = await getStudentLessons(currentUser.id);
 
   return (
     <>

@@ -7,10 +7,10 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 
 export function AuthButton() {
-  const { profile } = useRootContext();
+  const { currentUser } = useRootContext();
   const isMobile = useMobile();
 
-  return profile ? (
+  return currentUser ? (
     <>
       {isMobile ? (
         <Link href="/dashboard" className="block flex-1">
@@ -23,7 +23,7 @@ export function AuthButton() {
           <div className="flex items-stretch overflow-hidden rounded-md">
             <Avatar className="size-8">
               <AvatarFallback className="bg-primary text-primary-foreground rounded-none">
-                {getAvatarFallbackText(profile.full_name)}
+                {getAvatarFallbackText(currentUser.full_name)}
               </AvatarFallback>
             </Avatar>
             <div className="bg-primary/10 text-primary flex flex-1 items-center gap-2 px-2.5 font-medium">
