@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { StudentLesson } from "@/data/courses/queries";
-import { useDashboardContext } from "@/providers/dashboard-provider";
 import Fuse from "fuse.js/min-basic";
 
 import {

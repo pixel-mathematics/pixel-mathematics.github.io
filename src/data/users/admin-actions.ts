@@ -18,7 +18,7 @@ export async function resetUserPasswordAction(input: ChangeUserPasswordInput) {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("user_id, role")
+    .select("user_code, role")
     .eq("id", user.id)
     .single();
 
@@ -35,7 +35,7 @@ export async function resetUserPasswordAction(input: ChangeUserPasswordInput) {
 
     if (error) throw error;
 
-    return { success: true, message: `Đặt lại mật khẩu thành công cho #${profile.user_id}` };
+    return { success: true, message: `Đặt lại mật khẩu thành công cho #${profile.user_code}` };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {

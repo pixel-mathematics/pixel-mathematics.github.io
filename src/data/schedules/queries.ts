@@ -17,7 +17,7 @@ export async function buildScheduleEventsQuery(client: SupabaseClient<Database>)
       profiles (
         id,
         full_name,
-        user_id
+        user_code
       )
     )
   `

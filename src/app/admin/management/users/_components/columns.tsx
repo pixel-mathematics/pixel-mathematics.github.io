@@ -33,7 +33,7 @@ export const columns = columnHelper.columns([
   columnHelper.accessor("full_name", {
     header: "Họ tên",
   }),
-  columnHelper.accessor("user_id", {
+  columnHelper.accessor("user_code", {
     header: "Mã học viên",
   }),
   columnHelper.display({
@@ -45,7 +45,7 @@ export const columns = columnHelper.columns([
       async function handleResetUserPassword() {
         const result = await resetUserPasswordAction({
           userId: profile.id,
-          password: profile.user_id!,
+          password: profile.user_code!,
         });
 
         if (!result.success) {

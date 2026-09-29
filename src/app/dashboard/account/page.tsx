@@ -38,7 +38,7 @@ export default async function DashboardAccount() {
                 <p className="text-primary text-base font-semibold md:text-lg">
                   {currentUser.full_name}
                 </p>
-                <p className="text-muted-foreground">#{currentUser.user_id}</p>
+                <p className="text-muted-foreground">#{currentUser.user_code}</p>
               </div>
             </div>
           </div>

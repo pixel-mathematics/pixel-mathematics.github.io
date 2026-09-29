@@ -1,9 +1,8 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import { redirect } from "next/navigation";
 import type { ScheduleEvent } from "@/data/schedules/queries";
-import { useDashboardContext } from "@/providers/dashboard-provider";
+import { useRootContext } from "@/providers/root-provider";
 import { type EventClickArg } from "@fullcalendar/core";
 import viLocale from "@fullcalendar/core/locales/vi";
 import FullCalendar from "@fullcalendar/react";
@@ -27,10 +26,7 @@ interface Props {
 }
 
 export function CourseSchedule({ scheduleEvents }: Props) {
-  const { profile } = useDashboardContext();
-  if (!profile) {
-    redirect("/sign-in");
-  }
+  const { currentUser } = useRootContext();
 
   const [open, setOpen] = useState(false);
 
@@ -56,7 +52,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                 endTime: event.end_time,
                 daysOfWeek: [event.dayOfWeek],
                 backgroundColor: event.student_schedule_events.some(
-                  ({ profiles }) => profiles?.user_id === profile.user_id
+                  ({ profiles }) => profiles?.user_code === currentUser?.user_code
                 )
                   ? (event.background_color ?? "#000")
                   : "#eee",
