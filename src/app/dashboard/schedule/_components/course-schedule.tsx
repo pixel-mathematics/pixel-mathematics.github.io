@@ -57,7 +57,7 @@ export function CourseSchedule({ scheduleEvents }: Props) {
                   ? (event.background_color ?? "#000")
                   : "#eee",
                 textColor: event.text_color ?? "#000",
-                borderColor: event.background_color ?? "#000",
+                borderColor: "transparent",
               }))}
               slotMinTime="07:00:00" // Thời gian bắt đầu trong ngày
               slotMaxTime="22:00:00" // Thời gian kết thúc trong ngày

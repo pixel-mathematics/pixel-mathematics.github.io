@@ -1,7 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useRootContext } from "@/providers/root-provider";
+import { LogOutIcon } from "lucide-react";
 
 import { createClient } from "@/lib/supabase/client";
 import { getAvatarFallbackText } from "@/lib/utils";
@@ -22,11 +24,20 @@ import { Button } from "@/components/ui/button";
 
 export function CurrentUser() {
   const router = useRouter();
+  const pathname = usePathname();
   const isMobile = useMobile();
 
+  const isPublicRoute = !(pathname.startsWith("/dashboard") || pathname.startsWith("/admin"));
   const { currentUser } = useRootContext();
 
-  if (!currentUser) return null;
+  if (!currentUser)
+    return (
+      <Link href="/sign-in" className="block flex-1">
+        <Button size="lg" className="w-full">
+          Đăng nhập
+        </Button>
+      </Link>
+    );
 
   const handleLogout = async () => {
     const supabase = createClient();
@@ -39,26 +50,54 @@ export function CurrentUser() {
 
     router.push("/sign-in");
   };
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger>
-        {isMobile ? (
-          <Button size="lg" variant="destructive" className="w-full">
-            Đăng xuất
+
+  return isPublicRoute ? (
+    <>
+      {isMobile ? (
+        <Link href="/dashboard" className="block flex-1">
+          <Button size="lg" className="w-full">
+            Góc học tập
           </Button>
-        ) : (
-          <div className="text-primary flex cursor-pointer items-stretch overflow-hidden rounded-md">
-            <Avatar>
-              <AvatarFallback className="bg-primary text-primary-foreground rounded-none font-medium">
+        </Link>
+      ) : (
+        <Link href="/dashboard">
+          <div className="flex items-stretch overflow-hidden rounded-md">
+            <Avatar className="size-8">
+              <AvatarFallback className="bg-primary text-primary-foreground rounded-none">
                 {getAvatarFallbackText(currentUser.full_name)}
               </AvatarFallback>
             </Avatar>
-            <div className="bg-primary/10 grid place-items-center px-2 font-medium">
-              {currentUser.full_name.split(" ").slice(-2).join(" ")}
+            <div className="bg-primary/10 text-primary flex flex-1 items-center gap-2 px-2.5 font-medium">
+              Góc học tập
             </div>
           </div>
-        )}
-      </AlertDialogTrigger>
+        </Link>
+      )}
+    </>
+  ) : (
+    <AlertDialog>
+      <AlertDialogTrigger
+        render={
+          isMobile ? (
+            <Button size="lg" variant="destructive" className="w-full">
+              Đăng xuất
+            </Button>
+          ) : (
+            <button className="text-primary flex cursor-pointer items-stretch overflow-hidden rounded-md">
+              <Avatar>
+                <AvatarFallback className="bg-primary text-primary-foreground rounded-none font-medium">
+                  {getAvatarFallbackText(currentUser.full_name)}
+                </AvatarFallback>
+              </Avatar>
+              <div className="bg-primary/10 flex items-center gap-2 px-2 font-medium">
+                {/* <div>{currentUser.full_name.split(" ").slice(-2).join(" ")}</div> */}
+                Đăng xuất
+                <LogOutIcon className="size-4" />
+              </div>
+            </button>
+          )
+        }
+      />
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Bạn có chắc chắn muốn đăng xuất?</AlertDialogTitle>

@@ -23,14 +23,19 @@ export default async function DashboardResultsPage() {
         />
       </section>
       <Container className="mt-6 flex flex-col gap-6">
-        <ReusableBreadcrumb items={[{ href: "/dashboard", label: "Góc học tập" }]} />
+        <ReusableBreadcrumb
+          items={[
+            { href: "/dashboard", label: "Góc học tập" },
+            { href: "/dashboard/results", label: "Kết quả học tập" },
+          ]}
+        />
         <Separator />
-        <section>
+        <section className="mb-6">
           <div className="grid grid-cols-1 gap-12">
             {resultsBySubject.map((subject) => (
               <div key={subject.id}>
                 <Heading>Kết quả môn {subject.title}</Heading>
-                <div className="grid grid-cols-1 gap-2">
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                   {subject.results.map((result) => (
                     <ResultItem key={result.id} result={result} />
                   ))}

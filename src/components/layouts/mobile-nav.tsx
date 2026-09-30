@@ -20,12 +20,15 @@ export function MobileNav({ items }: MobileNavProps) {
   useEffect(() => {
     if (open) {
       document.body.classList.add("overflow-hidden");
+      document.body.style.touchAction = "none";
     } else {
       document.body.classList.remove("overflow-hidden");
+      document.body.style.touchAction = "";
     }
 
     return () => {
       document.body.classList.remove("overflow-hidden");
+      document.body.style.touchAction = "";
     };
   }, [open]);
 
@@ -54,8 +57,10 @@ export function MobileNav({ items }: MobileNavProps) {
         }
       />
       <PopoverContent
-        className="mt-[14px] h-[calc(100svh-64px)] w-svw -translate-x-1 gap-0 rounded-none p-0"
+        className="no-scrollbar h-[calc(100dvh-64px)] w-screen -translate-x-[5px] overflow-y-auto rounded-none border-none p-0 shadow-none data-open:animate-none!"
         align="end"
+        side="bottom"
+        sideOffset={20}
       >
         <div className="h-full px-4 text-base">
           <nav className="h-full">
