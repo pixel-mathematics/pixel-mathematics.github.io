@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 import { CurrentUser } from "./current-user";
 
@@ -17,24 +17,9 @@ interface MobileNavProps {
 export function MobileNav({ items }: MobileNavProps) {
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (open) {
-      document.body.classList.add("overflow-hidden");
-      document.body.style.touchAction = "none";
-    } else {
-      document.body.classList.remove("overflow-hidden");
-      document.body.style.touchAction = "";
-    }
-
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-      document.body.style.touchAction = "";
-    };
-  }, [open]);
-
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger
         render={
           <Button
             size="icon"
@@ -56,11 +41,11 @@ export function MobileNav({ items }: MobileNavProps) {
           </Button>
         }
       />
-      <PopoverContent
-        className="no-scrollbar h-[calc(100dvh-64px)] w-screen -translate-x-[5px] overflow-y-auto rounded-none border-none p-0 shadow-none data-open:animate-none!"
-        align="end"
-        side="bottom"
-        sideOffset={20}
+      <SheetContent
+        className="no-scrollbar border-border border-border mt-16 !h-[calc(100dvh-64px)] w-screen rounded-none border-t p-0 shadow-none data-open:animate-none!"
+        side="top"
+        showCloseButton={false}
+        showOverlay={false}
       >
         <div className="h-full px-4 text-base">
           <nav className="h-full">
@@ -89,7 +74,7 @@ export function MobileNav({ items }: MobileNavProps) {
         <div className="flex items-center p-4">
           <CurrentUser />
         </div>
-      </PopoverContent>
-    </Popover>
+      </SheetContent>
+    </Sheet>
   );
 }

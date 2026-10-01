@@ -6,7 +6,7 @@ export default function PublicLayout({ children }: LayoutProps<"/">) {
     <>
       <Header
         navItems={[
-          { href: "/admin", label: "Tổng quan" },
+          { href: "/admin", label: "Bảng điều khiển" },
           { href: "/admin/management", label: "Quản lí" },
         ]}
       />

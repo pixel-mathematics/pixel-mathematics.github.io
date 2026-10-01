@@ -1,10 +1,11 @@
 "use client";
 
-import { resetUserPasswordAction } from "@/data/users/admin-actions";
-import { UserProfile } from "@/data/users/admin-queries";
+import Link from "next/link";
+import { Course } from "@/data/courses/admin-queries";
 import { createColumnHelper } from "@tanstack/react-table";
 import { MoreHorizontalIcon } from "lucide-react";
 
+import { formatDate } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -15,55 +16,42 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { toast } from "@/components/ui/toast";
-import { ActionTooltip } from "@/components/shared/action-tooltip";
 
 import { type DataTableFeatures } from "./data-table-features";
 
 // Use `accessor` for data columns and `display` for columns without one.
-const columnHelper = createColumnHelper<DataTableFeatures, UserProfile>();
+const columnHelper = createColumnHelper<DataTableFeatures, Course>();
 
 export const columns = columnHelper.columns([
   columnHelper.accessor("id", {
     header: "ID",
     cell: (cell) => {
       const rawId = cell.getValue();
+      return <span className="text-muted-foreground">{rawId}</span>;
+    },
+  }),
+  columnHelper.accessor("title", {
+    header: "Khóa học",
+    cell: (cell) => {
+      const rawTitle = cell.getValue();
+      const course = cell.row.original;
       return (
-        <ActionTooltip label={rawId}>
-          <span className="text-muted-foreground">{`${rawId.slice(0, 8)}...`}</span>
-        </ActionTooltip>
+        <Link href={`/admin/management/courses/${course.id}`}>
+          <Button variant="link" className="px-0">
+            {rawTitle}
+          </Button>
+        </Link>
       );
     },
   }),
-  columnHelper.accessor("full_name", {
-    header: "Họ tên",
-    cell: (cell) => {
-      const rawFullName = cell.getValue();
-      return <span className="text-primary font-medium">{rawFullName}</span>;
-    },
-  }),
-  columnHelper.accessor("user_code", {
-    header: "Mã học viên",
+  columnHelper.accessor("subject.title", {
+    header: "Phân môn",
   }),
   columnHelper.display({
     id: "actions",
     header: "Hành động",
     cell: ({ row }) => {
-      const profile = row.original;
-
-      async function handleResetUserPassword() {
-        const result = await resetUserPasswordAction({
-          userId: profile.id,
-          password: profile.user_code!,
-        });
-
-        if (!result.success) {
-          toast.add({ type: "error", description: result.message });
-          return;
-        }
-
-        toast.add({ type: "success", description: "Đặt lại mật khẩu thành công" });
-      }
+      const course = row.original;
 
       return (
         <DropdownMenu>
@@ -74,14 +62,14 @@ export const columns = columnHelper.columns([
           <DropdownMenuContent align="end" className="min-w-[200px]">
             <DropdownMenuGroup>
               <DropdownMenuLabel>Hành động</DropdownMenuLabel>
-              <DropdownMenuItem onClick={() => navigator.clipboard.writeText(profile.id)}>
+              <DropdownMenuItem onClick={() => navigator.clipboard.writeText(course.id)}>
                 Sao chép ID
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={handleResetUserPassword}>
-                Đặt lại mật khẩu
+              <DropdownMenuItem>
+                <Link href={`/admin/management/courses/${course.id}/edit`}>Chỉnh sửa</Link>
               </DropdownMenuItem>
               <DropdownMenuItem variant="destructive">Xóa</DropdownMenuItem>
             </DropdownMenuGroup>

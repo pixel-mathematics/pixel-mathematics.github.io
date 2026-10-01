@@ -1,36 +1,23 @@
 import Link from "next/link";
-import { getCurrentUser } from "@/data/auth/queries";
-import { FilePenLineIcon } from "lucide-react";
+import { LibraryIcon, Users2Icon } from "lucide-react";
 
-import { getAvatarFallbackText } from "@/lib/utils";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Container } from "@/components/shared/container";
 import { Heading } from "@/components/shared/heading";
 import { ReusableBreadcrumb } from "@/components/shared/reusable-breadcrumb";
 
 export default async function DashboardPage() {
-  const currentUser = (await getCurrentUser())!;
-
   return (
     <Container className="mt-6 flex flex-col gap-6">
-      <ReusableBreadcrumb items={[{ href: "/admin", label: "Bảng điều khiển" }]} />
-      <section className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-        <div className="flex items-center gap-2">
-          <Avatar className="size-12 md:size-16">
-            <AvatarFallback className="text-primary-foreground bg-primary rounded-md text-2xl font-medium md:text-4xl">
-              {getAvatarFallbackText(currentUser.full_name)}
-            </AvatarFallback>
-          </Avatar>
-          <div>
-            <p className="text-lg font-medium">Xin chào,</p>
-            <p className="text-primary text-xl font-medium">{currentUser.full_name}</p>
-          </div>
-        </div>
-      </section>
+      <ReusableBreadcrumb
+        items={[
+          { href: "/admin", label: "Bảng điều khiển" },
+          { href: "/admin/management", label: "Quản lí" },
+        ]}
+      />
       <Separator />
       <section>
-        <Heading>Danh sách tiện ích</Heading>
+        <Heading>Quản lí</Heading>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {dashboardNavItems.map(({ href, icon: Icon, title, description }) => (
             <Link key={href} href={href}>
@@ -53,9 +40,15 @@ export default async function DashboardPage() {
 
 const dashboardNavItems = [
   {
-    href: "/admin/management",
-    icon: FilePenLineIcon,
-    title: "Quản lí",
-    description: "Quản lí người dùng và tài nguyên",
+    href: "/admin/management/users",
+    icon: Users2Icon,
+    title: "Tài khoản người dùng",
+    description: "Thiết lập tài khoản của người dùng",
+  },
+  {
+    href: "/admin/management/courses",
+    icon: LibraryIcon,
+    title: "Khóa học",
+    description: "Quản lí các khóa học hiện tại",
   },
 ];
